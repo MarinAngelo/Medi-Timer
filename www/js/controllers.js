@@ -33,16 +33,16 @@ angular.module('mediApp.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+.controller('MedisController', function($scope) {
+  $scope.medis = [
+    { title: 'Aspirin', id: 1 },
+    { title: 'Panadol', id: 2 },
+    { title: 'Ponstan', id: 3 },
+    { title: 'Valium', id: 4 },
+    { title: 'Rhoipnol', id: 5 },
+    { title: 'Meridol', id: 6 }
   ];
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('MediController', function($scope, $stateParams) {
 });
