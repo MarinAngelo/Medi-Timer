@@ -33,16 +33,18 @@ angular.module('mediApp.controllers', [])
   };
 })
 
-.controller('MedisController', function($scope) {
-  $scope.medis = [
-    { title: 'Aspirin', id: 1 },
-    { title: 'Panadol', id: 2 },
-    { title: 'Ponstan', id: 3 },
-    { title: 'Valium', id: 4 },
-    { title: 'Rhoipnol', id: 5 },
-    { title: 'Meridol', id: 6 }
-  ];
+.controller('MedisController', function($scope, Medis) {
+    $scope.medis = Medis.all();
+//   $scope.medis = [
+//     { title: 'Aspirin', id: 1 },
+//     { title: 'Panadol', id: 2 },
+//     { title: 'Ponstan', id: 3 },
+//     { title: 'Valium', id: 4 },
+//     { title: 'Rhoipnol', id: 5 },
+//     { title: 'Meridol', id: 6 }
+//   ];
 })
 
-.controller('MediController', function($scope, $stateParams) {
+.controller('MediController', function($scope, $stateParams, Medis) {
+  $scope.medi = Medis.get($stateParams.mediId);
 });

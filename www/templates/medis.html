@@ -1,0 +1,9 @@
+<ion-view view-title="Medi-Liste">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="medi in medis" href="#/app/medis/{{medi.id}}">
+        {{medi.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

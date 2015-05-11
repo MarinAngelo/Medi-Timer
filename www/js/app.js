@@ -4,7 +4,7 @@
 // 'mediApp' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'mediApp.controllers' is found in controllers.js
-angular.module('mediApp', ['ionic', 'mediApp.controllers'])
+angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -47,6 +47,7 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers'])
       }
     }
   })
+  //Listen-Ansicht
     .state('app.medis', {
       url: "/medis",
       views: {
@@ -56,7 +57,7 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers'])
         }
       }
     })
-
+//Detail-Ansicht
   .state('app.single', {
     url: "/medis/:mediId",
     views: {
