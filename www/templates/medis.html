@@ -1,6 +1,14 @@
 <ion-view view-title="Medi-Liste">
   <ion-content>
     <ion-list>
+      <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Medikament hinzufügen">
+    </label>
+    <button class="button button-small">
+      Submit
+    </button>
+  </div>
       <ion-item ng-repeat="medi in medis" href="#/app/medis/{{medi.id}}">
         {{medi.name}}
       </ion-item>
