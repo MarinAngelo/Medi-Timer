@@ -1,0 +1,36 @@
+<ion-view view-title="Medikament hinzufügen">
+    <ion-content>
+        <form action="">
+            <div class="list">
+                <label class="item item-input">
+                    <input type="text" ng-model='medi.name' placeholder="Name">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model='medi.einheit' placeholder="Einheit z.B. 250 mg">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model='medi.anwendungsform' placeholder="Anwendungsform z.B. Tabletten">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model='medi.packungsgroesse' placeholder="Packungsgrösse (Stk)">
+                </label>
+                <div class="item item-toggle">
+                    Medikament Rezeptfplichtig
+                    <label class="toggle toggle-assertive">
+                        <input type="checkbox" ng-model='medi.rezeptpflichtig'>
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
+                <label class="item item-input" ng-show="medi.rezeptpflichtig == true">
+                    <span class="input-label">Rezept gültig bis</span>
+                    <input type="date" ng-model='medi.rezeptende'>
+                </label>
+                <button class="button button-block button-positive">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

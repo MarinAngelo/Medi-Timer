@@ -47,6 +47,15 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services'])
       }
     }
   })
+  //Medi hinzufügen
+    .state('app.addMedi', {
+      url: "/addMedi",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/addMedi.html"
+        }
+      }
+    })
   //Listen-Ansicht
     .state('app.medis', {
       url: "/medis",
