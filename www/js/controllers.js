@@ -33,8 +33,25 @@ angular.module('mediApp.controllers', [])
   };
 })
 
-.controller('MedisController', function($scope, Medis) {
-    $scope.medis = Medis.all();
+.controller('MedisController', function($scope, $localstorage) { //Medis
+    // $scope.medis = Medis.all();
+    $scope.medis = $localstorage.getObject('medis');
+})
+
+.controller('AddMediController', function($scope, $localstorage){
+
+  $scope.addMedi = function() {
+    
+  $localstorage.setObject('medis', {
+    id: new Date().toISOString(),
+    name: $scope.medi.name,
+    einheit: $scope.medi.einheit,
+    anwendungsform: $scope.medi.anwendungsform,
+    packungsgroesse: $scope.medi.packungsgroesse,
+    rezeptpflichtig: $scope.medi.rezeptpflichtig,
+    rezeptende: $scope.medi.rezeptende
+  });
+  }
 })
 
 .controller('MediController', function($scope, $stateParams, Medis) {

@@ -52,7 +52,8 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services'])
       url: "/addMedi",
       views: {
         'menuContent': {
-          templateUrl: "templates/addMedi.html"
+          templateUrl: "templates/addMedi.html",
+          controller: 'AddMediController'
         }
       }
     })
