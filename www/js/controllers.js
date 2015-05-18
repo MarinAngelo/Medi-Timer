@@ -33,24 +33,32 @@ angular.module('mediApp.controllers', [])
   };
 })
 
-.controller('MedisController', function($scope, $localstorage) { //Medis
-    // $scope.medis = Medis.all();
+.controller('MedisController', function($scope, $localstorage) {
+
+    $scope.medis = [];
+
     $scope.medis = $localstorage.getObject('medis');
 })
 
 .controller('AddMediController', function($scope, $localstorage){
 
-  $scope.medis = {};
+  var existMedis = $localstorage.getObject('medis');
 
   $scope.addMedi = function(medi) {
-    
-    $scope.medis = medi; 
 
     var keygen = new Date().toISOString();
 
-    console.log(keygen);
+    medi.id = keygen;
 
-    $localstorage.setObject('medis', $scope.medis);
+    // $scope.medis = medi;
+
+    var newMedi = medi;
+
+    console.log(newMedi);
+
+    existMedis.push(newMedi);
+
+    $localstorage.setObject('medis', existMedis);
     
   // $localstorage.setObject('medis', {
   //   id: new Date().toISOString(),
