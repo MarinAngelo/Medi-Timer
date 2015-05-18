@@ -40,20 +40,30 @@ angular.module('mediApp.controllers', [])
 
 .controller('AddMediController', function($scope, $localstorage){
 
-  $scope.addMedi = function() {
+  $scope.medis = {};
+
+  $scope.addMedi = function(medi) {
     
-  $localstorage.setObject('medis', {
-    id: new Date().toISOString(),
-    name: $scope.medi.name,
-    einheit: $scope.medi.einheit,
-    anwendungsform: $scope.medi.anwendungsform,
-    packungsgroesse: $scope.medi.packungsgroesse,
-    rezeptpflichtig: $scope.medi.rezeptpflichtig,
-    rezeptende: $scope.medi.rezeptende
-  });
-  }
+    $scope.medis = medi; 
+
+    var keygen = new Date().toISOString();
+
+    console.log(keygen);
+
+    $localstorage.setObject('medis', $scope.medis);
+    
+  // $localstorage.setObject('medis', {
+  //   id: new Date().toISOString(),
+  //   name: $scope.medi.name,
+  //   einheit: $scope.medi.einheit,
+  //   anwendungsform: $scope.medi.anwendungsform,
+  //   packungsgroesse: $scope.medi.packungsgroesse,
+  //   rezeptpflichtig: $scope.medi.rezeptpflichtig,
+  //   rezeptende: $scope.medi.rezeptende
+  // });
+  };
 })
 
-.controller('MediController', function($scope, $stateParams, Medis) {
-  $scope.medi = Medis.get($stateParams.mediId);
-});
+// .controller('MediController', function($scope, $stateParams, Medis) {
+//   $scope.medi = Medis.get($stateParams.mediId);
+// });

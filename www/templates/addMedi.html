@@ -1,6 +1,6 @@
 <ion-view view-title="Medikament hinzufügen">
     <ion-content>
-        <form ng-submit="addMedi()">
+        <form novalidate>
             <div class="list">
                 <label class="item item-input">
                     <input type="text" ng-model='medi.name' placeholder="Name">
@@ -27,10 +27,11 @@
                     <span class="input-label">Rezept gültig bis</span>
                     <input type="date" ng-model='medi.rezeptende'>
                 </label>
-                <button class="button button-block button-positive">
+                <button class="button button-block button-positive" ng-click="addMedi(medi)">
                     Submit
                 </button>
             </div>
         </form>
+        <pre>Medi = {{medi | json}}</pre>
     </ion-content>
 </ion-view>
