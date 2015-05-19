@@ -67,11 +67,10 @@ angular.module('mediApp.controllers', [])
 
 .controller('MediController', function($scope, $stateParams, $localstorage) {
 
+    //ein Einzelnes Medi aus dem Objekt "medis" rauslesen
     var getMedi = function(mediId) {
 
         var medis = $localstorage.getObject('medis');
-
-        console.log(medis[0]);
 
         for (var i = 0; i < medis.length; i++) {
             if (medis[i].id === mediId) {
@@ -79,11 +78,28 @@ angular.module('mediApp.controllers', [])
             }
         }
         return null;
-    }
+    };
 
     $scope.medi = getMedi($stateParams.mediId);
 
     console.log($scope.medi);
 
+    $scope.deleteMedi = function(){
+
+        var existMedis = $localstorage.getObject('medis');
+
+        var index = existMedis.indexOf($stateParams.mediId);
+
+        console.log(index);
+
+        // if (index > -1) {
+    var newMedis = existMedis.splice(index, 1);
+
+    console.log(newMedis);
+
+    $localstorage.setObject('medis', newMedis);
+// };
+         
+    };
 
 });
