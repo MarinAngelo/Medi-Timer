@@ -14,7 +14,7 @@ angular.module('mediApp.services', [])
     getObject: function(key) {
       return JSON.parse($window.localStorage[key] || '{}');
     }
-  }
+}
 }]);
 
 // .factory('Medis', function() {
