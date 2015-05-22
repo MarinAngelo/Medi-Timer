@@ -36,9 +36,18 @@ angular.module('mediApp.controllers', [])
 //templeate medis.html (Liste)
 .controller('MedisController', function($scope, $localstorage) {
 
-    // $scope.medis = [];
+    if($localstorage.getObject('medis') !== [] ) {
 
-    $scope.medis = $localstorage.getObject('medis');
+        $scope.medis = $localstorage.getObject('medis');
+    
+    //kommt nicht auf else Block
+    } else {
+
+        $scope.medis = $localstorage.initialData();
+        console.log('keine medis');
+    }
+
+    console.log($scope.medis);
 })
 
 .controller('AddMediController', function($scope, $localstorage) {
