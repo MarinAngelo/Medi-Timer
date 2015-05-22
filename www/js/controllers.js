@@ -33,9 +33,10 @@ angular.module('mediApp.controllers', [])
     };
 })
 
+//templeate medis.html (Liste)
 .controller('MedisController', function($scope, $localstorage) {
 
-    $scope.medis = [];
+    // $scope.medis = [];
 
     $scope.medis = $localstorage.getObject('medis');
 })
@@ -43,7 +44,7 @@ angular.module('mediApp.controllers', [])
 .controller('AddMediController', function($scope, $localstorage) {
 
     //vorhandene Objekte im "medis" Array in Variable speichern
-    var existMedis = $localstorage.getObject('medis');
+    var existMedis = $localstorage.getObject('medis') || [];
 
     $scope.addMedi = function(medi) {
 
@@ -67,6 +68,7 @@ angular.module('mediApp.controllers', [])
 
 .controller('MediController', function($scope, $stateParams, $localstorage) {
 
+    //***************Einzelnes Medi anzeigen********************************
     //ein Einzelnes Medi aus dem Objekt "medis" rauslesen
     var getMedi = function(mediId) {
 
@@ -83,23 +85,49 @@ angular.module('mediApp.controllers', [])
     $scope.medi = getMedi($stateParams.mediId);
 
     console.log($scope.medi);
+    console.log($stateParams.mediId);
 
-    $scope.deleteMedi = function(){
+    //****************Medi löschen**********************
+    //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
+    $scope.deleteMedi = function(mediId) {
 
-        var existMedis = $localstorage.getObject('medis');
+        var medis = $localstorage.getObject('medis');
 
-        var index = existMedis.indexOf($stateParams.mediId);
+        for (var i = 0; i < medis.length; i++) {
+            if (medis[i].id === $stateParams.mediId) {
+                medis.splice(i, 1);
+                return $localstorage.setObject('medis', medis);
+            }
+        }
+        // return null
+        // $scope.medis = $localstorage.getObject('medis');
+        // console.log($scope.medis);
 
-        console.log(index);
+        // //entsprechendes objekt im medi-array kann nicht identifiziert werden
+        // var index = $scope.medis.indexOf();
+        // console.log(index);
+
+        // console.log($scope.medi);
+        // $scope.thisMedi = $scope.medi;
+        // console.log($scope.thisMedi);
+        // var index = $scope.thisMedi.indexOf($stateParams.mediId);
+
+        // var existMedis = $localstorage.getObject('medis');
+
+        // var index = existMedis.indexOf($stateParams.mediId);
+
+        // console.log(index);
 
         // if (index > -1) {
-    var newMedis = existMedis.splice(index, 1);
+        //     var newMedis = existMedis.splice(index, 1);
 
-    console.log(newMedis);
+        //     console.log(newMedis);
 
-    $localstorage.setObject('medis', newMedis);
-// };
-         
+        //     $localstorage.setObject('medis', newMedis);
+        // } else {
+        //     localStorage.removeItem('medis');
+        // }
+
     };
 
 });

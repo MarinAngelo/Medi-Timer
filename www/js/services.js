@@ -12,7 +12,7 @@ angular.module('mediApp.services', [])
       $window.localStorage[key] = JSON.stringify(value);
     },
     getObject: function(key) {
-      return JSON.parse($window.localStorage[key] || '{}');
+      return JSON.parse($window.localStorage[key] || '[]');
     }
 }
 }]);

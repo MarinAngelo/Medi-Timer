@@ -8,6 +8,6 @@
     	<li>Rezeptpflichtig: {{medi.rezeptpflichtig}}</li>
     	<li>Rezept Ablaufdatum: {{medi.rezeptende}}</li>
     </ul>
-    <button ng-click="deleteMedi()">delete</button>
+    <button ng-click="deleteMedi($stateParams.mediId)">delete</button>
   </ion-content>
 </ion-view>
