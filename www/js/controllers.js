@@ -93,9 +93,7 @@ angular.module('mediApp.controllers', [])
 
     $scope.medi = getMedi($stateParams.mediId);
 
-    console.log($scope.medi);
-    console.log($stateParams.mediId);
-
+    //Tage für Timer-Formulsr
     $scope.checkTag = {
         Montag : true,
         Dienstag : true,
@@ -106,6 +104,7 @@ angular.module('mediApp.controllers', [])
         Sonntag : true
     };
 
+    //Zeiten für Timer-Formulsr
     $scope.zeiten = [
     {zeitD: '00:00', zeitE: '00-00'},
     {zeitD: '00:30', zeitE: '00-30'},
@@ -123,8 +122,13 @@ angular.module('mediApp.controllers', [])
     {zeitD: '06:30', zeitE: '06-30'}
     ];
 
-    $scope.myDay = $scope.zeiten[0];
+    $scope.meineZeiten = [{zeitD: '06:30', zeitE: '06-30'}];
+    $scope.meineZeit = {};
 
+    // jedesmal, wenn eine Zeit ausgewählt wurde, soll die Zeit zu "Meine Zeiten" hinzugefügt werden
+    $scope.addMeineZeiten = function(meineZeit) {
+      $scope.meineZeiten = $scope.meineZeiten.push(meineZeit);
+    };
 
     //****************Medi löschen**********************
     //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
@@ -138,34 +142,6 @@ angular.module('mediApp.controllers', [])
                 return $localstorage.setObject('medis', medis);
             }
         }
-        // return null
-        // $scope.medis = $localstorage.getObject('medis');
-        // console.log($scope.medis);
-
-        // //entsprechendes objekt im medi-array kann nicht identifiziert werden
-        // var index = $scope.medis.indexOf();
-        // console.log(index);
-
-        // console.log($scope.medi);
-        // $scope.thisMedi = $scope.medi;
-        // console.log($scope.thisMedi);
-        // var index = $scope.thisMedi.indexOf($stateParams.mediId);
-
-        // var existMedis = $localstorage.getObject('medis');
-
-        // var index = existMedis.indexOf($stateParams.mediId);
-
-        // console.log(index);
-
-        // if (index > -1) {
-        //     var newMedis = existMedis.splice(index, 1);
-
-        //     console.log(newMedis);
-
-        //     $localstorage.setObject('medis', newMedis);
-        // } else {
-        //     localStorage.removeItem('medis');
-        // }
 
     };
   });

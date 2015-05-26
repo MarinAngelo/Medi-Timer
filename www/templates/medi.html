@@ -11,38 +11,61 @@
         <br/>
         <button ng-click="deleteMedi($stateParams.mediId)">delete</button>
         <br>
+        
         <form novalidate>
             <h3>Medikament terminieren</h3>
             <ul class="list">
-                <li class="item item-checkbox">
-                    <label class="checkbox">
-                        <input type="checkbox" ng-model="checkTag.Montag">
-                    </label>
-                    Montag
-                </li>
-                <li class="item item-checkbox">
-                    <label class="checkbox">
-                        <input type="checkbox" ng-model="checkTag.Dienstag">
-                    </label>
-                    Dienstag
-                </li>
-
-                <label class="item item-input item-select">
-    <div class="input-label">
-      Zeiten
-    </div>
-    <select ng-model="meineZeiten" ng-options="zeit.zeitD for zeit in zeiten">
-    </select>
-  </label>
-                <!--   <label>Dienstag:
+                <div class="row">
+                    <div class="col">
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="checkTag.Montag">
+                            </label>
+                            Montag
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="checkTag.Dienstag">
+                            </label>
+                            Dienstag
+                        </li>
+                        <!--   <label>Dienstag:
     <input type="checkbox" ng-model="checkTag.Dienstag"
            ng-true-value="'YES'" ng-false-value="'NO'">
    </label><br/>
    </ul> -->
-                <tt>Montag = {{checkTag.Montag}}</tt>
-                <br/>
-                <tt>Dienstag = {{checkTag.Dienstag}}</tt>
-                <br/>
+                        <tt>Montag = {{checkTag.Montag}}</tt>
+                        <br/>
+                        <tt>Dienstag = {{checkTag.Dienstag}}</tt>
+                        <br/>
+                    </div>
+                    <div class="col">
+                        <label class="item item-input item-select">
+                            <div class="input-label">
+                                Zeit
+                            </div>
+                            <!-- jedesmal, wenn eine Zeit ausgewählt wurde, soll die Zeit zu "Meine Zeiten" hinzugefügt werden -->
+                            <select ng-model="meineZeit" ng-options="zeit.zeitD for zeit in zeiten" ng-change="addMeineZeiten(meineZeit)">
+                            </select>
+                        </label>
+                        <pre>Meine Zeit = {{meineZeit | json}}</pre>
+                        <pre>Meine Zeiten = {{meineZeiten | json}}</pre>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col">
+                    <label class="item item-input">
+    <input type="text" placeholder="Menge (z.B. 0,5)">
+  </label>
+                </div>
+                </div>
+                                <div class="row">
+                <div class="col">
+                    <label class="item item-input">
+    <input type="text" placeholder="Infos (z.B. nach den Mahlzeiten)">
+  </label>
+                </div>
+                </div>
         </form>
         <pre>Timer = {{timer | json}}</pre>
     </ion-content>
