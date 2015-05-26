@@ -1,0 +1,35 @@
+<ion-view view-title="Medi-Liste">
+  <ion-content>
+    <ion-list>
+      <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Medikament hinzufügen">
+    </label>
+    <button class="button button-small">
+      Submit
+    </button>
+  </div>
+      <ion-item ng-repeat="medi in medis" href="#/app/medis/{{medi.id}}">
+        {{medi.name}}
+      </ion-item>
+    </ion-list>
+    <form>
+      <label>Tage:
+  <span  class="nullable">
+    <select ng-model="myDay" ng-options="tag.tagD for tag in tage">
+      <option value="">-- wähle Tag --</option>
+    </select>
+  </span></label><br/>
+
+  <label>Montag:
+    <input type="checkbox" ng-model="checkTag.Montag">
+  </label><br/>
+  <label>Dienstag:
+    <input type="checkbox" ng-model="checkTag.Dienstag"
+           ng-true-value="'YES'" ng-false-value="'NO'">
+   </label><br/>
+  <tt>Montag = {{checkTag.Montag}}</tt><br/>
+  <tt>Dienstag = {{checkTag.Dienstag}}</tt><br/>
+    </form>
+  </ion-content>
+</ion-view>
