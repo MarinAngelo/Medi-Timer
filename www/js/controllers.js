@@ -31,6 +31,12 @@ angular.module('mediApp.controllers', [])
             $scope.closeLogin();
         }, 1000);
     };
+
+.controller('MedisController', function($scope, $localstorage) {
+
+    $scope.medis = [];
+
+    $scope.medis = $localstorage.getObject('medis');
 })
 
 //templeate medis.html (Liste)
@@ -46,6 +52,9 @@ angular.module('mediApp.controllers', [])
         $scope.medis = $localstorage.initialData();
         console.log('keine medis');
     }
+  var existMedis = $localstorage.getObject('medis');
+
+  $scope.addMedi = function(medi) {
 
     console.log($scope.medis);
 })
@@ -73,6 +82,30 @@ angular.module('mediApp.controllers', [])
         $localstorage.setObject('medis', existMedis);
 
     };
+
+    medi.id = keygen;
+
+    // $scope.medis = medi;
+
+    var newMedi = medi;
+
+    console.log(newMedi);
+
+    existMedis.push(newMedi);
+
+    $localstorage.setObject('medis', existMedis);
+    
+  // $localstorage.setObject('medis', {
+  //   id: new Date().toISOString(),
+  //   name: $scope.medi.name,
+  //   einheit: $scope.medi.einheit,
+  //   anwendungsform: $scope.medi.anwendungsform,
+  //   packungsgroesse: $scope.medi.packungsgroesse,
+  //   rezeptpflichtig: $scope.medi.rezeptpflichtig,
+  //   rezeptende: $scope.medi.rezeptende
+  // });
+  };
+
 })
 
 .controller('MediController', function($scope, $stateParams, $localstorage) {
