@@ -2,7 +2,7 @@
     <ion-content>
         <h1>{{medi.name}}</h1>
         <ul>
-        <li>Menge: {{medi.menge}}</li>
+            <li>Menge: {{medi.menge}}</li>
             <li>Einheit: {{medi.einheit}}</li>
             <li>Anwendungsform: {{medi.anwendungsform}}</li>
             <li>Packungsgrösse: {{medi.packungsgroesse}}</li>
@@ -12,8 +12,7 @@
         <br/>
         <button ng-click="deleteMedi($stateParams.mediId)">delete</button>
         <br>
-
-                <div ng-repeat="timer in timers">
+        <div ng-repeat="timer in timers">
             <ul>
                 <h2>Timer {{timer.id}}</h2>
                 <li>
@@ -36,7 +35,6 @@
                     <h4>Infos: </h4>{{timer.infos}}</li>
             </ul>
         </div>
-        
         <form novalidate>
             <h3>Medikament terminieren</h3>
             <ul class="list">
@@ -45,7 +43,7 @@
                         <div ng-repeat="tag in ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']">
                             <li class="item item-checkbox">
                                 <label class="checkbox">
-                                    <input type="checkbox" ng-model="timers.tage[tag]">
+                                    <input type="checkbox" ng-model="timers.tage[tag]" ng-checked="true">
                                 </label>
                                 {{tag}}
                             </li>
@@ -58,27 +56,25 @@
                             <div class="input-label">
                                 Zeit
                             </div>
-                            <!-- jedesmal, wenn eine Zeit ausgewählt wurde, soll die Zeit zu "Meine Zeiten" hinzugefügt werden -->
                             <select ng-model="meineZeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten">
                             </select>
                         </label>
-                        <pre>Meine Zeit = {{meineZeit | json}}</pre>
                         <pre>Meine Zeiten = {{meineZeiten | json}}</pre>
                     </div>
                 </div>
                 <div class="row">
-                <div class="col">
-                    <label class="item item-input">
-    <input type="text" placeholder="Menge (z.B. 0,5)">
-  </label>
+                    <div class="col">
+                        <label class="item item-input">
+                            <input type="text" placeholder="Menge (z.B. 0,5)">
+                        </label>
+                    </div>
                 </div>
-                </div>
-                                <div class="row">
-                <div class="col">
-                    <label class="item item-input">
-    <input type="text" placeholder="Infos (z.B. nach den Mahlzeiten)">
-  </label>
-                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input">
+                            <input type="text" placeholder="Infos (z.B. nach den Mahlzeiten)">
+                        </label>
+                    </div>
                 </div>
         </form>
         <pre>Timer = {{timer | json}}</pre>

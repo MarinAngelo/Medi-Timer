@@ -31,32 +31,22 @@ angular.module('mediApp.controllers', [])
             $scope.closeLogin();
         }, 1000);
     };
-
-.controller('MedisController', function($scope, $localstorage) {
-
-    $scope.medis = [];
-
-    $scope.medis = $localstorage.getObject('medis');
 })
 
 //templeate medis.html (Liste)
 .controller('MedisController', function($scope, $localstorage) {
 
-    if($localstorage.getObject('medis') !== [] ) {
+    if ($localstorage.getObject('medis') !== []) {
 
         $scope.medis = $localstorage.getObject('medis');
-    
-    //kommt nicht auf else Block
+
+        //kommt nicht auf else Block
     } else {
 
         $scope.medis = $localstorage.initialData();
         console.log('keine medis');
     }
-  var existMedis = $localstorage.getObject('medis');
 
-  $scope.addMedi = function(medi) {
-
-    console.log($scope.medis);
 })
 
 .controller('AddMediController', function($scope, $localstorage) {
@@ -70,7 +60,7 @@ angular.module('mediApp.controllers', [])
         var keygen = new Date().toISOString();
         medi.id = keygen;
 
-        //neu erzeugtes medi-Objekt ins Variable speichern
+        //neu erzeugtes medi-Objekt als Variable speichern
         var newMedi = medi;
 
         //dem medis-Array das neue Objekt hinzufügen
@@ -82,29 +72,6 @@ angular.module('mediApp.controllers', [])
         $localstorage.setObject('medis', existMedis);
 
     };
-
-    medi.id = keygen;
-
-    // $scope.medis = medi;
-
-    var newMedi = medi;
-
-    console.log(newMedi);
-
-    existMedis.push(newMedi);
-
-    $localstorage.setObject('medis', existMedis);
-    
-  // $localstorage.setObject('medis', {
-  //   id: new Date().toISOString(),
-  //   name: $scope.medi.name,
-  //   einheit: $scope.medi.einheit,
-  //   anwendungsform: $scope.medi.anwendungsform,
-  //   packungsgroesse: $scope.medi.packungsgroesse,
-  //   rezeptpflichtig: $scope.medi.rezeptpflichtig,
-  //   rezeptende: $scope.medi.rezeptende
-  // });
-  };
 
 })
 
@@ -132,40 +99,56 @@ angular.module('mediApp.controllers', [])
         id: null,
         //mit diesem Feld werden Medi und Timers verbunden
         mediId: $stateParams.mediId,
-            tage: [],
-            zeiten: [''],
+        tage: [],
+        zeiten: [''],
         einheit: null,
         infos: ''
     }];
 
-    //Tage für Timer-Formulsr
-    $scope.checkTag = {
-        Montag : true,
-        Dienstag : true,
-        Mittwoch : true,
-        Donnerstag : true,
-        Freitag : true,
-        Samstag : true,
-        Sonntag : true
-    };
-
     //Zeiten für Timer-Formulsr
-    $scope.zeiten = [
-    {zeitD: '00:00', zeitE: '00-00'},
-    {zeitD: '00:30', zeitE: '00-30'},
-    {zeitD: '01:00', zeitE: '01-00'},
-    {zeitD: '01:30', zeitE: '01-30'},
-    {zeitD: '02:00', zeitE: '02-00'},
-    {zeitD: '02:30', zeitE: '02-30'},
-    {zeitD: '03:00', zeitE: '03-00'},
-    {zeitD: '03:30', zeitE: '03-30'},
-    {zeitD: '04:00', zeitE: '04-00'},
-    {zeitD: '04:30', zeitE: '04-30'},
-    {zeitD: '05:00', zeitE: '05-00'},
-    {zeitD: '05:30', zeitE: '05-30'},
-    {zeitD: '06:00', zeitE: '06-00'},
-    {zeitD: '06:30', zeitE: '06-30'}
-    ];
+    $scope.zeiten = [{
+        zeitD: '00:00',
+        zeitE: '00-00'
+    }, {
+        zeitD: '00:30',
+        zeitE: '00-30'
+    }, {
+        zeitD: '01:00',
+        zeitE: '01-00'
+    }, {
+        zeitD: '01:30',
+        zeitE: '01-30'
+    }, {
+        zeitD: '02:00',
+        zeitE: '02-00'
+    }, {
+        zeitD: '02:30',
+        zeitE: '02-30'
+    }, {
+        zeitD: '03:00',
+        zeitE: '03-00'
+    }, {
+        zeitD: '03:30',
+        zeitE: '03-30'
+    }, {
+        zeitD: '04:00',
+        zeitE: '04-00'
+    }, {
+        zeitD: '04:30',
+        zeitE: '04-30'
+    }, {
+        zeitD: '05:00',
+        zeitE: '05-00'
+    }, {
+        zeitD: '05:30',
+        zeitE: '05-30'
+    }, {
+        zeitD: '06:00',
+        zeitE: '06-00'
+    }, {
+        zeitD: '06:30',
+        zeitE: '06-30'
+    }];
 
     $scope.meineZeiten = ['06-30'];
 
@@ -183,6 +166,4 @@ angular.module('mediApp.controllers', [])
         }
 
     };
-  });
-
-
+});
