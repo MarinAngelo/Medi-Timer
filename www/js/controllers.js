@@ -96,6 +96,36 @@ angular.module('mediApp.controllers', [])
     console.log($scope.medi);
     console.log($stateParams.mediId);
 
+    $scope.checkTag = {
+        Montag : true,
+        Dienstag : true,
+        Mittwoch : true,
+        Donnerstag : true,
+        Freitag : true,
+        Samstag : true,
+        Sonntag : true
+    };
+
+    $scope.zeiten = [
+    {zeitD: '00:00', zeitE: '00-00'},
+    {zeitD: '00:30', zeitE: '00-30'},
+    {zeitD: '01:00', zeitE: '01-00'},
+    {zeitD: '01:30', zeitE: '01-30'},
+    {zeitD: '02:00', zeitE: '02-00'},
+    {zeitD: '02:30', zeitE: '02-30'},
+    {zeitD: '03:00', zeitE: '03-00'},
+    {zeitD: '03:30', zeitE: '03-30'},
+    {zeitD: '04:00', zeitE: '04-00'},
+    {zeitD: '04:30', zeitE: '04-30'},
+    {zeitD: '05:00', zeitE: '05-00'},
+    {zeitD: '05:30', zeitE: '05-30'},
+    {zeitD: '06:00', zeitE: '06-00'},
+    {zeitD: '06:30', zeitE: '06-30'}
+    ];
+
+    $scope.myDay = $scope.zeiten[0];
+
+
     //****************Medi löschen**********************
     //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
     $scope.deleteMedi = function(mediId) {
@@ -138,5 +168,6 @@ angular.module('mediApp.controllers', [])
         // }
 
     };
+  });
 
-});
+

@@ -1,13 +1,49 @@
 <ion-view view-title="Medi Detail">
-  <ion-content>
-    <h1>{{medi.name}}</h1>
-    <ul>
-    	<li>Einheit: {{medi.einheit}}</li>
-    	<li>Anwendungsform: {{medi.anwendungsform}}</li>
-    	<li>Packungsgrösse: {{medi.packungsgroesse}}</li>
-    	<li>Rezeptpflichtig: {{medi.rezeptpflichtig}}</li>
-    	<li>Rezept Ablaufdatum: {{medi.rezeptende}}</li>
-    </ul>
-    <button ng-click="deleteMedi($stateParams.mediId)">delete</button>
-  </ion-content>
+    <ion-content>
+        <h1>{{medi.name}}</h1>
+        <ul>
+            <li>Einheit: {{medi.einheit}}</li>
+            <li>Anwendungsform: {{medi.anwendungsform}}</li>
+            <li>Packungsgrösse: {{medi.packungsgroesse}}</li>
+            <li>Rezeptpflichtig: {{medi.rezeptpflichtig}}</li>
+            <li>Rezept Ablaufdatum: {{medi.rezeptende}}</li>
+        </ul>
+        <br/>
+        <button ng-click="deleteMedi($stateParams.mediId)">delete</button>
+        <br>
+        <form novalidate>
+            <h3>Medikament terminieren</h3>
+            <ul class="list">
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="checkTag.Montag">
+                    </label>
+                    Montag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="checkTag.Dienstag">
+                    </label>
+                    Dienstag
+                </li>
+
+                <label class="item item-input item-select">
+    <div class="input-label">
+      Zeiten
+    </div>
+    <select ng-model="meineZeiten" ng-options="zeit.zeitD for zeit in zeiten">
+    </select>
+  </label>
+                <!--   <label>Dienstag:
+    <input type="checkbox" ng-model="checkTag.Dienstag"
+           ng-true-value="'YES'" ng-false-value="'NO'">
+   </label><br/>
+   </ul> -->
+                <tt>Montag = {{checkTag.Montag}}</tt>
+                <br/>
+                <tt>Dienstag = {{checkTag.Dienstag}}</tt>
+                <br/>
+        </form>
+        <pre>Timer = {{timer | json}}</pre>
+    </ion-content>
 </ion-view>
