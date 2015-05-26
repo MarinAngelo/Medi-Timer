@@ -2,6 +2,7 @@
     <ion-content>
         <h1>{{medi.name}}</h1>
         <ul>
+        <li>Menge: {{medi.menge}}</li>
             <li>Einheit: {{medi.einheit}}</li>
             <li>Anwendungsform: {{medi.anwendungsform}}</li>
             <li>Packungsgrösse: {{medi.packungsgroesse}}</li>
@@ -11,32 +12,45 @@
         <br/>
         <button ng-click="deleteMedi($stateParams.mediId)">delete</button>
         <br>
+
+                <div ng-repeat="timer in timers">
+            <ul>
+                <h2>Timer {{timer.id}}</h2>
+                <li>
+                    <h4>Tage:</h4>
+                    <ul>
+                        <li ng-repeat="tage in timer.tage.tageD">{{tage}}</li>
+                        <!-- <li ng-repeat="tage in timer.tage">{{tage}}</li> -->
+                    </ul>
+                </li>
+                <li>
+                    <h4>Zeiten:</h4>
+                    <ul>
+                        <li ng-repeat="zeiten in timer.zeiten.zeitenD">{{zeiten}}</li>
+                        <!-- <li ng-repeat="zeiten in timer.zeiten">{{zeiten}}</li> -->
+                    </ul>
+                </li>
+                <li>
+                    <h4>Einheit: </h4>{{timer.einheit}}</li>
+                <li>
+                    <h4>Infos: </h4>{{timer.infos}}</li>
+            </ul>
+        </div>
         
         <form novalidate>
             <h3>Medikament terminieren</h3>
             <ul class="list">
                 <div class="row">
                     <div class="col">
-                        <li class="item item-checkbox">
-                            <label class="checkbox">
-                                <input type="checkbox" ng-model="checkTag.Montag">
-                            </label>
-                            Montag
-                        </li>
-                        <li class="item item-checkbox">
-                            <label class="checkbox">
-                                <input type="checkbox" ng-model="checkTag.Dienstag">
-                            </label>
-                            Dienstag
-                        </li>
-                        <!--   <label>Dienstag:
-    <input type="checkbox" ng-model="checkTag.Dienstag"
-           ng-true-value="'YES'" ng-false-value="'NO'">
-   </label><br/>
-   </ul> -->
-                        <tt>Montag = {{checkTag.Montag}}</tt>
-                        <br/>
-                        <tt>Dienstag = {{checkTag.Dienstag}}</tt>
+                        <div ng-repeat="tag in ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']">
+                            <li class="item item-checkbox">
+                                <label class="checkbox">
+                                    <input type="checkbox" ng-model="timers.tage[tag]">
+                                </label>
+                                {{tag}}
+                            </li>
+                        </div>
+                        <tt>Tage = {{timers.tage}}</tt>
                         <br/>
                     </div>
                     <div class="col">
@@ -45,7 +59,7 @@
                                 Zeit
                             </div>
                             <!-- jedesmal, wenn eine Zeit ausgewählt wurde, soll die Zeit zu "Meine Zeiten" hinzugefügt werden -->
-                            <select ng-model="meineZeit" ng-options="zeit.zeitD for zeit in zeiten" ng-change="addMeineZeiten(meineZeit)">
+                            <select ng-model="meineZeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten">
                             </select>
                         </label>
                         <pre>Meine Zeit = {{meineZeit | json}}</pre>

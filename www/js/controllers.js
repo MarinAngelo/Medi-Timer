@@ -93,6 +93,18 @@ angular.module('mediApp.controllers', [])
 
     $scope.medi = getMedi($stateParams.mediId);
 
+    //********************Timer zu Medi hinzufügen***********************
+
+    $scope.timers = [{
+        id: null,
+        //mit diesem Feld werden Medi und Timers verbunden
+        mediId: $stateParams.mediId,
+            tage: [],
+            zeiten: [''],
+        einheit: null,
+        infos: ''
+    }];
+
     //Tage für Timer-Formulsr
     $scope.checkTag = {
         Montag : true,
@@ -122,13 +134,7 @@ angular.module('mediApp.controllers', [])
     {zeitD: '06:30', zeitE: '06-30'}
     ];
 
-    $scope.meineZeiten = [{zeitD: '06:30', zeitE: '06-30'}];
-    $scope.meineZeit = {};
-
-    // jedesmal, wenn eine Zeit ausgewählt wurde, soll die Zeit zu "Meine Zeiten" hinzugefügt werden
-    $scope.addMeineZeiten = function(meineZeit) {
-      $scope.meineZeiten = $scope.meineZeiten.push(meineZeit);
-    };
+    $scope.meineZeiten = ['06-30'];
 
     //****************Medi löschen**********************
     //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
