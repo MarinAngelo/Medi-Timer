@@ -96,13 +96,13 @@ angular.module('mediApp.controllers', [])
     //********************Timer zu Medi hinzufügen***********************
 
     $scope.timers = [{
-        id: null,
+        // id: null,
         //mit diesem Feld werden Medi und Timers verbunden
-        mediId: $stateParams.mediId,
-        tage: [],
-        zeiten: [''],
-        einheit: null,
-        infos: ''
+        // mediId: $stateParams.mediId,
+        // tage: [],
+        // zeiten: [''],
+        // menge: null,
+        // infos: ''
     }];
 
     $scope.tage = [{
@@ -113,7 +113,7 @@ angular.module('mediApp.controllers', [])
         'tagE': 'Tuesday'
     }, {
         'tagD': 'Mittwoch',
-        'tagE': 'Wedensday'
+        'tagE': 'Wednesday'
     }, {
         'tagD': 'Donnerstag',
         'tagE': 'Thursday'
@@ -127,6 +127,16 @@ angular.module('mediApp.controllers', [])
         'tagD': 'Sonntag',
         'tagE': 'Sunday'
     }];
+
+    $scope.timers.tage = {
+        'Monday':true,
+        'Tuesday':true,
+        'Wednesday':true,
+        'Thursday':true,
+        'Friday':true,
+        'Saturday':true,
+        'Sunday':true
+};
 
     //Zeiten für Timer-Formulsr
     $scope.zeiten = [{
@@ -173,7 +183,7 @@ angular.module('mediApp.controllers', [])
         zeitE: '06-30'
     }];
 
-    $scope.meineZeiten = ['06-30'];
+    $scope.timers.zeiten = ['06-30'];
 
     //****************Medi löschen**********************
     //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora

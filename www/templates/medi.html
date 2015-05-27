@@ -40,7 +40,8 @@
             <ul class="list">
                 <div class="row">
                     <div class="col">
-                        <!-- <div ng-repeat="tag in ['Monday', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']"> -->
+
+                    <!-- selektieren der Tage -->
                         <div ng-repeat="tag in tage">
                             <li class="item item-checkbox">
                                 <label class="checkbox">
@@ -49,18 +50,20 @@
                                 {{tag.tagD}}
                             </li>
                         </div>
-                        <tt>Tage = {{timers.tage}}</tt>
-                        <br/>
                     </div>
+
                     <div class="col">
+                    <!-- auswahl der Zeiten -->
                         <label class="item item-input item-select">
                             <div class="input-label">
                                 Zeit
                             </div>
-                            <select ng-model="meineZeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten">
+                            <select ng-model="timers.zeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten ">
                             </select>
                         </label>
-                        <pre>Meine Zeiten = {{meineZeiten | json}}</pre>
+                        <pre>Meine Zeiten = {{timers.zeiten}}</pre>
+                        <tt>Tage = {{timers.tage}}</tt>
+                        <br/>
                     </div>
                 </div>
                 <div class="row">
