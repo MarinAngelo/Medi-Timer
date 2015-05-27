@@ -30,23 +30,6 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services'])
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: "/search",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/search.html"
-      }
-    }
-  })
-
-  .state('app.browse', {
-    url: "/browse",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/browse.html"
-      }
-    }
-  })
   //Medi hinzufügen
     .state('app.addMedi', {
       url: "/addMedi",

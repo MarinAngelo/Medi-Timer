@@ -18,19 +18,35 @@ angular.module('mediApp.services', [])
             return [{
                 id: 0,
                 name: 'Actiq®',
-                einheit: '800 Mikrogramm',
+                menge: 500,
+                einheit: 'Mikrogramm',
                 anwendungsform: 'Lutschtabletten',
-                packungsgroesse: '20 Stk',
+                packungsgroesse: 20,
                 rezeptpflichtig: true,
-                rezeptende: '16.07.2015'
+                rezeptende: '16.07.2015',
+                timers: [{
+                    tage: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
+                    zeiten: ['08:00', '18:30'],
+                    info: 'vor den Mahlzeiten'
+                }]
             }, {
                 id: 1,
                 name: 'Acidum folicum Streuli®',
-                einheit: '5 mg',
+                menge: 5,
+                einheit: '',
                 anwendungsform: 'Tabletten',
-                packungsgroesse: '25 Stk',
+                packungsgroesse: 25,
                 rezeptpflichtig: false,
-                rezeptende: ''
+                rezeptende: '',
+                timers: [{
+                    tage: ['Montag', 'Mittwoch', 'Freitag', 'Sonntag'],
+                    zeiten: ['08:00'],
+                    info: 'vor den Mahlzeiten'
+                }, {
+                    tage: ['Dienstag', 'Donnerstag', 'Samstag'],
+                    zeiten: ['18:30'],
+                    info: 'nach den Mahlzeiten'
+                }]
             }, {
                 id: 2,
                 name: 'Advantan®',
@@ -38,7 +54,12 @@ angular.module('mediApp.services', [])
                 anwendungsform: 'Crème/Salbe/Fettsalbe',
                 packungsgroesse: '1 Stk',
                 rezeptpflichtig: true,
-                rezeptende: '16.07.2015'
+                rezeptende: '16.07.2015',
+                timers: [{
+                    tage: ['Montag'],
+                    zeiten: ['08:00', '18:30'],
+                    info: 'vor den Mahlzeiten'
+                }]
             }, {
                 id: 3,
                 name: 'Alendron D3-Mepha',
@@ -46,7 +67,12 @@ angular.module('mediApp.services', [])
                 anwendungsform: 'Wochentabletten',
                 packungsgroesse: '40 Stk',
                 rezeptpflichtig: true,
-                rezeptende: '16.07.2015'
+                rezeptende: '16.07.2015',
+                timers: [{
+                    tage: ['Dienstag', 'Samstag'],
+                    zeiten: ['08:00', '14:00', '18:30'],
+                    info: 'vor den Mahlzeiten, mit einem Glas Wasser'
+                }]
             }, {
                 id: 4,
                 name: 'Aloxi®',
@@ -54,7 +80,12 @@ angular.module('mediApp.services', [])
                 anwendungsform: 'Weichkapseln',
                 packungsgroesse: '20 Stk',
                 rezeptpflichtig: false,
-                rezeptende: ''
+                rezeptende: '',
+                timers: [{
+                    tage: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
+                    zeiten: ['05:30', '08:00', '14:30', '18:30', '21:30'],
+                    info: 'vor den Mahlzeiten'
+                }]
             }, {
                 id: 5,
                 name: 'Amoxicillin Sandoz®',
@@ -62,7 +93,36 @@ angular.module('mediApp.services', [])
                 anwendungsform: 'dispergierbare Filmtabletten',
                 packungsgroesse: '15 Stk',
                 rezeptpflichtig: true,
-                rezeptende: '16.07.2015'
+                rezeptende: '16.07.2015',
+                timers: [{
+                    tage: ['Montag'],
+                    zeiten: ['08:00'],
+                    info: 'vor den Mahlzeiten'
+                }, {
+                    tage: ['Dienstag'],
+                    zeiten: ['08:30'],
+                    info: 'vor den Mahlzeiten'
+                }, {
+                    tage: ['Mittwoch'],
+                    zeiten: ['09:00'],
+                    info: 'vor den Mahlzeiten'
+                }, {
+                    tage: ['Donnerstag'],
+                    zeiten: ['09:30'],
+                    info: 'vor den Mahlzeiten'
+                }, {
+                    tage: ['Freitag'],
+                    zeiten: ['09:30'],
+                    info: 'vor den Mahlzeiten'
+                }, {
+                    tage: ['Samstag'],
+                    zeiten: ['10:00'],
+                    info: 'vor den Mahlzeiten'
+                }, {
+                    tage: ['Sonntag'],
+                    zeiten: ['10:30'],
+                    info: 'vor den Mahlzeiten'
+                }]
             }];
         }
 
