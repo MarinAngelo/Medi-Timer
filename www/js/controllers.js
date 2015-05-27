@@ -105,6 +105,29 @@ angular.module('mediApp.controllers', [])
         infos: ''
     }];
 
+    $scope.tage = [{
+        'tagD': 'Montag',
+        'tagE': 'Monday'
+    }, {
+        'tagD': 'Dienstag',
+        'tagE': 'Tuesday'
+    }, {
+        'tagD': 'Mittwoch',
+        'tagE': 'Wedensday'
+    }, {
+        'tagD': 'Donnerstag',
+        'tagE': 'Thursday'
+    }, {
+        'tagD': 'Freitag',
+        'tagE': 'Friday'
+    }, {
+        'tagD': 'Samstag',
+        'tagE': 'Saturday'
+    }, {
+        'tagD': 'Sonntag',
+        'tagE': 'Sunday'
+    }];
+
     //Zeiten für Timer-Formulsr
     $scope.zeiten = [{
         zeitD: '00:00',

@@ -40,12 +40,13 @@
             <ul class="list">
                 <div class="row">
                     <div class="col">
-                        <div ng-repeat="tag in ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']">
+                        <!-- <div ng-repeat="tag in ['Monday', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']"> -->
+                        <div ng-repeat="tag in tage">
                             <li class="item item-checkbox">
                                 <label class="checkbox">
-                                    <input type="checkbox" ng-model="timers.tage[tag]" ng-checked="true">
+                                    <input type="checkbox" ng-model="timers.tage[tag.tagE]" ng-checked="true">
                                 </label>
-                                {{tag}}
+                                {{tag.tagD}}
                             </li>
                         </div>
                         <tt>Tage = {{timers.tage}}</tt>

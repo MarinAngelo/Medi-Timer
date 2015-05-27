@@ -129,7 +129,25 @@ angular.module('mediApp.services', [])
     }
 
 
-}]);
+}])
+
+.factory('TimerData', function(){
+
+    //Datenstruktur, zur Verwendung der Funktion "Timewatcher"
+    var timerData = [{
+        dayTime: 'Wednesday-18-06',
+        mediId: '2015-05-26T20:35:44.755Z'
+    },
+    {
+        dayTime: 'Wednesday-18-06',
+        mediId: '2015-05-26T20:35:44.755Z'
+    }];
+    
+    return function name(){
+        
+    };
+});
+
 
 // .factory('Medis', function() {
 // Might use a resource here that returns a JSON array
