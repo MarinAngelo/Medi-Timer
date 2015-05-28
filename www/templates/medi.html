@@ -1,93 +1,41 @@
 <ion-view view-title="Medi Detail">
     <ion-content>
-        <h1>{{medi.name}}</h1>
+        <h1>{{medi.name}} {{medi.menge}} {{medi.einheit}}</h1>
+        <!-- Medi Infos anzeigen -->
+        <h3>Medi Infos</h3>
         <ul>
-            <li>Menge: {{medi.menge}}</li>
-            <li>Einheit: {{medi.einheit}}</li>
+            <!--             <li>Menge: {{medi.menge}} {{medi.einheit}}</li>
+            <li>Einheit: {{medi.einheit}}</li> -->
             <li>Anwendungsform: {{medi.anwendungsform}}</li>
             <li>Packungsgrösse: {{medi.packungsgroesse}}</li>
             <li>Rezeptpflichtig: {{medi.rezeptpflichtig}}</li>
             <li>Rezept Ablaufdatum: {{medi.rezeptende}}</li>
         </ul>
-        <br/>
-        <button ng-click="deleteMedi($stateParams.mediId)">delete</button>
-        <br>
-        <div ng-repeat="timer in timers">
+        <!-- Zimer Infos anzeigen -->
+        <div ng-repeat="timer in medi.timers">
             <ul>
-                <h2>Timer {{timer.id}}</h2>
+                <h3>Timers</h3>
                 <li>
                     <h4>Tage:</h4>
                     <ul>
-                        <li ng-repeat="tage in timer.tage.tageD">{{tage}}</li>
+                        <li ng-repeat="tag in medi.timers.timer.tage">{{tag}}</li>
                         <!-- <li ng-repeat="tage in timer.tage">{{tage}}</li> -->
                     </ul>
                 </li>
                 <li>
                     <h4>Zeiten:</h4>
                     <ul>
-                        <li ng-repeat="zeiten in timer.zeiten.zeitenD">{{zeiten}}</li>
+                        <li ng-repeat="zeit in medi.timers.timer.zeiten">{{zeit}}</li>
                         <!-- <li ng-repeat="zeiten in timer.zeiten">{{zeiten}}</li> -->
                     </ul>
                 </li>
                 <li>
-                    <h4>Einheit: </h4>{{timer.einheit}}</li>
+                    <h4>Menge: </h4>{{medi.timers.timer.menge}}</li>
                 <li>
-                    <h4>Infos: </h4>{{timer.infos}}</li>
+                    <h4>Infos: </h4>{{medi.timers.timer.info}}</li>
             </ul>
         </div>
-        <form novalidate>
-            <h3>Medikament terminieren</h3>
-            <ul class="list">
-                <div class="row">
-                    <div class="col">
-
-                    <!-- selektieren der Tage -->
-                        <div ng-repeat="tag in tage">
-                            <li class="item item-checkbox">
-                                <label class="checkbox">
-                                    <input type="checkbox" ng-model="timers.tage[tag]" ng-checked="true">
-                                    <!-- <input type="checkbox" ng-model="timers.tage[tag.tagE]" ng-checked="true"> -->
-                                </label>
-                                {{tag}}
-                            </li>
-                        </div>
-                    </div>
-
-                    <div class="col">
-
-                    <!-- auswahl der Zeiten -->
-                        <label class="item item-input item-select">
-                            <div class="input-label">
-                                Zeit
-                            </div>
-                            <select ng-model="timers.zeiten" multiple ng-options="zeit as zeit for zeit in zeiten">
-                            <!-- <select ng-model="timers.zeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten "> -->
-                            </select>
-                        </label>
-
-                        <pre>Meine Zeiten = {{timers.zeiten}}</pre>
-                        <tt>Tage = {{timers.tage}}</tt>
-                        <br/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label class="item item-input">
-                            <input type="text" ng-model="timers.menge" placeholder="Menge (z.B. 0,5)">
-                        </label>
-                   <!--  </div>
-                </div> -->
-                <!-- <div class="row">
-                    <div class="col"> -->
-                        <label class="item item-input">
-                            <input type="text" ng-model="timers.info" placeholder="Infos (z.B. nach den Mahlzeiten)">
-                        </label>
-                        <button class="button button-block button-positive" ng-click="addTimer()">
-                    Timer speichern
-                </button>
-                    </div>
-                </div>
-        </form>
-        <pre>Timer = {{timer | json}}</pre>
+        <br/>
+        <button ng-click="deleteMedi($stateParams.mediId)">delete</button>
     </ion-content>
 </ion-view>

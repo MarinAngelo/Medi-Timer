@@ -147,28 +147,6 @@ angular.module('mediApp.services', [])
     
     var tage = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
 
-    // [{
-    //     'tagD': 'Montag',
-    //     'tagE': 'Monday'
-    // }, {
-    //     'tagD': 'Dienstag',
-    //     'tagE': 'Tuesday'
-    // }, {
-    //     'tagD': 'Mittwoch',
-    //     'tagE': 'Wednesday'
-    // }, {
-    //     'tagD': 'Donnerstag',
-    //     'tagE': 'Thursday'
-    // }, {
-    //     'tagD': 'Freitag',
-    //     'tagE': 'Friday'
-    // }, {
-    //     'tagD': 'Samstag',
-    //     'tagE': 'Saturday'
-    // }, {
-    //     'tagD': 'Sonntag',
-    //     'tagE': 'Sunday'
-    // }];
 
     return {
 
@@ -232,3 +210,26 @@ angular.module('mediApp.services', [])
 
 
 // });
+
+    // [{
+    //     'tagD': 'Montag',
+    //     'tagE': 'Monday'
+    // }, {
+    //     'tagD': 'Dienstag',
+    //     'tagE': 'Tuesday'
+    // }, {
+    //     'tagD': 'Mittwoch',
+    //     'tagE': 'Wednesday'
+    // }, {
+    //     'tagD': 'Donnerstag',
+    //     'tagE': 'Thursday'
+    // }, {
+    //     'tagD': 'Freitag',
+    //     'tagE': 'Friday'
+    // }, {
+    //     'tagD': 'Samstag',
+    //     'tagE': 'Saturday'
+    // }, {
+    //     'tagD': 'Sonntag',
+    //     'tagE': 'Sunday'
+    // }];

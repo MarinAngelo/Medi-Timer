@@ -49,10 +49,21 @@ angular.module('mediApp.controllers', [])
 
 })
 
-.controller('AddMediController', function($scope, $localstorage) {
+.controller('AddMediController', function($scope, $localstorage, Timer) {
 
     //vorhandene Objekte im "medis" Array in Variable speichern
     var existMedis = $localstorage.getObject('medis') || [];
+
+    $scope.timers = [{}];
+
+    //Tage aus Service
+    $scope.tage = Timer.alleTage();
+
+    //zeiten aus Servece
+    $scope.zeiten = Timer.alleZeiten();
+
+    //Vorausgewählte Zeit
+    $scope.timers.zeiten = ['06:30'];
 
     $scope.addMedi = function(medi) {
 
