@@ -131,7 +131,7 @@ angular.module('mediApp.services', [])
 
 }])
 
-.factory('TimerData', function(){
+.factory('Timer', function(){
 
     //Datenstruktur, zur Verwendung der Funktion "Timewatcher"
     var timerData = [{
@@ -142,10 +142,44 @@ angular.module('mediApp.services', [])
         dayTime: 'Wednesday-18-06',
         mediId: '2015-05-26T20:35:44.755Z'
     }];
+
+    var zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'];
     
-    return function name(){
-        
-    };
+    var tage = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+
+    // [{
+    //     'tagD': 'Montag',
+    //     'tagE': 'Monday'
+    // }, {
+    //     'tagD': 'Dienstag',
+    //     'tagE': 'Tuesday'
+    // }, {
+    //     'tagD': 'Mittwoch',
+    //     'tagE': 'Wednesday'
+    // }, {
+    //     'tagD': 'Donnerstag',
+    //     'tagE': 'Thursday'
+    // }, {
+    //     'tagD': 'Freitag',
+    //     'tagE': 'Friday'
+    // }, {
+    //     'tagD': 'Samstag',
+    //     'tagE': 'Saturday'
+    // }, {
+    //     'tagD': 'Sonntag',
+    //     'tagE': 'Sunday'
+    // }];
+
+    return {
+
+        //zeiten für Formular bereitstellen
+        alleZeiten: function() {
+            return zeiten;
+        },
+        alleTage: function() {
+            return tage;
+        }
+    }
 });
 
 

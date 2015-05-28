@@ -45,22 +45,26 @@
                         <div ng-repeat="tag in tage">
                             <li class="item item-checkbox">
                                 <label class="checkbox">
-                                    <input type="checkbox" ng-model="timers.tage[tag.tagE]" ng-checked="true">
+                                    <input type="checkbox" ng-model="timers.tage[tag]" ng-checked="true">
+                                    <!-- <input type="checkbox" ng-model="timers.tage[tag.tagE]" ng-checked="true"> -->
                                 </label>
-                                {{tag.tagD}}
+                                {{tag}}
                             </li>
                         </div>
                     </div>
 
                     <div class="col">
+
                     <!-- auswahl der Zeiten -->
                         <label class="item item-input item-select">
                             <div class="input-label">
                                 Zeit
                             </div>
-                            <select ng-model="timers.zeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten ">
+                            <select ng-model="timers.zeiten" multiple ng-options="zeit as zeit for zeit in zeiten">
+                            <!-- <select ng-model="timers.zeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten "> -->
                             </select>
                         </label>
+
                         <pre>Meine Zeiten = {{timers.zeiten}}</pre>
                         <tt>Tage = {{timers.tage}}</tt>
                         <br/>
@@ -69,15 +73,18 @@
                 <div class="row">
                     <div class="col">
                         <label class="item item-input">
-                            <input type="text" placeholder="Menge (z.B. 0,5)">
+                            <input type="text" ng-model="timers.menge" placeholder="Menge (z.B. 0,5)">
                         </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
+                   <!--  </div>
+                </div> -->
+                <!-- <div class="row">
+                    <div class="col"> -->
                         <label class="item item-input">
-                            <input type="text" placeholder="Infos (z.B. nach den Mahlzeiten)">
+                            <input type="text" ng-model="timers.info" placeholder="Infos (z.B. nach den Mahlzeiten)">
                         </label>
+                        <button class="button button-block button-positive" ng-click="addTimer()">
+                    Timer speichern
+                </button>
                     </div>
                 </div>
         </form>

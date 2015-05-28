@@ -75,7 +75,7 @@ angular.module('mediApp.controllers', [])
 
 })
 
-.controller('MediController', function($scope, $stateParams, $localstorage) {
+.controller('MediController', function($scope, $stateParams, $localstorage, Timer) {
 
     //***************Einzelnes Medi anzeigen********************************
     //ein Einzelnes Medi aus dem Objekt "medis" rauslesen
@@ -95,95 +95,16 @@ angular.module('mediApp.controllers', [])
 
     //********************Timer zu Medi hinzufügen***********************
 
-    $scope.timers = [{
-        // id: null,
-        //mit diesem Feld werden Medi und Timers verbunden
-        // mediId: $stateParams.mediId,
-        // tage: [],
-        // zeiten: [''],
-        // menge: null,
-        // infos: ''
-    }];
+    $scope.timers = [{}];
 
-    $scope.tage = [{
-        'tagD': 'Montag',
-        'tagE': 'Monday'
-    }, {
-        'tagD': 'Dienstag',
-        'tagE': 'Tuesday'
-    }, {
-        'tagD': 'Mittwoch',
-        'tagE': 'Wednesday'
-    }, {
-        'tagD': 'Donnerstag',
-        'tagE': 'Thursday'
-    }, {
-        'tagD': 'Freitag',
-        'tagE': 'Friday'
-    }, {
-        'tagD': 'Samstag',
-        'tagE': 'Saturday'
-    }, {
-        'tagD': 'Sonntag',
-        'tagE': 'Sunday'
-    }];
+    //Tage aus Service
+    $scope.tage = Timer.alleTage();
 
-    $scope.timers.tage = {
-        'Monday':true,
-        'Tuesday':true,
-        'Wednesday':true,
-        'Thursday':true,
-        'Friday':true,
-        'Saturday':true,
-        'Sunday':true
-};
+    //zeiten aus Servece
+    $scope.zeiten = Timer.alleZeiten();
 
-    //Zeiten für Timer-Formulsr
-    $scope.zeiten = [{
-        zeitD: '00:00',
-        zeitE: '00-00'
-    }, {
-        zeitD: '00:30',
-        zeitE: '00-30'
-    }, {
-        zeitD: '01:00',
-        zeitE: '01-00'
-    }, {
-        zeitD: '01:30',
-        zeitE: '01-30'
-    }, {
-        zeitD: '02:00',
-        zeitE: '02-00'
-    }, {
-        zeitD: '02:30',
-        zeitE: '02-30'
-    }, {
-        zeitD: '03:00',
-        zeitE: '03-00'
-    }, {
-        zeitD: '03:30',
-        zeitE: '03-30'
-    }, {
-        zeitD: '04:00',
-        zeitE: '04-00'
-    }, {
-        zeitD: '04:30',
-        zeitE: '04-30'
-    }, {
-        zeitD: '05:00',
-        zeitE: '05-00'
-    }, {
-        zeitD: '05:30',
-        zeitE: '05-30'
-    }, {
-        zeitD: '06:00',
-        zeitE: '06-00'
-    }, {
-        zeitD: '06:30',
-        zeitE: '06-30'
-    }];
-
-    $scope.timers.zeiten = ['06-30'];
+    //Vorausgewählte Zeit
+    $scope.timers.zeiten = ['06:30'];
 
     //****************Medi löschen**********************
     //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
@@ -200,3 +121,54 @@ angular.module('mediApp.controllers', [])
 
     };
 });
+
+    //Zeiten für Timer-Formulsr
+    // $scope.zeiten = [{
+    //     zeitD: '00:00',
+    //     zeitE: '00-00'
+    // }, {
+    //     zeitD: '00:30',
+    //     zeitE: '00-30'
+    // }, {
+    //     zeitD: '01:00',
+    //     zeitE: '01-00'
+    // }, {
+    //     zeitD: '01:30',
+    //     zeitE: '01-30'
+    // }];
+
+
+        // $scope.timers.tage = {
+//         'Monday':true,
+//         'Tuesday':true,
+//         'Wednesday':true,
+//         'Thursday':true,
+//         'Friday':true,
+//         'Saturday':true,
+//         'Sunday':true
+// };
+
+    // $scope.zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'];
+
+        // $scope.tage = [{
+    //     'tagD': 'Montag',
+    //     'tagE': 'Monday'
+    // }, {
+    //     'tagD': 'Dienstag',
+    //     'tagE': 'Tuesday'
+    // }, {
+    //     'tagD': 'Mittwoch',
+    //     'tagE': 'Wednesday'
+    // }, {
+    //     'tagD': 'Donnerstag',
+    //     'tagE': 'Thursday'
+    // }, {
+    //     'tagD': 'Freitag',
+    //     'tagE': 'Friday'
+    // }, {
+    //     'tagD': 'Samstag',
+    //     'tagE': 'Saturday'
+    // }, {
+    //     'tagD': 'Sonntag',
+    //     'tagE': 'Sunday'
+    // }];
