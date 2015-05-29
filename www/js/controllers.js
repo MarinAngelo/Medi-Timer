@@ -54,16 +54,11 @@ angular.module('mediApp.controllers', [])
     //vorhandene Objekte im "medis" Array in Variable speichern
     var existMedis = $localstorage.getObject('medis') || [];
 
-    $scope.timers = [{}];
-
     //Tage aus Service
-    $scope.tage = Timer.alleTage();
+    $scope.medi = Timer.alleTage();
 
     //zeiten aus Servece
     $scope.zeiten = Timer.alleZeiten();
-
-    //Vorausgewählte Zeit
-    $scope.timers.zeiten = ['06:30'];
 
     $scope.addMedi = function(medi) {
 
@@ -133,23 +128,23 @@ angular.module('mediApp.controllers', [])
     };
 });
 
-    //Zeiten für Timer-Formulsr
-    // $scope.zeiten = [{
-    //     zeitD: '00:00',
-    //     zeitE: '00-00'
-    // }, {
-    //     zeitD: '00:30',
-    //     zeitE: '00-30'
-    // }, {
-    //     zeitD: '01:00',
-    //     zeitE: '01-00'
-    // }, {
-    //     zeitD: '01:30',
-    //     zeitE: '01-30'
-    // }];
+//Zeiten für Timer-Formulsr
+// $scope.zeiten = [{
+//     zeitD: '00:00',
+//     zeitE: '00-00'
+// }, {
+//     zeitD: '00:30',
+//     zeitE: '00-30'
+// }, {
+//     zeitD: '01:00',
+//     zeitE: '01-00'
+// }, {
+//     zeitD: '01:30',
+//     zeitE: '01-30'
+// }];
 
 
-        // $scope.timers.tage = {
+// $scope.timers.tage = {
 //         'Monday':true,
 //         'Tuesday':true,
 //         'Wednesday':true,
@@ -159,27 +154,31 @@ angular.module('mediApp.controllers', [])
 //         'Sunday':true
 // };
 
-    // $scope.zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'];
+// $scope.zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'];
 
-        // $scope.tage = [{
-    //     'tagD': 'Montag',
-    //     'tagE': 'Monday'
-    // }, {
-    //     'tagD': 'Dienstag',
-    //     'tagE': 'Tuesday'
-    // }, {
-    //     'tagD': 'Mittwoch',
-    //     'tagE': 'Wednesday'
-    // }, {
-    //     'tagD': 'Donnerstag',
-    //     'tagE': 'Thursday'
-    // }, {
-    //     'tagD': 'Freitag',
-    //     'tagE': 'Friday'
-    // }, {
-    //     'tagD': 'Samstag',
-    //     'tagE': 'Saturday'
-    // }, {
-    //     'tagD': 'Sonntag',
-    //     'tagE': 'Sunday'
-    // }];
+// $scope.tage = [{
+//     'tagD': 'Montag',
+//     'tagE': 'Monday'
+// }, {
+//     'tagD': 'Dienstag',
+//     'tagE': 'Tuesday'
+// }, {
+//     'tagD': 'Mittwoch',
+//     'tagE': 'Wednesday'
+// }, {
+//     'tagD': 'Donnerstag',
+//     'tagE': 'Thursday'
+// }, {
+//     'tagD': 'Freitag',
+//     'tagE': 'Friday'
+// }, {
+//     'tagD': 'Samstag',
+//     'tagE': 'Saturday'
+// }, {
+//     'tagD': 'Sonntag',
+//     'tagE': 'Sunday'
+// }];
+
+    //Vorausgewählte Zeit
+    // $scope.timers = [{}];
+    // $scope.timers.zeiten = ['06:30'];

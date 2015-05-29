@@ -11,14 +11,14 @@
             <li>Rezeptpflichtig: {{medi.rezeptpflichtig}}</li>
             <li>Rezept Ablaufdatum: {{medi.rezeptende}}</li>
         </ul>
-        <!-- Zimer Infos anzeigen -->
+        <!-- Timer Infos anzeigen -->
         <div ng-repeat="timer in medi.timers">
             <ul>
                 <h3>Timers</h3>
                 <li>
                     <h4>Tage:</h4>
                     <ul>
-                        <li ng-repeat="tag in medi.timers.timer.tage">{{tag}}</li>
+                        <li ng-repeat="tag in medi.timers.tage" ng-show="{{tag}} !== false">{{tag}}</li>
                         <!-- <li ng-repeat="tage in timer.tage">{{tage}}</li> -->
                     </ul>
                 </li>

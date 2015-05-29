@@ -1,6 +1,6 @@
 <ion-view view-title="Medikament hinzufügen">
     <ion-content>
-        <form novalidate>
+        <form name="myForm">
             <h3>Medikament erfassen</h3>
             <div class="list">
                 <label class="item item-input">
@@ -31,18 +31,58 @@
                     <span class="input-label">Rezept gültig bis</span>
                     <input type="date" ng-model='medi.rezeptende'>
                 </label>
-
                 <!--Medikament terminieren-->
                 <!-- selektieren der Tage -->
-                <div ng-repeat="tag in tage">
+                <!--                 <div ng-repeat="tag in tage">
                     <li class="item item-checkbox">
                         <label class="checkbox">
                             <input type="checkbox" ng-model="medi.timers.timer.tage[tag]" ng-checked="true">
-                            <!-- <input type="checkbox" ng-model="timers.tage[tag.tagE]" ng-checked="true"> -->
                         </label>
                         {{tag}}
                     </li>
-                </div>
+                </div> -->
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.montag" ng-true-value="'Montag'">
+                    </label>
+                    Montag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.dienstag" ng-true-value="'Dienstag'">
+                    </label>
+                    Dienstag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.mittwoch" ng-true-value="'Mittwoch'">
+                    </label>
+                    Mittwoch
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.donnerstag" ng-true-value="'Donnerstag'">
+                    </label>
+                    Donnerstag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.freitag" ng-true-value="'Freitag'">
+                    </label>
+                    Freitag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.samstag" ng-true-value="'Samstag'">
+                    </label>
+                    Samstag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.sonntag" ng-true-value="'Sonntag'">
+                    </label>
+                    Sonntag
+                </li>
                 <!-- auswahl der Zeiten -->
                 <label class="item item-input item-select">
                     <div class="input-label">
@@ -53,7 +93,7 @@
                     </select>
                 </label>
                 <pre>Meine Zeiten = {{medi.timers.timer.zeiten}}</pre>
-                <tt>Tage = {{medi.timers.timer.tage}}</tt>
+                <tt>Tage = {{medi.timers.tage}}</tt>
                 <br/>
                 <label class="item item-input">
                     <input type="text" ng-model="medi.timers.timer.menge" placeholder="Menge (z.B. 0,5)">
@@ -69,3 +109,4 @@
         <pre>Medi = {{medi | json}}</pre>
     </ion-content>
 </ion-view>
+<!-- <input type="checkbox" ng-model="timers.tage[tag.tagE]" ng-checked="true"> -->

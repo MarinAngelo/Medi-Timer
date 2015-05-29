@@ -131,21 +131,35 @@ angular.module('mediApp.services', [])
 
 }])
 
-.factory('Timer', function(){
+.factory('Timer', function() {
 
     //Datenstruktur, zur Verwendung der Funktion "Timewatcher"
     var timerData = [{
         dayTime: 'Wednesday-18-06',
         mediId: '2015-05-26T20:35:44.755Z'
-    },
-    {
+    }, {
         dayTime: 'Wednesday-18-06',
         mediId: '2015-05-26T20:35:44.755Z'
     }];
 
     var zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'];
-    
-    var tage = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+
+    //für Variante mit ng-repeat
+    // var tage = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+
+    var tage = {
+        timers: [{
+            tage: {
+                montag: 'Montag',
+                dienstag: 'Dienstag',
+                mittwoch: 'Mittwoch',
+                donnerstag: 'Donnerstag',
+                freitag: 'Freitag',
+                samstag: 'Samstag',
+                sonntag: 'Sonntag'
+            }
+        }]
+    };
 
 
     return {
@@ -211,25 +225,25 @@ angular.module('mediApp.services', [])
 
 // });
 
-    // [{
-    //     'tagD': 'Montag',
-    //     'tagE': 'Monday'
-    // }, {
-    //     'tagD': 'Dienstag',
-    //     'tagE': 'Tuesday'
-    // }, {
-    //     'tagD': 'Mittwoch',
-    //     'tagE': 'Wednesday'
-    // }, {
-    //     'tagD': 'Donnerstag',
-    //     'tagE': 'Thursday'
-    // }, {
-    //     'tagD': 'Freitag',
-    //     'tagE': 'Friday'
-    // }, {
-    //     'tagD': 'Samstag',
-    //     'tagE': 'Saturday'
-    // }, {
-    //     'tagD': 'Sonntag',
-    //     'tagE': 'Sunday'
-    // }];
+// [{
+//     'tagD': 'Montag',
+//     'tagE': 'Monday'
+// }, {
+//     'tagD': 'Dienstag',
+//     'tagE': 'Tuesday'
+// }, {
+//     'tagD': 'Mittwoch',
+//     'tagE': 'Wednesday'
+// }, {
+//     'tagD': 'Donnerstag',
+//     'tagE': 'Thursday'
+// }, {
+//     'tagD': 'Freitag',
+//     'tagE': 'Friday'
+// }, {
+//     'tagD': 'Samstag',
+//     'tagE': 'Saturday'
+// }, {
+//     'tagD': 'Sonntag',
+//     'tagE': 'Sunday'
+// }];
