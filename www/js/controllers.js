@@ -5,7 +5,8 @@ angular.module('mediApp.controllers', [])
     $scope.loginData = {};
 
     // Create the login modal that we will use later
-    $ionicModal.fromTemplateUrl('templates/login.html', {
+    $ionicModal.fromTemplateUrl('templates/addMedi.html', {
+        // $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.modal = modal;
@@ -34,7 +35,7 @@ angular.module('mediApp.controllers', [])
 })
 
 //templeate medis.html (Liste)
-.controller('MedisController', function($scope, $localstorage, Timer) {
+.controller('MedisController', function($scope, $localstorage, $interval) {
 
     if ($localstorage.getObject('medis') !== []) {
 
@@ -46,9 +47,18 @@ angular.module('mediApp.controllers', [])
         $scope.medis = $localstorage.initialData();
         console.log('keine medis');
     }
-    
-    $scope.date = Timer.holsDatum();
 
+    //initial Datum holen
+    $scope.date = moment().format('dddd h:mm');
+    // jede Minute Datum holen
+    $scope.holeDatum = function() {
+        $scope.date = moment().format('dddd h:mm');
+    }
+
+    $interval(function() {
+        $scope.holeDatum();
+    }, 60000, 0);
+    // $scope.date = Timer.holsdatum();
 })
 
 .controller('AddMediController', function($scope, $localstorage, Timer) {

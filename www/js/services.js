@@ -161,8 +161,16 @@ angular.module('mediApp.services', [])
         }]
     };
 
-    var tagZeit = moment().format('MMMM Do YYYY, h:mm:ss a');
-    // var tagZeit = new Date();
+
+    // var tagZeit = moment().format('dddd h:mm:ss');
+
+    // var datum = function() {
+    //     var date = moment().format('dddd h:mm:ss');
+    // }
+
+    // $interval(function() {
+    //     $scope.datum();
+    // }, 6000, 0);
 
     return {
 
@@ -172,10 +180,10 @@ angular.module('mediApp.services', [])
         },
         alleTage: function() {
             return tage;
-        },
-        holsDatum: function() {
-            return tagZeit;
         }
+        // holsDatum: function() {
+        //     return date;
+        // }
     }
 });
 
