@@ -34,7 +34,7 @@ angular.module('mediApp.controllers', [])
 })
 
 //templeate medis.html (Liste)
-.controller('MedisController', function($scope, $localstorage) {
+.controller('MedisController', function($scope, $localstorage, Timer) {
 
     if ($localstorage.getObject('medis') !== []) {
 
@@ -46,6 +46,8 @@ angular.module('mediApp.controllers', [])
         $scope.medis = $localstorage.initialData();
         console.log('keine medis');
     }
+    
+    $scope.date = Timer.holsDatum();
 
 })
 
@@ -179,6 +181,6 @@ angular.module('mediApp.controllers', [])
 //     'tagE': 'Sunday'
 // }];
 
-    //Vorausgewählte Zeit
-    // $scope.timers = [{}];
-    // $scope.timers.zeiten = ['06:30'];
+//Vorausgewählte Zeit
+// $scope.timers = [{}];
+// $scope.timers.zeiten = ['06:30'];

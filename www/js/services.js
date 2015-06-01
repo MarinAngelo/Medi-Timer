@@ -161,6 +161,8 @@ angular.module('mediApp.services', [])
         }]
     };
 
+    var tagZeit = moment().format('MMMM Do YYYY, h:mm:ss a');
+    // var tagZeit = new Date();
 
     return {
 
@@ -170,6 +172,9 @@ angular.module('mediApp.services', [])
         },
         alleTage: function() {
             return tage;
+        },
+        holsDatum: function() {
+            return tagZeit;
         }
     }
 });
