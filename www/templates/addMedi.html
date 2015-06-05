@@ -88,18 +88,18 @@
                     <div class="input-label">
                         Zeit
                     </div>
-                    <select ng-model="medi.timers.timer.zeiten" multiple ng-options="zeit as zeit for zeit in zeiten">
+                    <select ng-model="medi.timers.zeiten" multiple ng-options="zeit as zeit for zeit in zeiten">
                         <!-- <select ng-model="timers.zeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten "> -->
                     </select>
                 </label>
-                <pre>Meine Zeiten = {{medi.timers.timer.zeiten}}</pre>
+                <pre>Meine Zeiten = {{medi.timers.zeiten}}</pre>
                 <tt>Tage = {{medi.timers.tage}}</tt>
                 <br/>
                 <label class="item item-input">
-                    <input type="text" ng-model="medi.timers.timer.menge" placeholder="Menge (z.B. 0,5)">
+                    <input type="text" ng-model="medi.timers.menge" placeholder="Menge (z.B. 0,5)">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model="medi.timers.timer.info" placeholder="Infos (z.B. nach den Mahlzeiten)">
+                    <input type="text" ng-model="medi.timers.info" placeholder="Infos (z.B. nach den Mahlzeiten)">
                 </label>
                 <button class="button button-block button-positive" ng-click="addMedi(medi)">
                     Medikament speichern

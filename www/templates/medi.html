@@ -12,27 +12,25 @@
             <li>Rezept Ablaufdatum: {{medi.rezeptende}}</li>
         </ul>
         <!-- Timer Infos anzeigen -->
-        <div ng-repeat="timer in medi.timers">
+        <div><!-- ng-repeat="timer in medi.timers"-->
             <ul>
                 <h3>Timers</h3>
                 <li>
                     <h4>Tage:</h4>
                     <ul>
                         <li ng-repeat="tag in medi.timers.tage" ng-show="{{tag}} !== false">{{tag}}</li>
-                        <!-- <li ng-repeat="tage in timer.tage">{{tage}}</li> -->
                     </ul>
                 </li>
                 <li>
                     <h4>Zeiten:</h4>
                     <ul>
-                        <li ng-repeat="zeit in medi.timers.timer.zeiten">{{zeit}}</li>
-                        <!-- <li ng-repeat="zeiten in timer.zeiten">{{zeiten}}</li> -->
+                        <li ng-repeat="zeit in medi.timers.zeiten">{{zeit}}</li>
                     </ul>
                 </li>
                 <li>
-                    <h4>Menge: </h4>{{medi.timers.timer.menge}}</li>
+                    <h4>Menge: </h4>{{medi.timers.menge}}</li>
                 <li>
-                    <h4>Infos: </h4>{{medi.timers.timer.info}}</li>
+                    <h4>Infos: </h4>{{medi.timers.info}}</li>
             </ul>
         </div>
         <br/>

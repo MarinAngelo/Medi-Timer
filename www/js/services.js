@@ -25,6 +25,7 @@ angular.module('mediApp.services', [])
                 rezeptpflichtig: true,
                 rezeptende: '16.07.2015',
                 timers: [{
+                    id : 1,
                     tage: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
                     zeiten: ['08:00', '18:30'],
                     info: 'vor den Mahlzeiten'
@@ -39,10 +40,12 @@ angular.module('mediApp.services', [])
                 rezeptpflichtig: false,
                 rezeptende: '',
                 timers: [{
+                    id : 1,
                     tage: ['Montag', 'Mittwoch', 'Freitag', 'Sonntag'],
                     zeiten: ['08:00'],
                     info: 'vor den Mahlzeiten'
                 }, {
+                    id : 2,
                     tage: ['Dienstag', 'Donnerstag', 'Samstag'],
                     zeiten: ['18:30'],
                     info: 'nach den Mahlzeiten'
@@ -56,6 +59,7 @@ angular.module('mediApp.services', [])
                 rezeptpflichtig: true,
                 rezeptende: '16.07.2015',
                 timers: [{
+                    id : 1,
                     tage: ['Montag'],
                     zeiten: ['08:00', '18:30'],
                     info: 'vor den Mahlzeiten'
@@ -69,6 +73,7 @@ angular.module('mediApp.services', [])
                 rezeptpflichtig: true,
                 rezeptende: '16.07.2015',
                 timers: [{
+                    id : 1,
                     tage: ['Dienstag', 'Samstag'],
                     zeiten: ['08:00', '14:00', '18:30'],
                     info: 'vor den Mahlzeiten, mit einem Glas Wasser'
@@ -82,6 +87,7 @@ angular.module('mediApp.services', [])
                 rezeptpflichtig: false,
                 rezeptende: '',
                 timers: [{
+                    id : 1,
                     tage: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
                     zeiten: ['05:30', '08:00', '14:30', '18:30', '21:30'],
                     info: 'vor den Mahlzeiten'
@@ -95,30 +101,37 @@ angular.module('mediApp.services', [])
                 rezeptpflichtig: true,
                 rezeptende: '16.07.2015',
                 timers: [{
+                    id : 1,
                     tage: ['Montag'],
                     zeiten: ['08:00'],
                     info: 'vor den Mahlzeiten'
                 }, {
+                    id : 2,
                     tage: ['Dienstag'],
                     zeiten: ['08:30'],
                     info: 'vor den Mahlzeiten'
                 }, {
+                    id : 3,
                     tage: ['Mittwoch'],
                     zeiten: ['09:00'],
                     info: 'vor den Mahlzeiten'
                 }, {
+                    id : 4,
                     tage: ['Donnerstag'],
                     zeiten: ['09:30'],
                     info: 'vor den Mahlzeiten'
                 }, {
+                    id : 5,
                     tage: ['Freitag'],
                     zeiten: ['09:30'],
                     info: 'vor den Mahlzeiten'
                 }, {
+                    id : 6,
                     tage: ['Samstag'],
                     zeiten: ['10:00'],
                     info: 'vor den Mahlzeiten'
                 }, {
+                    id : 7,
                     tage: ['Sonntag'],
                     zeiten: ['10:30'],
                     info: 'vor den Mahlzeiten'
@@ -144,46 +157,14 @@ angular.module('mediApp.services', [])
 
     var zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'];
 
-    //für Variante mit ng-repeat
-    // var tage = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
-
-    var tage = {
-        timers: [{
-            tage: {
-                montag: 'Montag',
-                dienstag: 'Dienstag',
-                mittwoch: 'Mittwoch',
-                donnerstag: 'Donnerstag',
-                freitag: 'Freitag',
-                samstag: 'Samstag',
-                sonntag: 'Sonntag'
-            }
-        }]
-    };
-
-
-    // var tagZeit = moment().format('dddd h:mm:ss');
-
-    // var datum = function() {
-    //     var date = moment().format('dddd h:mm:ss');
-    // }
-
-    // $interval(function() {
-    //     $scope.datum();
-    // }, 6000, 0);
 
     return {
 
         //zeiten für Formular bereitstellen
         alleZeiten: function() {
             return zeiten;
-        },
-        alleTage: function() {
-            return tage;
         }
-        // holsDatum: function() {
-        //     return date;
-        // }
+
     }
 });
 
@@ -260,3 +241,25 @@ angular.module('mediApp.services', [])
 //     'tagD': 'Sonntag',
 //     'tagE': 'Sunday'
 // }];
+
+    //für Variante mit ng-repeat
+    // var tage = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+
+    // var tage = {
+    //     timers: [{
+    //         tage: {
+    //             montag: 'Montag',
+    //             dienstag: 'Dienstag',
+    //             mittwoch: 'Mittwoch',
+    //             donnerstag: 'Donnerstag',
+    //             freitag: 'Freitag',
+    //             samstag: 'Samstag',
+    //             sonntag: 'Sonntag'
+    //         }
+    //     }]
+    // };
+
+        // ,
+        // alleTage: function() {
+        //     return tage;
+        // }

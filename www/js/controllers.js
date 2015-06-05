@@ -68,11 +68,10 @@ angular.module('mediApp.controllers', [])
     //vorhandene Objekte im "medis" Array in Variable speichern
     var existMedis = $localstorage.getObject('medis') || [];
 
-    //Tage aus Service
-    $scope.medi = Timer.alleTage();
-
-    //zeiten aus Servece
+    //zeiten aus Servece um im select anzuzeigen
     $scope.zeiten = Timer.alleZeiten();
+
+    $scope.timers = [];
 
     $scope.addMedi = function(medi) {
 
@@ -115,16 +114,16 @@ angular.module('mediApp.controllers', [])
 
     //********************Timer zu Medi hinzufügen***********************
 
-    $scope.timers = [{}];
+    // $scope.timers = [{}];
 
     //Tage aus Service
-    $scope.tage = Timer.alleTage();
+    // $scope.tage = Timer.alleTage();
 
     //zeiten aus Servece
-    $scope.zeiten = Timer.alleZeiten();
+    // $scope.zeiten = Timer.alleZeiten();
 
     //Vorausgewählte Zeit
-    $scope.timers.zeiten = ['06:30'];
+    // $scope.timers.zeiten = ['06:30'];
 
     //****************Medi löschen**********************
     //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
