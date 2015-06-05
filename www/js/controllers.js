@@ -50,15 +50,17 @@ angular.module('mediApp.controllers', [])
 
     //initial Datum holen
     $scope.date = moment().format('dddd h:mm');
+    console.log('inizial:' + $scope.date);
+
     // jede Minute Datum holen
     $scope.holeDatum = function() {
         $scope.date = moment().format('dddd h:mm');
+        console.log('jede Minute:' + $scope.date);
     }
 
     $interval(function() {
         $scope.holeDatum();
     }, 60000, 0);
-    // $scope.date = Timer.holsdatum();
 })
 
 .controller('AddMediController', function($scope, $localstorage, Timer) {
