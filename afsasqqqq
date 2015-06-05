@@ -1,0 +1,162 @@
+[33mcommit 9ab4a958c64904d2dcba67d66854f29ad4964faf[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Fri May 29 22:07:54 2015 +0200
+
+    Tage mit Rückgabewert Tag anstatt boolean
+
+[33mcommit 5124c96879aa56f59a8cea8a497a4346a0254eb6[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Thu May 28 17:19:58 2015 +0200
+
+    Timers dem Formular hinzugefügt
+
+[33mcommit 2c32a1f909cda74a2517a2b9db498a80fbb02f46[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Thu May 28 15:36:42 2015 +0200
+
+    Datenmodel vereinfacht, uebersetzung der gespeicherten Daten ins Datums-Format muss an anderer Stelle erfolgen
+
+[33mcommit 23a587e767cd21ad8b7217125978409c72f52591[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Thu May 28 01:47:38 2015 +0200
+
+    Timers Formular angepasst
+
+[33mcommit d268c0915b7742b7a7a094d4c1dc2b93ed0ecc53[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Wed May 27 20:33:34 2015 +0200
+
+    Checkbox Tage mit D und E
+
+[33mcommit d0f677726c9704b729640133648a656da10d3c03[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Wed May 27 09:42:53 2015 +0200
+
+    JSON inizial daten angepasst
+
+[33mcommit ef43d7ff0795dd01ec78e87f4c9fafbb96d8d60b[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Tue May 26 23:15:57 2015 +0200
+
+    aufräumarbeiten
+
+[33mcommit 24712455045adb4b78b7e46566ca722a3a6fcedf[m
+Merge: a38e983 5a95772
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Tue May 26 20:52:28 2015 +0200
+
+    rafi war da
+
+[33mcommit a38e9837b5c816df2b0ecb5ddf64989d6c6147ef[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Tue May 26 20:47:40 2015 +0200
+
+    rafi war da
+
+[33mcommit 58012197a7894ae2438b23eebc804129a8dec6da[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Tue May 26 16:02:08 2015 +0200
+
+    ausgewählte Zeit in Array Zeiten speichern
+
+[33mcommit b6ce1861100e0569e4c9c441ea4f71b7071b0cc5[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Tue May 26 13:34:28 2015 +0200
+
+    Tage und Zeiten im Form hinzugefügt
+
+[33mcommit 4ee0bb6aef50f30c5822fae67caa4054c4aace70[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Tue May 26 10:05:22 2015 +0200
+
+    überflüssige Templeates entfernt
+
+[33mcommit 30c0986bc4e25a9f7d3cf30b6ee993751b7e1b4f[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Tue May 26 07:50:13 2015 +0200
+
+    lib's
+
+[33mcommit d82aeb4c56284203cd2fb009dd66799763a1f55b[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Fri May 22 19:00:21 2015 +0200
+
+    initialData in Service eingefügt, funktioniert aber nicht
+
+[33mcommit faa18cef5e6f4370c651b0d4257d369e1a8bf6f0[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Fri May 22 17:41:13 2015 +0200
+
+    löschen geht jeztzt
+
+[33mcommit df0b85e62df3d78fe03eaedfd30f092625fffba8[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Tue May 19 16:48:29 2015 +0200
+
+    delete geht noch nicht ganz sauber
+
+[33mcommit 6ee018cdd15fcf62b5f6fc4e0a0e3d0637e83fab[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Tue May 19 12:44:51 2015 +0200
+
+    Datail aus Local Storage anzeigen
+
+[33mcommit dd1146642e26b25de942e8b1a4c46ae47b2606d2[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Mon May 18 21:18:14 2015 +0200
+
+    Medi hinzufügen funktioniert
+
+[33mcommit 5a957728b4b2e6fd0a75e30ef50b186cb85b9789[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Mon May 18 21:18:14 2015 +0200
+
+    Medi hinzufügen funktioniert
+
+[33mcommit f74bd765be03122b8553e8872a654e6cb5044773[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Mon May 18 16:18:58 2015 +0200
+
+    kann Formulareingabe hinzufügen, local Storage wird aber immer überschrieben
+
+[33mcommit 51468ec7f0335af5caa824d965d34c329ede8ceb[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Sun May 17 23:07:50 2015 +0200
+
+    neuen Service von http://learn.ionicframework.com/formulas/localstorage/ und AddMediController hinzugefügt
+
+[33mcommit 7a9accc8ebeead2e124bda03327e458ab6bde128[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Thu May 14 18:41:10 2015 +0200
+
+    formular hinzugefügt, local Storage im Angular Service
+
+[33mcommit 789692f4ec408f024eb3a61afeb27a655091067c[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Wed May 13 20:50:14 2015 +0200
+
+    stand 13.0.
+
+[33mcommit 3e17f652b51c5c0cf965c0c1fe9ad130e5d6ec21[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Mon May 11 16:10:46 2015 +0200
+
+    service factory hinzugefügt und Daten von dort geholt
+
+[33mcommit 1f3bed7404e5c7be829992283348927bc465f827[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Fri May 8 18:08:48 2015 +0200
+
+    Namensgebung an Projekt angepasst
+
+[33mcommit 2868555b43304d776ea1411c94b85d773e5e820d[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Thu May 7 17:35:14 2015 +0200
+
+    ng-app name geändert
+
+[33mcommit 154bb79c57b462629fdd403cd2796068b55a8611[m
+Author: Marinus Klap <marinus@klap.ch>
+Date:   Thu May 7 17:29:43 2015 +0200
+
+    initial commit
