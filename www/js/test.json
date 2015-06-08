@@ -1,0 +1,21 @@
+[{
+    "name": "Aspirin",
+    "menge": "250",
+    "einheit": "mg",
+    "anwendungsform": "Tabletten",
+    "packungsgroesse": "40",
+    "rezeptpflichtig": true,
+    "rezeptende": "2015-06-29T22:00:00.000Z",
+    "timers": {
+        "tage": {
+            "montag": "Montag",
+            "mittwoch": "Mittwoch",
+            "freitag": "Freitag",
+            "sonntag": "Sonntag"
+        },
+        "zeiten": ["02:30"],
+        "menge": "1",
+        "info": "nach den Mahlzeiten"
+    },
+    "id": "2015-06-05T08:14:14.230Z"
+}]
