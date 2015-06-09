@@ -1,6 +1,6 @@
 angular.module('mediApp.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $localstorage, $interval) {
     // Form data for the login modal
     $scope.loginData = {};
 
@@ -32,29 +32,8 @@ angular.module('mediApp.controllers', [])
             $scope.closeLogin();
         }, 1000);
     };
-})
 
-//templeate medis.html (Liste)
-.controller('MedisController', function($scope, $localstorage, $interval, $window) {
-
-    //teste ob key "medis" im Local Storage vorhanden ist
-    if (localStorage['medis'] === undefined) {
-        //wenn nicht speichere initial Daten
-        $localstorage.setInitialData('medis');
-        //zeige inizial Daten an
-        $scope.medis = $localstorage.getObject('medis');
-
-        // $window.location.reload(true);
-
-    } else {
-
-        $scope.medis = $localstorage.getObject('medis');
-
-        // $window.location.reload(true);
-
-    };
-
-    //initial Datum holen
+        //initial Datum holen
     $scope.date = moment().format('dddd h:mm');
     console.log('inizial:' + $scope.date);
 
@@ -67,9 +46,28 @@ angular.module('mediApp.controllers', [])
     $interval(function() {
         $scope.holeDatum();
     }, 60000, 0);
-
+    
+    //Local Storage String holen um in gewünschtes Format umzuwandeln
     $scope.lsString = localStorage['medis'];
     console.log($scope.lsString);
+})
+
+//templeate medis.html (Liste)
+.controller('MedisController', function($scope, $localstorage, $interval, $window) {
+
+    //teste ob key "medis" im Local Storage vorhanden ist
+    if (localStorage['medis'] === undefined) {
+        //wenn nicht speichere initial Daten
+        $localstorage.setInitialData('medis');
+        //zeige inizial Daten an
+        $scope.medis = $localstorage.getObject('medis');
+
+    } else {
+
+        $scope.medis = $localstorage.getObject('medis');
+
+    };
+
 })
 
 .controller('AddMediController', function($scope, $localstorage, $location, Timer, $window) {
