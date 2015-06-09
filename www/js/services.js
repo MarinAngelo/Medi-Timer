@@ -1,6 +1,44 @@
 angular.module('mediApp.services', [])
 
 .factory('$localstorage', ['$window', function($window) {
+
+    var initialData = [{
+                id: '2015-06-05T08:58:53.372Z',
+                name: 'Actiq®',
+                menge: 500,
+                einheit: 'Mikrogramm',
+                anwendungsform: 'Lutschtabletten',
+                packungsgroesse: 20,
+                rezeptpflichtig: true,
+                rezeptende: '16.07.2015',
+                timers: [{
+                    timerId : 1,
+                    tage: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
+                    zeiten: ['08:00', '18:30'],
+                    info: 'vor den Mahlzeiten'
+                }]
+            }, {
+                id: '2015-07-05T08:58:53.372Z',
+                name: 'Acidum folicum Streuli®',
+                menge: 5,
+                einheit: 'mg',
+                anwendungsform: 'Tabletten',
+                packungsgroesse: 25,
+                rezeptpflichtig: false,
+                rezeptende: '',
+                timers: [{
+                    timerId : 1,
+                    tage: ['Montag', 'Mittwoch', 'Freitag', 'Sonntag'],
+                    zeiten: ['08:00'],
+                    info: 'vor den Mahlzeiten'
+                }, {
+                    timerId : 2,
+                    tage: ['Dienstag', 'Donnerstag', 'Samstag'],
+                    zeiten: ['18:30'],
+                    info: 'nach den Mahlzeiten'
+                }]
+            }];
+
     return {
         set: function(key, value) {
             $window.localStorage[key] = value;
@@ -14,133 +52,11 @@ angular.module('mediApp.services', [])
         getObject: function(key) {
             return JSON.parse($window.localStorage[key] || '[]');
         },
-        initialData: function() {
-            return [{
-                id: 0,
-                name: 'Actiq®',
-                menge: 500,
-                einheit: 'Mikrogramm',
-                anwendungsform: 'Lutschtabletten',
-                packungsgroesse: 20,
-                rezeptpflichtig: true,
-                rezeptende: '16.07.2015',
-                timers: [{
-                    id : 1,
-                    tage: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
-                    zeiten: ['08:00', '18:30'],
-                    info: 'vor den Mahlzeiten'
-                }]
-            }, {
-                id: 1,
-                name: 'Acidum folicum Streuli®',
-                menge: 5,
-                einheit: '',
-                anwendungsform: 'Tabletten',
-                packungsgroesse: 25,
-                rezeptpflichtig: false,
-                rezeptende: '',
-                timers: [{
-                    id : 1,
-                    tage: ['Montag', 'Mittwoch', 'Freitag', 'Sonntag'],
-                    zeiten: ['08:00'],
-                    info: 'vor den Mahlzeiten'
-                }, {
-                    id : 2,
-                    tage: ['Dienstag', 'Donnerstag', 'Samstag'],
-                    zeiten: ['18:30'],
-                    info: 'nach den Mahlzeiten'
-                }]
-            }, {
-                id: 2,
-                name: 'Advantan®',
-                einheit: '0,1%',
-                anwendungsform: 'Crème/Salbe/Fettsalbe',
-                packungsgroesse: '1 Stk',
-                rezeptpflichtig: true,
-                rezeptende: '16.07.2015',
-                timers: [{
-                    id : 1,
-                    tage: ['Montag'],
-                    zeiten: ['08:00', '18:30'],
-                    info: 'vor den Mahlzeiten'
-                }]
-            }, {
-                id: 3,
-                name: 'Alendron D3-Mepha',
-                einheit: '70mg',
-                anwendungsform: 'Wochentabletten',
-                packungsgroesse: '40 Stk',
-                rezeptpflichtig: true,
-                rezeptende: '16.07.2015',
-                timers: [{
-                    id : 1,
-                    tage: ['Dienstag', 'Samstag'],
-                    zeiten: ['08:00', '14:00', '18:30'],
-                    info: 'vor den Mahlzeiten, mit einem Glas Wasser'
-                }]
-            }, {
-                id: 4,
-                name: 'Aloxi®',
-                einheit: '500 Mikrogramm',
-                anwendungsform: 'Weichkapseln',
-                packungsgroesse: '20 Stk',
-                rezeptpflichtig: false,
-                rezeptende: '',
-                timers: [{
-                    id : 1,
-                    tage: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
-                    zeiten: ['05:30', '08:00', '14:30', '18:30', '21:30'],
-                    info: 'vor den Mahlzeiten'
-                }]
-            }, {
-                id: 5,
-                name: 'Amoxicillin Sandoz®',
-                einheit: '',
-                anwendungsform: 'dispergierbare Filmtabletten',
-                packungsgroesse: '15 Stk',
-                rezeptpflichtig: true,
-                rezeptende: '16.07.2015',
-                timers: [{
-                    id : 1,
-                    tage: ['Montag'],
-                    zeiten: ['08:00'],
-                    info: 'vor den Mahlzeiten'
-                }, {
-                    id : 2,
-                    tage: ['Dienstag'],
-                    zeiten: ['08:30'],
-                    info: 'vor den Mahlzeiten'
-                }, {
-                    id : 3,
-                    tage: ['Mittwoch'],
-                    zeiten: ['09:00'],
-                    info: 'vor den Mahlzeiten'
-                }, {
-                    id : 4,
-                    tage: ['Donnerstag'],
-                    zeiten: ['09:30'],
-                    info: 'vor den Mahlzeiten'
-                }, {
-                    id : 5,
-                    tage: ['Freitag'],
-                    zeiten: ['09:30'],
-                    info: 'vor den Mahlzeiten'
-                }, {
-                    id : 6,
-                    tage: ['Samstag'],
-                    zeiten: ['10:00'],
-                    info: 'vor den Mahlzeiten'
-                }, {
-                    id : 7,
-                    tage: ['Sonntag'],
-                    zeiten: ['10:30'],
-                    info: 'vor den Mahlzeiten'
-                }]
-            }];
+        setInitialData: function(key, value) {
+            $window.localStorage[key] = JSON.stringify(initialData);
         }
 
     }
-
 
 }])
 

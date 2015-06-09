@@ -1,3 +1,5 @@
+//local Storage nach Formulareingabe
+
 [{
     "name": "Aspirin",
     "menge": "250",
@@ -18,4 +20,43 @@
         "info": "nach den Mahlzeiten"
     },
     "id": "2015-06-05T08:14:14.230Z"
+}]
+
+//local Storage nach Initial-Daten speicherung
+
+[{
+    "id": 0,
+    "name": "Actiq®",
+    "menge": 500,
+    "einheit": "Mikrogramm",
+    "anwendungsform": "Lutschtabletten",
+    "packungsgroesse": 20,
+    "rezeptpflichtig": true,
+    "rezeptende": "16.07.2015",
+    "timers": [{
+        "timerId": 1,
+        "tage": ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"],
+        "zeiten": ["08:00", "18:30"],
+        "info": "vor den Mahlzeiten"
+    }]
+}, {
+    "id": 1,
+    "name": "Acidum folicum Streuli®",
+    "menge": 5,
+    "einheit": "mg",
+    "anwendungsform": "Tabletten",
+    "packungsgroesse": 25,
+    "rezeptpflichtig": false,
+    "rezeptende": "",
+    "timers": [{
+        "timerId": 1,
+        "tage": ["Montag", "Mittwoch", "Freitag", "Sonntag"],
+        "zeiten": ["08:00"],
+        "info": "vor den Mahlzeiten"
+    }, {
+        "timerId": 2,
+        "tage": ["Dienstag", "Donnerstag", "Samstag"],
+        "zeiten": ["18:30"],
+        "info": "nach den Mahlzeiten"
+    }]
 }]

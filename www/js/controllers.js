@@ -37,16 +37,18 @@ angular.module('mediApp.controllers', [])
 //templeate medis.html (Liste)
 .controller('MedisController', function($scope, $localstorage, $interval) {
 
-    if ($localstorage.getObject('medis') !== []) {
-
+    //teste ob key "medis" im Local Storage vorhanden ist
+    if (localStorage['medis'] === undefined) {
+        //wenn nicht speichere initial Daten
+        $localstorage.setInitialData('medis');
+        //zeige inizial Daten an
         $scope.medis = $localstorage.getObject('medis');
 
-        //kommt nicht auf else Block
     } else {
 
-        $scope.medis = $localstorage.initialData();
-        console.log('keine medis');
-    }
+        $scope.medis = $localstorage.getObject('medis');
+        
+    };
 
     //initial Datum holen
     $scope.date = moment().format('dddd h:mm');
@@ -61,6 +63,9 @@ angular.module('mediApp.controllers', [])
     $interval(function() {
         $scope.holeDatum();
     }, 60000, 0);
+
+    $scope.lsString = localStorage['medis'];
+    console.log($scope.lsString);
 })
 
 .controller('AddMediController', function($scope, $localstorage, Timer) {
