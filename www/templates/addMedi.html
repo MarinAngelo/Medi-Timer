@@ -7,7 +7,7 @@
                     <input type="text" ng-model='medi.name' placeholder="Name">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model='medi.menge' placeholder="Menge z.B. 250">
+                    <input type="number" ng-model='medi.menge' min="0" max="10000" placeholder="Menge z.B. 250">
                 </label>
                 <label class="item item-input">
                     <input type="text" ng-model='medi.einheit' placeholder="Einheit z.B. mg">
@@ -16,7 +16,7 @@
                     <input type="text" ng-model='medi.anwendungsform' placeholder="Anwendungsform z.B. Tabletten">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model='medi.packungsgroesse' placeholder="Packungsgrösse (Stk)">
+                    <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" placeholder="Packungsgrösse (Stk)">
                 </label>
                 <div class="item item-toggle">
                     Medikament Rezeptfplichtig
@@ -31,7 +31,7 @@
                     <span class="input-label">Rezept gültig bis</span>
                     <input type="date" ng-model='medi.rezeptende'>
                 </label>
-                <!--Medikament terminieren-->
+                <h3>Medikament terminieren</h3>
                 <!-- selektieren der Tage -->
                 <!--                 <div ng-repeat="tag in tage">
                     <li class="item item-checkbox">
@@ -96,7 +96,7 @@
                 <tt>Tage = {{medi.timers.tage}}</tt>
                 <br/>
                 <label class="item item-input">
-                    <input type="text" ng-model="medi.timers.menge" placeholder="Menge (z.B. 0,5)">
+                    <input type="number" ng-model="medi.timers.menge" min="0" max="10" placeholder="Menge (z.B. 0,5)">
                 </label>
                 <label class="item item-input">
                     <input type="text" ng-model="medi.timers.info" placeholder="Infos (z.B. nach den Mahlzeiten)">

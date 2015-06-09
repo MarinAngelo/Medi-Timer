@@ -35,7 +35,7 @@ angular.module('mediApp.controllers', [])
 })
 
 //templeate medis.html (Liste)
-.controller('MedisController', function($scope, $localstorage, $interval) {
+.controller('MedisController', function($scope, $localstorage, $interval, $window) {
 
     //teste ob key "medis" im Local Storage vorhanden ist
     if (localStorage['medis'] === undefined) {
@@ -44,10 +44,14 @@ angular.module('mediApp.controllers', [])
         //zeige inizial Daten an
         $scope.medis = $localstorage.getObject('medis');
 
+        // $window.location.reload(true);
+
     } else {
 
         $scope.medis = $localstorage.getObject('medis');
-        
+
+        // $window.location.reload(true);
+
     };
 
     //initial Datum holen
@@ -68,7 +72,7 @@ angular.module('mediApp.controllers', [])
     console.log($scope.lsString);
 })
 
-.controller('AddMediController', function($scope, $localstorage, Timer) {
+.controller('AddMediController', function($scope, $localstorage, $location, Timer, $window) {
 
     //vorhandene Objekte im "medis" Array in Variable speichern
     var existMedis = $localstorage.getObject('medis') || [];
@@ -76,7 +80,7 @@ angular.module('mediApp.controllers', [])
     //zeiten aus Servece um im select anzuzeigen
     $scope.zeiten = Timer.alleZeiten();
 
-    $scope.timers = [];
+    // $scope.timers = [];
 
     $scope.addMedi = function(medi) {
 
@@ -95,11 +99,18 @@ angular.module('mediApp.controllers', [])
         //mit den Parametern key=medis und value=existMedis
         $localstorage.setObject('medis', existMedis);
 
+        //daten aktualisieren
+        $window.location.reload(true);
+
+        //redirect to List
+        $location.path('/medis');
+
+
     };
 
 })
 
-.controller('MediController', function($scope, $stateParams, $localstorage, Timer) {
+.controller('MediController', function($scope, $stateParams, $localstorage, Timer, $location, $window) {
 
     //***************Einzelnes Medi anzeigen********************************
     //ein Einzelnes Medi aus dem Objekt "medis" rauslesen
@@ -141,6 +152,10 @@ angular.module('mediApp.controllers', [])
                 medis.splice(i, 1);
                 return $localstorage.setObject('medis', medis);
             }
+            //daten aktualisieren
+            $window.location.reload(true);
+            //redirect to Liste
+            $location.path('/medis');
         }
 
     };

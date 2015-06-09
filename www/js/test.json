@@ -2,30 +2,47 @@
 
 [{
     "name": "Aspirin",
-    "menge": "250",
+    "menge": 250,
     "einheit": "mg",
     "anwendungsform": "Tabletten",
-    "packungsgroesse": "40",
+    "packungsgroesse": 40,
     "rezeptpflichtig": true,
     "rezeptende": "2015-06-29T22:00:00.000Z",
     "timers": {
         "tage": {
             "montag": "Montag",
+            "dienstag": false,
             "mittwoch": "Mittwoch",
+            "donnerstag": false,
             "freitag": "Freitag",
+            "samstag": false,
             "sonntag": "Sonntag"
         },
-        "zeiten": ["02:30"],
-        "menge": "1",
+        "menge": 1,
+        "info": "vor dem Essen"
+    },
+    "id": "2015-06-09T15:16:02.004Z"
+}, {
+    "name": "Dafalgan",
+    "menge": 500,
+    "einheit": "mg",
+    "anwendungsform": "Tabletten",
+    "packungsgroesse": 40,
+    "timers": {
+        "tage": {
+            "montag": "Montag",
+            "donnerstag": "Donnerstag",
+            "sonntag": "Sonntag"
+        },
         "info": "nach den Mahlzeiten"
     },
-    "id": "2015-06-05T08:14:14.230Z"
+    "id": "2015-06-09T15:17:52.170Z"
 }]
 
 //local Storage nach Initial-Daten speicherung
 
 [{
-    "id": 0,
+    "id": "2015-06-05T08:58:53.372Z",
     "name": "Actiq®",
     "menge": 500,
     "einheit": "Mikrogramm",
@@ -33,14 +50,17 @@
     "packungsgroesse": 20,
     "rezeptpflichtig": true,
     "rezeptende": "16.07.2015",
-    "timers": [{
-        "timerId": 1,
-        "tage": ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"],
+    "timers": {
+        "tage": {
+            "montag": "Montag",
+            "dienstag": "Dienstag"
+        },
         "zeiten": ["08:00", "18:30"],
-        "info": "vor den Mahlzeiten"
-    }]
+        "info": "vor den Mahlzeiten",
+        "menge": 1
+    }
 }, {
-    "id": 1,
+    "id": "2015-07-05T08:58:53.372Z",
     "name": "Acidum folicum Streuli®",
     "menge": 5,
     "einheit": "mg",
@@ -48,15 +68,14 @@
     "packungsgroesse": 25,
     "rezeptpflichtig": false,
     "rezeptende": "",
-    "timers": [{
-        "timerId": 1,
-        "tage": ["Montag", "Mittwoch", "Freitag", "Sonntag"],
+    "timers": {
+        "tage": {
+            "montag": "Montag",
+            "dienstag": "Dienstag",
+            "mittwoch": "Mittwoch"
+        },
         "zeiten": ["08:00"],
-        "info": "vor den Mahlzeiten"
-    }, {
-        "timerId": 2,
-        "tage": ["Dienstag", "Donnerstag", "Samstag"],
-        "zeiten": ["18:30"],
-        "info": "nach den Mahlzeiten"
-    }]
+        "info": "vor den Mahlzeiten",
+        "menge": 2
+    }
 }]
