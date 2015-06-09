@@ -4,19 +4,19 @@
             <h3>Medikament erfassen</h3>
             <div class="list">
                 <label class="item item-input">
-                    <input type="text" ng-model='medi.name' placeholder="Name">
+                    <input type="text" ng-model='medi.name' placeholder="Name" name="mediname" value="Aspirin" ng-init="medi.name='Aspirin'">
                 </label>
                 <label class="item item-input">
-                    <input type="number" ng-model='medi.menge' min="0" max="10000" placeholder="Menge z.B. 250">
+                    <input type="number" ng-model='medi.menge' min="0" max="10000" placeholder="Menge z.B. 250" name="medimenge">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model='medi.einheit' placeholder="Einheit z.B. mg">
+                    <input type="text" ng-model='medi.einheit' placeholder="Einheit z.B. mg" name="medieinheit">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model='medi.anwendungsform' placeholder="Anwendungsform z.B. Tabletten">
+                    <input type="text" ng-model='medi.anwendungsform' placeholder="Anwendungsform z.B. Tabletten" name="medianwendungsform">
                 </label>
                 <label class="item item-input">
-                    <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" placeholder="Packungsgrösse (Stk)">
+                    <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" placeholder="Packungsgrösse (Stk)" name="medipackungsgroesse">
                 </label>
                 <div class="item item-toggle">
                     Medikament Rezeptfplichtig

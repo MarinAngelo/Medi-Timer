@@ -70,7 +70,7 @@ angular.module('mediApp.controllers', [])
 
 })
 
-.controller('AddMediController', function($scope, $localstorage, $location, Timer, $window) {
+.controller('AddMediController', function($scope, $localstorage, Timer, $window, $state) {
 
     //vorhandene Objekte im "medis" Array in Variable speichern
     var existMedis = $localstorage.getObject('medis') || [];
@@ -101,7 +101,7 @@ angular.module('mediApp.controllers', [])
         $window.location.reload(true);
 
         //redirect to List
-        $location.path('/medis');
+        $state.go('app.medis');
 
 
     };
