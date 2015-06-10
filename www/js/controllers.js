@@ -1,6 +1,6 @@
 angular.module('mediApp.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $localstorage, $interval) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $localstorage, $interval, Timer, $window) {
     // Form data for the login modal
     $scope.loginData = {};
 
@@ -33,23 +33,50 @@ angular.module('mediApp.controllers', [])
         }, 1000);
     };
 
-        //initial Datum holen
-    $scope.date = moment().format('dddd h:mm');
+    //initial Datum holen
+    $scope.date = moment().format('dddd HH:mm');
     console.log('inizial:' + $scope.date);
 
     // jede Minute Datum holen
     $scope.holeDatum = function() {
-        $scope.date = moment().format('dddd h:mm');
+        $scope.date = moment().format('dddd HH:mm');
         console.log('jede Minute:' + $scope.date);
+    }
+
+    $scope.userTimer = [];
+
+    $scope.compareTimer = function() {
+
+        var sysTimer = $scope.date;
+        var userTimers = $scope.timerData;
+
+        for (var i = 0; i < userTimers.length; i++) {
+            if (userTimers[i].timer == sysTimer) {
+                $scope.userTimer = JSON.stringify(userTimers[i]);
+                console.log($scope.userTimer + 'Es ist Zeit' + ' ' + JSON.stringify(userTimers[i].menge) + ' ' + 'Stück des Meikaments' + ' ' + JSON.stringify(userTimers[i].name + ' ' + 'einzunehmen'));
+                $window.alert('Es ist Zeit' + ' ' + JSON.stringify(userTimers[i].menge) + ' ' + 'Stück des Meikaments' + ' ' + JSON.stringify(userTimers[i].name + ' ' + 'einzunehmen'));
+                // return userTimers[i];
+                return $scope.userTimer;
+            }
+        }
+
+        return null;
     }
 
     $interval(function() {
         $scope.holeDatum();
-    }, 60000, 0);
-    
+        $scope.compareTimer();
+    }, 6000, 0);
+
+
     //Local Storage String holen um in gewünschtes Format umzuwandeln
     $scope.lsString = localStorage['medis'];
     console.log($scope.lsString);
+
+    $scope.timerData = Timer.timerData();
+    console.log($scope.timerData);
+
+
 })
 
 //templeate medis.html (Liste)

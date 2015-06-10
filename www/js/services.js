@@ -2,6 +2,7 @@ angular.module('mediApp.services', [])
 
 .factory('$localstorage', ['$window', function($window) {
 
+    //Initial-Daten
     var initialData = [{
 
         id: '2015-06-05T08:58:53.372Z',
@@ -56,6 +57,7 @@ angular.module('mediApp.services', [])
         getObject: function(key) {
             return JSON.parse($window.localStorage[key] || '[]');
         },
+        //Initial-Daten in den Local Storag speichern
         setInitialData: function(key, value) {
             $window.localStorage[key] = JSON.stringify(initialData);
         }
@@ -68,11 +70,13 @@ angular.module('mediApp.services', [])
 
     //Datenstruktur, zur Verwendung der Funktion "Timewatcher"
     var timerData = [{
-        dayTime: 'Wednesday-18-06',
-        mediId: '2015-05-26T20:35:44.755Z'
+        timer : 'Montag 08:30',
+        name : 'Aspirin',
+        menge : 1
     }, {
-        dayTime: 'Wednesday-18-06',
-        mediId: '2015-05-26T20:35:44.755Z'
+        timer : 'Mittwoch 14:50',
+        name : 'Aspirin',
+        menge : 2
     }];
 
     var zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'];
@@ -83,6 +87,10 @@ angular.module('mediApp.services', [])
         //zeiten für Formular bereitstellen
         alleZeiten: function() {
             return zeiten;
+        },
+
+        timerData: function() {
+            return timerData;
         }
 
     }
