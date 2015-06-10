@@ -43,30 +43,34 @@ angular.module('mediApp.controllers', [])
         console.log('jede Minute:' + $scope.date);
     }
 
-    $scope.userTimer = [];
 
-    $scope.compareTimer = function() {
+    var compareTimer = function() {
 
         var sysTimer = $scope.date;
         var userTimers = $scope.timerData;
 
         for (var i = 0; i < userTimers.length; i++) {
             if (userTimers[i].timer == sysTimer) {
-                $scope.userTimer = JSON.stringify(userTimers[i]);
-                console.log($scope.userTimer + 'Es ist Zeit' + ' ' + JSON.stringify(userTimers[i].menge) + ' ' + 'Stück des Meikaments' + ' ' + JSON.stringify(userTimers[i].name + ' ' + 'einzunehmen'));
-                $window.alert('Es ist Zeit' + ' ' + JSON.stringify(userTimers[i].menge) + ' ' + 'Stück des Meikaments' + ' ' + JSON.stringify(userTimers[i].name + ' ' + 'einzunehmen'));
+
+                var userTimer = JSON.stringify(userTimers[i], ['name', 'menge']);
+                console.log(userTimer);
+                $window.confirm('Es ist Zeit' + ' ' + JSON.stringify(userTimers[i].menge) + ' ' + 'Stück des Meikaments' + ' ' + JSON.stringify(userTimers[i].name + ' ' + 'einzunehmen'));
                 // return userTimers[i];
-                return $scope.userTimer;
+                //variable ausserhalb der Funktion nicht verwendbar
+                return userTimer;
             }
         }
-
         return null;
     }
 
     $interval(function() {
         $scope.holeDatum();
-        $scope.compareTimer();
-    }, 6000, 0);
+        $scope.userTimer = compareTimer();
+        // nach OK von $window.confirm wird wert zurückgegeben
+        console.log($scope.userTimer);
+    }, 60000, 0);
+
+
 
 
     //Local Storage String holen um in gewünschtes Format umzuwandeln
