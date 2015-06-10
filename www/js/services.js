@@ -74,7 +74,7 @@ angular.module('mediApp.services', [])
         name : 'Aspirin',
         menge : 1
     }, {
-        timer : 'Mittwoch 19:41',
+        timer : 'Mittwoch 23:04',
         name : 'Aspirin',
         menge : 2
     }];

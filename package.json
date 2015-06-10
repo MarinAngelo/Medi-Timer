@@ -20,5 +20,10 @@
     "cordova-plugin-device",
     "https://github.com/katzer/cordova-plugin-local-notifications"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    {
+      "platform": "android",
+      "locator": "windows"
+    }
+  ]
 }
