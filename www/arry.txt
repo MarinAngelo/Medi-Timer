@@ -1,0 +1,64 @@
+Ausgehender Daten-String aus Local Storage:
+
+[{"name":"Aspirin","menge":250,"einheit":"mg","anwendungsform":"Tabletten","packungsgroesse":40,"rezeptpflichtig":true,"rezeptende":"2015-06-29T22:00:00.000Z","timers":{"tage":{"montag":"Montag","dienstag":false,"mittwoch":"Mittwoch","donnerstag":false,"freitag":"Freitag","samstag":false,"sonntag":"Sonntag"},"zeiten":["02:00","02:30"],"menge":1,"info":"vor den Mahlzeiten"},"id":"2015-06-11T07:04:00.768Z"},{"name":"Dafalgan","menge":400,"einheit":"mg","anwendungsform":"Tabletten","packungsgroesse":20,"timers":{"tage":{"dienstag":"Dienstag","freitag":"Freitag"},"zeiten":["02:30"],"menge":1,"info":"nach dem Essen"},"id":"2015-06-11T07:05:33.155Z"}]
+
+1. Array "medi" in einzelne Arrays je Medi id aufteilen
+
+Ergebnisse:
+
+Array 1
+****************************************************
+
+[{"name":"Aspirin","menge":250,"einheit":"mg","anwendungsform":"Tabletten","packungsgroesse":40,"rezeptpflichtig":true,"rezeptende":"2015-06-29T22:00:00.000Z","timers":{"tage":{"montag":"Montag","dienstag":false,"mittwoch":"Mittwoch","donnerstag":false,"freitag":"Freitag","samstag":false,"sonntag":"Sonntag"},"zeiten":["02:00","02:30"],"menge":1,"info":"vor den Mahlzeiten"},"id":"2015-06-11T07:04:00.768Z"}]
+
+***************************************************
+
+
+2. Alle Key-Value Paare, die nicht gebraucht werden entfernen
+
+Array 1
+****************************************************
+
+Zu entfernende Keys / Key-Value Paare:
+
+"menge","einheit","packungsgroesse","rezeptpflichtig","rezeptende","dienstag":false,"donnerstag":false,"samstag":false,
+
+
+Ergebnis
+
+[{"name":"Aspirin","anwendungsform":"Tabletten","timers":{"tage":{"montag":"Montag","mittwoch":"Mittwoch","freitag":"Freitag","sonntag":"Sonntag"},"zeiten":["02:00","02:30"],"menge":1,"info":"vor den Mahlzeiten"},"id":"2015-06-11T07:04:00.768Z"}]
+
+**********************************************
+
+3. Jedem Tag alle Zeiten zuordnen
+
+3.1 Key in Tage entfernen
+
+Ergebnis
+
+[{"name":"Aspirin","anwendungsform":"Tabletten","timers":{"tage":["Montag","Mittwoch","Freitag","Sonntag"],"zeiten":["02:00","02:30"],"menge":1,"info":"vor den Mahlzeiten"},"id":"2015-06-11T07:04:00.768Z"}]
+
+3.2 Im Key "timers" jeden Tag mit den vorhandenen Zeiten kombinieren
+
+Teilergebnis:
+
+"timers": ["Montag 02:00", "Montag 02:30","Mittwoch 02:00", "Mittwoch 02:30","Freitag 02:00", "Freitag 02:30","Sonntag 02:00", "Sonntag 02:30"]
+
+3.3 Neuen Array "timerData" erzeugen und für jedes Item im Array "timers" ein Property mit key "timer" speichern
+
+Teilergebnis:
+
+"timerData":[{"timer":"Montag 02:00"},{"timer":"Montag 02:30"},{"timer":Mittwoch 02:00"},{"timer":"Mittwoch 02:30"},{"timer":"Freitag 02:00"},{"timer":"Freitag 02:30"},{"timer":"Sonntag 02:00"},{"timer":"Sonntag 02:30"}]
+
+3.4. "timerData" die restlichen key-value Paare hinzufügen
+
+Ergebnis:
+
+"timerData":[{"timer":"Montag 02:00","name":"Aspirin","anwendungsform":"Tabletten","menge":1,"info":"vor den Mahlzeiten" },{"timer":"Montag 02:30","name":"Aspirin","anwendungsform":"Tabletten","menge":1,"info":"vor den Mahlzeiten"},{"timer":Mittwoch 02:00","name":"Aspirin","anwendungsform":"Tabletten","menge":1,"info":"vor den Mahlzeiten"},{"timer":"Mittwoch 02:30","name":"Aspirin","anwendungsform":"Tabletten","menge":1,"info":"vor den Mahlzeiten"},{"timer":"Freitag 02:00","name":"Aspirin","anwendungsform":"Tabletten","menge":1,"info":"vor den Mahlzeiten"},{"timer":"Freitag 02:30","name":"Aspirin","anwendungsform":"Tabletten","menge":1,"info":"vor den Mahlzeiten"},{"timer":"Sonntag 02:00","name":"Aspirin","anwendungsform":"Tabletten","menge":1,"info":"vor den Mahlzeiten"},{"timer":"Sonntag 02:30","name":"Aspirin","anwendungsform":"Tabletten","menge":1,"info":"vor den Mahlzeiten"}]
+
+
+
+
+
+
+

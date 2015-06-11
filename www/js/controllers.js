@@ -54,7 +54,7 @@ angular.module('mediApp.controllers', [])
 
                 var userTimer = JSON.stringify(userTimers[i], ['name', 'menge']);
                 console.log(userTimer);
-                $window.confirm('Es ist Zeit' + ' ' + JSON.stringify(userTimers[i].menge) + ' ' + 'Stück des Meikaments' + ' ' + JSON.stringify(userTimers[i].name + ' ' + 'einzunehmen'));
+                $window.confirm('Es ist Zeit ' + JSON.stringify(userTimers[i].menge) + ' ' + JSON.stringify(userTimers[i].anwendungsform) + ' des Meikaments ' + JSON.stringify(userTimers[i].name) + ' einzunehmen, Info: ' + JSON.stringify(userTimers[i].info));
                 // return userTimers[i];
                 //variable ausserhalb der Funktion nicht verwendbar
                 return userTimer;

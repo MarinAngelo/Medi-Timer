@@ -70,13 +70,19 @@ angular.module('mediApp.services', [])
 
     //Datenstruktur, zur Verwendung der Funktion "Timewatcher"
     var timerData = [{
-        timer : 'Montag 08:30',
-        name : 'Aspirin',
-        menge : 1
+        timer: 'Montag 08:30',
+        name: 'Aspirin',
+        menge: 1,
+        info: 'vor den Mahlzeiten',
+        anwendungsform: "Tabletten"
     }, {
-        timer : 'Mittwoch 19:41',
-        name : 'Aspirin',
-        menge : 2
+        timer: 'Donnerstag 10:54',
+        name: 'Aspirin',
+        menge: 2,
+        info: 'vor den Mahlzeiten',
+        anwendungsform: "Tabletten"
+
+
     }];
 
     var zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'];
@@ -193,37 +199,37 @@ angular.module('mediApp.services', [])
 // }
 
 //struktur mit mehreren Timern
-        //             id: '2015-06-05T08:58:53.372Z',
-        //             name: 'Actiq®',
-        //             menge: 500,
-        //             einheit: 'Mikrogramm',
-        //             anwendungsform: 'Lutschtabletten',
-        //             packungsgroesse: 20,
-        //             rezeptpflichtig: true,
-        //             rezeptende: '16.07.2015',
-        //             timers: [{
-        //                 timerId : 1,
-        //                 tage: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
-        //                 zeiten: ['08:00', '18:30'],
-        //                 info: 'vor den Mahlzeiten'
-        //             }]
-        //         }, {
-        //             id: '2015-07-05T08:58:53.372Z',
-        //             name: 'Acidum folicum Streuli®',
-        //             menge: 5,
-        //             einheit: 'mg',
-        //             anwendungsform: 'Tabletten',
-        //             packungsgroesse: 25,
-        //             rezeptpflichtig: false,
-        //             rezeptende: '',
-        //             timers: [{
-        //                 timerId : 1,
-        //                 tage: ['Montag', 'Mittwoch', 'Freitag', 'Sonntag'],
-        //                 zeiten: ['08:00'],
-        //                 info: 'vor den Mahlzeiten'
-        //             }, {
-        //                 timerId : 2,
-        //                 tage: ['Dienstag', 'Donnerstag', 'Samstag'],
-        //                 zeiten: ['18:30'],
-        //                 info: 'nach den Mahlzeiten'
-        //             }]
+//             id: '2015-06-05T08:58:53.372Z',
+//             name: 'Actiq®',
+//             menge: 500,
+//             einheit: 'Mikrogramm',
+//             anwendungsform: 'Lutschtabletten',
+//             packungsgroesse: 20,
+//             rezeptpflichtig: true,
+//             rezeptende: '16.07.2015',
+//             timers: [{
+//                 timerId : 1,
+//                 tage: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
+//                 zeiten: ['08:00', '18:30'],
+//                 info: 'vor den Mahlzeiten'
+//             }]
+//         }, {
+//             id: '2015-07-05T08:58:53.372Z',
+//             name: 'Acidum folicum Streuli®',
+//             menge: 5,
+//             einheit: 'mg',
+//             anwendungsform: 'Tabletten',
+//             packungsgroesse: 25,
+//             rezeptpflichtig: false,
+//             rezeptende: '',
+//             timers: [{
+//                 timerId : 1,
+//                 tage: ['Montag', 'Mittwoch', 'Freitag', 'Sonntag'],
+//                 zeiten: ['08:00'],
+//                 info: 'vor den Mahlzeiten'
+//             }, {
+//                 timerId : 2,
+//                 tage: ['Dienstag', 'Donnerstag', 'Samstag'],
+//                 zeiten: ['18:30'],
+//                 info: 'nach den Mahlzeiten'
+//             }]

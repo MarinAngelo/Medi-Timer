@@ -18,25 +18,27 @@
             "samstag": false,
             "sonntag": "Sonntag"
         },
+        "zeiten": ["02:00", "02:30"],
         "menge": 1,
-        "info": "vor dem Essen"
+        "info": "vor den Mahlzeiten"
     },
-    "id": "2015-06-09T15:16:02.004Z"
+    "id": "2015-06-11T07:04:00.768Z"
 }, {
     "name": "Dafalgan",
-    "menge": 500,
+    "menge": 400,
     "einheit": "mg",
     "anwendungsform": "Tabletten",
-    "packungsgroesse": 40,
+    "packungsgroesse": 20,
     "timers": {
         "tage": {
-            "montag": "Montag",
-            "donnerstag": "Donnerstag",
-            "sonntag": "Sonntag"
+            "dienstag": "Dienstag",
+            "freitag": "Freitag"
         },
-        "info": "nach den Mahlzeiten"
+        "zeiten": ["02:30"],
+        "menge": 1,
+        "info": "nach dem Essen"
     },
-    "id": "2015-06-09T15:17:52.170Z"
+    "id": "2015-06-11T07:05:33.155Z"
 }]
 
 //local Storage nach Initial-Daten speicherung
