@@ -82,8 +82,7 @@ angular.module('mediApp.services', [])
         info: 'vor den Mahlzeiten',
         anwendungsform: "Tabletten"
 
-
-    }];
+   }];
 
     var zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'];
 
