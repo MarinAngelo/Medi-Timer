@@ -71,15 +71,62 @@ angular.module('mediApp.controllers', [])
     }, 60000, 0);
 
 
-
-
-    //Local Storage String holen um in gewünschtes Format umzuwandeln
+    //Local Storage String holen, um in gewünschtes Format umzuwandeln
     $scope.lsString = localStorage['medis'];
     console.log($scope.lsString);
 
+    $scope.lsStringSlice = $scope.lsString.slice(0,16);
+    console.log($scope.lsStringSlice);
+
+    //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
+    var medis = $localstorage.getObject('medis');
+
+    //Schritt 1
+    var medisSlice = medis.slice(0,1);
+    console.log(medisSlice);
+    console.log(angular.isObject(medisSlice));
+    console.log(angular.isArray(medisSlice));
+    $scope.medisSlice = medisSlice;
+
+    var medisSliceObj = medisSlice[0];
+    $scope.medisSliceObj = medisSliceObj;
+
+    //Schritt 2
+
+    //löschen geht
+    delete medisSliceObj.einheit;
+    delete medisSliceObj.menge;
+    delete medisSliceObj.packungsgroesse;
+    delete medisSliceObj.rezeptpflichtig;
+    delete medisSliceObj.rezeptende;
+    var medisSliceDel = medisSliceObj;
+    console.log(medisSliceDel);
+
+    //Property picking
+    var medisSliceObjName = medisSliceObj.name;
+    console.log(medisSliceObjName);
+
+    //schritt 3
+
+    //isoliere timers object
+    mediSliceObjTimers = medisSliceObj.timers;
+    console.log(mediSliceObjTimers);
+
+    //isoliere tage object
+    mediSliceObjTimersTage = medisSliceObj.timers.tage;
+    console.log(mediSliceObjTimersTage);
+
+    //mache aus tage object ein array nur mit den werten
+    var mediSliceObjTimersTageArr = Object.keys(mediSliceObjTimersTage).map(function(k) { return mediSliceObjTimersTage[k] });
+    console.log(mediSliceObjTimersTageArr);
+
+    mediSliceObjTimersZeiten = medisSliceObj.timers.zeiten;
+    console.log(mediSliceObjTimersZeiten);
+
+
+    //Fake timerData aus service 
     $scope.timerData = Timer.timerData();
     console.log($scope.timerData);
-
 
 })
 
