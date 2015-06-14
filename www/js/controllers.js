@@ -117,6 +117,7 @@ angular.module('mediApp.controllers', [])
 
         //die zwei arrays in gewünschter weise kombinieren und neu anordnen
 
+        //den array tage sovielmal kopieren wie entsprechende Zeiten
         function combiArray(zeiten, tage) {
             var newArray = [];
             for (var i = 0; i < zeiten.length; i++) {
@@ -126,8 +127,26 @@ angular.module('mediApp.controllers', [])
             }
             return newArray;
         }
-        var tagesZeiten = combiArray(zeiten, tage);
-        console.log(tagesZeiten);
+        var combiTage = combiArray(zeiten, tage);
+        console.log(combiTage);
+
+        //die Zeiten den tages-arrays hinzufügen
+        function mergeArray(combiTage, zeiten) {
+    var advancedArray = [];
+    for (var i = 0; i < combiTage.length; i++) {
+      var innerArray = combiTage[i];
+      for (var j = 0; j < innerArray.length; j++) {
+        for (var z = 0; z < zeiten.length; z++) {
+          advancedArray.push(innerArray[j]);
+          advancedArray.push(zeiten[z]);
+        }
+
+      }
+    }
+    return advancedArray;
+  }
+  var tagesZeiten = mergeArray(combiTage, zeiten);
+  console.log(tagesZeiten);
 
     }
 
