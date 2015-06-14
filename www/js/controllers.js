@@ -70,30 +70,74 @@ angular.module('mediApp.controllers', [])
         console.log($scope.userTimer);
     }, 60000, 0);
 
-
-    //Local Storage String holen, um in gewünschtes Format umzuwandeln
-    $scope.lsString = localStorage['medis'];
-    console.log($scope.lsString);
-
-    $scope.lsStringSlice = $scope.lsString.slice(0,16);
-    console.log($scope.lsStringSlice);
-
     //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
     var medis = $localstorage.getObject('medis');
 
-    //Schritt 1
-    var medisSlice = medis.slice(0,1);
-    console.log(medisSlice);
-    console.log(angular.isObject(medisSlice));
-    console.log(angular.isArray(medisSlice));
-    $scope.medisSlice = medisSlice;
+    //Schritt 1: je array in medi folgenden prozess ausführen:
+    for (i = 0; i < medis.length; i++) {
 
-    var medisSliceObj = medisSlice[0];
-    $scope.medisSliceObj = medisSliceObj;
+        //Schritt 2: Alle Key-Value Paare, die nicht gebraucht werden entfernen
+        function delProps(medi) {
+            var newObj = medis[i];
+            delete newObj.einheit;
+            delete newObj.menge;
+            delete newObj.packungsgroesse;
+            delete newObj.rezeptpflichtig;
+            delete newObj.rezeptende;
+            return newObj;
+        }
+        var newObj = delProps(medis[i]);
+        console.log(newObj);
+
+        //Schritt 3: Jedem Tag alle Zeiten zuordnen
+
+        //isoliere tage object
+        var tage = newObj.timers.tage;
+        //mache aus tage object ein array nur mit den werten
+        var tage = Object.keys(tage).map(function(k) {
+            return tage[k];
+        });
+
+        //enferne falsy values aus tage array
+        function cleanArray(tage) {
+            var newArray = new Array();
+            for (var i = 0; i < tage.length; i++) {
+                if (tage[i]) {
+                    newArray.push(tage[i]);
+                }
+            }
+            return newArray;
+        }
+        var tage = cleanArray(tage);
+        console.log(tage);
+
+        //isoliere zeiten array
+        var zeiten = newObj.timers.zeiten;
+        console.log(zeiten);
+
+        //die zwei arrays in gewünschter weise kombinieren und neu anordnen
+
+        function combiArray(zeiten, tage) {
+            var newArray = [];
+            for (var i = 0; i < zeiten.length; i++) {
+                if (zeiten[i]) {
+                    newArray.push(tage);
+                }
+            }
+            return newArray;
+        }
+        var tagesZeiten = combiArray(zeiten, tage);
+        console.log(tagesZeiten);
+
+    }
+
+    //Schritt 1
+    var medisSlice = medis.slice(0, 1);
 
     //Schritt 2
 
-    //löschen geht
+    //löschen geht nur wenn array in object umgewandelt wird
+    var medisSliceObj = medisSlice[0];
     delete medisSliceObj.einheit;
     delete medisSliceObj.menge;
     delete medisSliceObj.packungsgroesse;
@@ -117,9 +161,28 @@ angular.module('mediApp.controllers', [])
     console.log(mediSliceObjTimersTage);
 
     //mache aus tage object ein array nur mit den werten
-    var mediSliceObjTimersTageArr = Object.keys(mediSliceObjTimersTage).map(function(k) { return mediSliceObjTimersTage[k] });
+    var mediSliceObjTimersTageArr = Object.keys(mediSliceObjTimersTage).map(function(k) {
+        return mediSliceObjTimersTage[k]
+    });
     console.log(mediSliceObjTimersTageArr);
 
+    //enferne falsy values aus array
+    function cleanArray(actual) {
+        var newArray = new Array();
+        for (var i = 0; i < actual.length; i++) {
+            if (actual[i]) {
+                newArray.push(actual[i]);
+            }
+        }
+        return newArray;
+    }
+    var mediSliceObjTimersTageArrClean = cleanArray(mediSliceObjTimersTageArr);
+    console.log(mediSliceObjTimersTageArrClean);
+
+    // var mediSliceObjTimersTageArrCleanToJSON = angular.toJson(mediSliceObjTimersTageArrClean);
+    // console.log(mediSliceObjTimersTageArrCleanToJSON);
+
+    //isoliere zeiten array
     mediSliceObjTimersZeiten = medisSliceObj.timers.zeiten;
     console.log(mediSliceObjTimersZeiten);
 

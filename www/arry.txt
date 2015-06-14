@@ -2,7 +2,7 @@ Ausgehender Daten-String aus Local Storage:
 
 [{"name":"Aspirin","menge":250,"einheit":"mg","anwendungsform":"Tabletten","packungsgroesse":40,"rezeptpflichtig":true,"rezeptende":"2015-06-29T22:00:00.000Z","timers":{"tage":{"montag":"Montag","dienstag":false,"mittwoch":"Mittwoch","donnerstag":false,"freitag":"Freitag","samstag":false,"sonntag":"Sonntag"},"zeiten":["02:00","02:30"],"menge":1,"info":"vor den Mahlzeiten"},"id":"2015-06-11T07:04:00.768Z"},{"name":"Dafalgan","menge":400,"einheit":"mg","anwendungsform":"Tabletten","packungsgroesse":20,"timers":{"tage":{"dienstag":"Dienstag","freitag":"Freitag"},"zeiten":["02:30"],"menge":1,"info":"nach dem Essen"},"id":"2015-06-11T07:05:33.155Z"}]
 
-1. Array "medi" in einzelne Arrays je Medi id aufteilen
+1. Array "medi" in einzelne Arrays je Medi id aufteilen (array.slice)
 
 Ergebnisse:
 
