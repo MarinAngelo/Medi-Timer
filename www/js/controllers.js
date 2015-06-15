@@ -79,11 +79,13 @@ angular.module('mediApp.controllers', [])
         //Schritt 2: Alle Key-Value Paare, die nicht gebraucht werden entfernen
         function delProps(medi) {
             var newObj = medis[i];
+
             delete newObj.einheit;
             delete newObj.menge;
             delete newObj.packungsgroesse;
             delete newObj.rezeptpflichtig;
             delete newObj.rezeptende;
+
             return newObj;
         }
         var newObj = delProps(medis[i]);
@@ -139,6 +141,7 @@ angular.module('mediApp.controllers', [])
         for (var z = 0; z < zeiten.length; z++) {
           advancedArray.push(innerArray[j]);
           advancedArray.push(zeiten[z]);
+              console.log(advancedArray);
         }
 
       }
@@ -146,65 +149,41 @@ angular.module('mediApp.controllers', [])
     return advancedArray;
   }
   var tagesZeiten = mergeArray(combiTage, zeiten);
+
+  //tagesZeiten auf einzelne arrays verteilen
+  function spliceArr(tagesZeiten) {
+    var newArray = [];
+    while (tagesZeiten.length > 0) {
+      newArray.push(tagesZeiten.splice(0, 2));
+    }
+    return newArray;
+  }
+  
+  var tagesZeiten = spliceArr(tagesZeiten);
+
+  //duplikate entfernen (liesse sich evtl. auch vermeiden durch verbesserung von funktion mergeArray)
+  function uniqBy(tagesZeiten, key) {
+    var seen = {};
+    return tagesZeiten.filter(function(item) {
+      var k = key(item);
+      return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+    })
+  }
+  var tagesZeiten = uniqBy(tagesZeiten, JSON.stringify);
+
+  //tagesZeiten in strings umwandeln und in neuem array speichern
+  function arrToString(tagesZeiten) {
+    newArray = [];
+    for (i = 0; i < tagesZeiten.length; i++) {
+      newArray.push(tagesZeiten[i].join(' '));
+    }
+    return newArray;
+  }
+  
+  var tagesZeiten = arrToString(tagesZeiten);
   console.log(tagesZeiten);
 
     }
-
-    //Schritt 1
-    var medisSlice = medis.slice(0, 1);
-
-    //Schritt 2
-
-    //löschen geht nur wenn array in object umgewandelt wird
-    var medisSliceObj = medisSlice[0];
-    delete medisSliceObj.einheit;
-    delete medisSliceObj.menge;
-    delete medisSliceObj.packungsgroesse;
-    delete medisSliceObj.rezeptpflichtig;
-    delete medisSliceObj.rezeptende;
-    var medisSliceDel = medisSliceObj;
-    console.log(medisSliceDel);
-
-    //Property picking
-    var medisSliceObjName = medisSliceObj.name;
-    console.log(medisSliceObjName);
-
-    //schritt 3
-
-    //isoliere timers object
-    mediSliceObjTimers = medisSliceObj.timers;
-    console.log(mediSliceObjTimers);
-
-    //isoliere tage object
-    mediSliceObjTimersTage = medisSliceObj.timers.tage;
-    console.log(mediSliceObjTimersTage);
-
-    //mache aus tage object ein array nur mit den werten
-    var mediSliceObjTimersTageArr = Object.keys(mediSliceObjTimersTage).map(function(k) {
-        return mediSliceObjTimersTage[k]
-    });
-    console.log(mediSliceObjTimersTageArr);
-
-    //enferne falsy values aus array
-    function cleanArray(actual) {
-        var newArray = new Array();
-        for (var i = 0; i < actual.length; i++) {
-            if (actual[i]) {
-                newArray.push(actual[i]);
-            }
-        }
-        return newArray;
-    }
-    var mediSliceObjTimersTageArrClean = cleanArray(mediSliceObjTimersTageArr);
-    console.log(mediSliceObjTimersTageArrClean);
-
-    // var mediSliceObjTimersTageArrCleanToJSON = angular.toJson(mediSliceObjTimersTageArrClean);
-    // console.log(mediSliceObjTimersTageArrCleanToJSON);
-
-    //isoliere zeiten array
-    mediSliceObjTimersZeiten = medisSliceObj.timers.zeiten;
-    console.log(mediSliceObjTimersZeiten);
-
 
     //Fake timerData aus service 
     $scope.timerData = Timer.timerData();
@@ -373,3 +352,58 @@ angular.module('mediApp.controllers', [])
 //Vorausgewählte Zeit
 // $scope.timers = [{}];
 // $scope.timers.zeiten = ['06:30'];
+
+    //Schritt 1
+    // var medisSlice = medis.slice(0, 1);
+
+    // //Schritt 2
+
+    // //löschen geht nur wenn array in object umgewandelt wird
+    // var medisSliceObj = medisSlice[0];
+    // delete medisSliceObj.einheit;
+    // delete medisSliceObj.menge;
+    // delete medisSliceObj.packungsgroesse;
+    // delete medisSliceObj.rezeptpflichtig;
+    // delete medisSliceObj.rezeptende;
+    // var medisSliceDel = medisSliceObj;
+    // console.log(medisSliceDel);
+
+    // //Property picking
+    // var medisSliceObjName = medisSliceObj.name;
+    // console.log(medisSliceObjName);
+
+    // //schritt 3
+
+    // //isoliere timers object
+    // mediSliceObjTimers = medisSliceObj.timers;
+    // console.log(mediSliceObjTimers);
+
+    // //isoliere tage object
+    // mediSliceObjTimersTage = medisSliceObj.timers.tage;
+    // console.log(mediSliceObjTimersTage);
+
+    // //mache aus tage object ein array nur mit den werten
+    // var mediSliceObjTimersTageArr = Object.keys(mediSliceObjTimersTage).map(function(k) {
+    //     return mediSliceObjTimersTage[k]
+    // });
+    // console.log(mediSliceObjTimersTageArr);
+
+    // //enferne falsy values aus array
+    // function cleanArray(actual) {
+    //     var newArray = new Array();
+    //     for (var i = 0; i < actual.length; i++) {
+    //         if (actual[i]) {
+    //             newArray.push(actual[i]);
+    //         }
+    //     }
+    //     return newArray;
+    // }
+    // var mediSliceObjTimersTageArrClean = cleanArray(mediSliceObjTimersTageArr);
+    // console.log(mediSliceObjTimersTageArrClean);
+
+    // // var mediSliceObjTimersTageArrCleanToJSON = angular.toJson(mediSliceObjTimersTageArrClean);
+    // // console.log(mediSliceObjTimersTageArrCleanToJSON);
+
+    // //isoliere zeiten array
+    // mediSliceObjTimersZeiten = medisSliceObj.timers.zeiten;
+    // console.log(mediSliceObjTimersZeiten);
