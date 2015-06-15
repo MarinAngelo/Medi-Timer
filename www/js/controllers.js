@@ -158,56 +158,47 @@ angular.module('mediApp.controllers', [])
         tagesZeiten = uniqBy(tagesZeiten, JSON.stringify);
 
         //tagesZeiten in strings umwandeln und in neuem array speichern
+        //iterations variable musste innerhalb funktion geändert werden das sonst übergeordnetes "i"
+        //nicht mehr konstant war
         function arrToString(tagesZeiten) {
             newArray = [];
-            for (i = 0; i < tagesZeiten.length; i++) {
-                newArray.push(tagesZeiten[i].join(' '));
+            for (u = 0; u < tagesZeiten.length; u++) {
+                newArray.push(tagesZeiten[u].join(' '));
             }
             return newArray;
         }
         tagesZeiten = arrToString(tagesZeiten);
         console.log(tagesZeiten);
 
-    }
+        //neues Objekt generieten, 
+        var timerData = [];
 
-        //Alle Key-Value Paare, die nicht gebraucht werden entfernen
-    function delProps(medis) {
-
-        for (i = 0; i < medis.length; i++) {
-            var newMediObj = medis[i];
-
-            delete newMediObj.einheit;
-            delete newMediObj.menge;
-            delete newMediObj.packungsgroesse;
-            delete newMediObj.rezeptpflichtig;
-            delete newMediObj.rezeptende;
-            delete newMediObj.timers.tage;
-            delete newMediObj.timers.zeiten;
+        for (p = 0; p < tagesZeiten.length; p++) {
+            timerData[p] = {
+                timer: tagesZeiten[p],
+                id: medis[i].id,
+                name: medis[i].name,
+                menge: medis[i].timers.menge,
+                info: medis[i].timers.info,
+                anwendungsform: medis[i].anwendungsform
+            }
         }
+        console.log(timerData);
 
-        return newMediObj;
-    }
-    var newMediObj = delProps(medis);
-    console.log(newMediObj);
+        var allTimerData = [];
 
-    
-    
-
-    //neues Objekt generieten, 
-    var newTimerData = [];
-
-    for (i = 0; i < tagesZeiten.length; i++) {
-        newTimerData[i] = {
-            timer: tagesZeiten[i],
-            id: medis.id,
+        function allTData(timerData) {
+        return allTimerData.push(timerData);
         }
+        allTimerData = allTData(timerData);
+        console.log(allTimerData);
+
     }
-    console.log(newTimerData);
-
-
 
     //Fake timerData aus service 
-    $scope.timerData = Timer.timerData();
+    // $scope.timerData = Timer.timerData();
+    //real von form
+    $scope.timerData = allTimerData;
     console.log($scope.timerData);
 
 })
