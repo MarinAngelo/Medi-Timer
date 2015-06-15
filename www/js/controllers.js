@@ -71,32 +71,21 @@ angular.module('mediApp.controllers', [])
     }, 60000, 0);
 
     //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
-    var medis = $localstorage.getObject('medis');
+    //************************************************************************
 
-    //Schritt 1: je array in medi folgenden prozess ausführen:
+    var medis = $localstorage.getObject('medis');
+    console.log(medis);
+
+    //je array in medi folgenden prozess ausführen:
     for (i = 0; i < medis.length; i++) {
 
-        //Schritt 2: Alle Key-Value Paare, die nicht gebraucht werden entfernen
-        function delProps(medi) {
-            var newObj = medis[i];
-
-            delete newObj.einheit;
-            delete newObj.menge;
-            delete newObj.packungsgroesse;
-            delete newObj.rezeptpflichtig;
-            delete newObj.rezeptende;
-
-            return newObj;
-        }
-        var newObj = delProps(medis[i]);
-        console.log(newObj);
-
-        //Schritt 3: Jedem Tag alle Zeiten zuordnen
+        //object tage und array zeiten gemäss allgorythmus mergen
 
         //isoliere tage object
-        var tage = newObj.timers.tage;
+        tage = medis[i].timers.tage;
+
         //mache aus tage object ein array nur mit den werten
-        var tage = Object.keys(tage).map(function(k) {
+        tage = Object.keys(tage).map(function(k) {
             return tage[k];
         });
 
@@ -110,16 +99,16 @@ angular.module('mediApp.controllers', [])
             }
             return newArray;
         }
-        var tage = cleanArray(tage);
+        tage = cleanArray(tage);
         console.log(tage);
 
         //isoliere zeiten array
-        var zeiten = newObj.timers.zeiten;
+        var zeiten = medis[i].timers.zeiten;
         console.log(zeiten);
 
-        //die zwei arrays in gewünschter weise kombinieren und neu anordnen
+        //Schritt 3.1: die zwei arrays in gewünschter weise kombinieren und neu anordnen
 
-        //den array tage sovielmal kopieren wie entsprechende Zeiten
+        //den array tage soviel mal kopieren wie entsprechende Zeiten
         function combiArray(zeiten, tage) {
             var newArray = [];
             for (var i = 0; i < zeiten.length; i++) {
@@ -134,56 +123,88 @@ angular.module('mediApp.controllers', [])
 
         //die Zeiten den tages-arrays hinzufügen
         function mergeArray(combiTage, zeiten) {
-    var advancedArray = [];
-    for (var i = 0; i < combiTage.length; i++) {
-      var innerArray = combiTage[i];
-      for (var j = 0; j < innerArray.length; j++) {
-        for (var z = 0; z < zeiten.length; z++) {
-          advancedArray.push(innerArray[j]);
-          advancedArray.push(zeiten[z]);
-              console.log(advancedArray);
+            var advancedArray = [];
+            for (var i = 0; i < combiTage.length; i++) {
+                var innerArray = combiTage[i];
+                for (var j = 0; j < innerArray.length; j++) {
+                    for (var z = 0; z < zeiten.length; z++) {
+                        advancedArray.push(innerArray[j]);
+                        advancedArray.push(zeiten[z]);
+                    }
+                }
+            }
+            return advancedArray;
+        }
+        var tagesZeiten = mergeArray(combiTage, zeiten);
+
+        //tagesZeiten auf einzelne arrays verteilen
+        function spliceArr(tagesZeiten) {
+            var newArray = [];
+            while (tagesZeiten.length > 0) {
+                newArray.push(tagesZeiten.splice(0, 2));
+            }
+            return newArray;
+        }
+        tagesZeiten = spliceArr(tagesZeiten);
+
+        //duplikate entfernen (liesse sich evtl. auch vermeiden durch verbesserung von funktion mergeArray)
+        function uniqBy(tagesZeiten, key) {
+            var seen = {};
+            return tagesZeiten.filter(function(item) {
+                var k = key(item);
+                return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+            })
+        }
+        tagesZeiten = uniqBy(tagesZeiten, JSON.stringify);
+
+        //tagesZeiten in strings umwandeln und in neuem array speichern
+        function arrToString(tagesZeiten) {
+            newArray = [];
+            for (i = 0; i < tagesZeiten.length; i++) {
+                newArray.push(tagesZeiten[i].join(' '));
+            }
+            return newArray;
+        }
+        tagesZeiten = arrToString(tagesZeiten);
+        console.log(tagesZeiten);
+
+    }
+
+        //Alle Key-Value Paare, die nicht gebraucht werden entfernen
+    function delProps(medis) {
+
+        for (i = 0; i < medis.length; i++) {
+            var newMediObj = medis[i];
+
+            delete newMediObj.einheit;
+            delete newMediObj.menge;
+            delete newMediObj.packungsgroesse;
+            delete newMediObj.rezeptpflichtig;
+            delete newMediObj.rezeptende;
+            delete newMediObj.timers.tage;
+            delete newMediObj.timers.zeiten;
         }
 
-      }
+        return newMediObj;
     }
-    return advancedArray;
-  }
-  var tagesZeiten = mergeArray(combiTage, zeiten);
+    var newMediObj = delProps(medis);
+    console.log(newMediObj);
 
-  //tagesZeiten auf einzelne arrays verteilen
-  function spliceArr(tagesZeiten) {
-    var newArray = [];
-    while (tagesZeiten.length > 0) {
-      newArray.push(tagesZeiten.splice(0, 2));
-    }
-    return newArray;
-  }
-  
-  var tagesZeiten = spliceArr(tagesZeiten);
+    
+    
 
-  //duplikate entfernen (liesse sich evtl. auch vermeiden durch verbesserung von funktion mergeArray)
-  function uniqBy(tagesZeiten, key) {
-    var seen = {};
-    return tagesZeiten.filter(function(item) {
-      var k = key(item);
-      return seen.hasOwnProperty(k) ? false : (seen[k] = true);
-    })
-  }
-  var tagesZeiten = uniqBy(tagesZeiten, JSON.stringify);
+    //neues Objekt generieten, 
+    var newTimerData = [];
 
-  //tagesZeiten in strings umwandeln und in neuem array speichern
-  function arrToString(tagesZeiten) {
-    newArray = [];
     for (i = 0; i < tagesZeiten.length; i++) {
-      newArray.push(tagesZeiten[i].join(' '));
+        newTimerData[i] = {
+            timer: tagesZeiten[i],
+            id: medis.id,
+        }
     }
-    return newArray;
-  }
-  
-  var tagesZeiten = arrToString(tagesZeiten);
-  console.log(tagesZeiten);
+    console.log(newTimerData);
 
-    }
+
 
     //Fake timerData aus service 
     $scope.timerData = Timer.timerData();
@@ -353,57 +374,57 @@ angular.module('mediApp.controllers', [])
 // $scope.timers = [{}];
 // $scope.timers.zeiten = ['06:30'];
 
-    //Schritt 1
-    // var medisSlice = medis.slice(0, 1);
+//Schritt 1
+// var medisSlice = medis.slice(0, 1);
 
-    // //Schritt 2
+// //Schritt 2
 
-    // //löschen geht nur wenn array in object umgewandelt wird
-    // var medisSliceObj = medisSlice[0];
-    // delete medisSliceObj.einheit;
-    // delete medisSliceObj.menge;
-    // delete medisSliceObj.packungsgroesse;
-    // delete medisSliceObj.rezeptpflichtig;
-    // delete medisSliceObj.rezeptende;
-    // var medisSliceDel = medisSliceObj;
-    // console.log(medisSliceDel);
+// //löschen geht nur wenn array in object umgewandelt wird
+// var medisSliceObj = medisSlice[0];
+// delete medisSliceObj.einheit;
+// delete medisSliceObj.menge;
+// delete medisSliceObj.packungsgroesse;
+// delete medisSliceObj.rezeptpflichtig;
+// delete medisSliceObj.rezeptende;
+// var medisSliceDel = medisSliceObj;
+// console.log(medisSliceDel);
 
-    // //Property picking
-    // var medisSliceObjName = medisSliceObj.name;
-    // console.log(medisSliceObjName);
+// //Property picking
+// var medisSliceObjName = medisSliceObj.name;
+// console.log(medisSliceObjName);
 
-    // //schritt 3
+// //schritt 3
 
-    // //isoliere timers object
-    // mediSliceObjTimers = medisSliceObj.timers;
-    // console.log(mediSliceObjTimers);
+// //isoliere timers object
+// mediSliceObjTimers = medisSliceObj.timers;
+// console.log(mediSliceObjTimers);
 
-    // //isoliere tage object
-    // mediSliceObjTimersTage = medisSliceObj.timers.tage;
-    // console.log(mediSliceObjTimersTage);
+// //isoliere tage object
+// mediSliceObjTimersTage = medisSliceObj.timers.tage;
+// console.log(mediSliceObjTimersTage);
 
-    // //mache aus tage object ein array nur mit den werten
-    // var mediSliceObjTimersTageArr = Object.keys(mediSliceObjTimersTage).map(function(k) {
-    //     return mediSliceObjTimersTage[k]
-    // });
-    // console.log(mediSliceObjTimersTageArr);
+// //mache aus tage object ein array nur mit den werten
+// var mediSliceObjTimersTageArr = Object.keys(mediSliceObjTimersTage).map(function(k) {
+//     return mediSliceObjTimersTage[k]
+// });
+// console.log(mediSliceObjTimersTageArr);
 
-    // //enferne falsy values aus array
-    // function cleanArray(actual) {
-    //     var newArray = new Array();
-    //     for (var i = 0; i < actual.length; i++) {
-    //         if (actual[i]) {
-    //             newArray.push(actual[i]);
-    //         }
-    //     }
-    //     return newArray;
-    // }
-    // var mediSliceObjTimersTageArrClean = cleanArray(mediSliceObjTimersTageArr);
-    // console.log(mediSliceObjTimersTageArrClean);
+// //enferne falsy values aus array
+// function cleanArray(actual) {
+//     var newArray = new Array();
+//     for (var i = 0; i < actual.length; i++) {
+//         if (actual[i]) {
+//             newArray.push(actual[i]);
+//         }
+//     }
+//     return newArray;
+// }
+// var mediSliceObjTimersTageArrClean = cleanArray(mediSliceObjTimersTageArr);
+// console.log(mediSliceObjTimersTageArrClean);
 
-    // // var mediSliceObjTimersTageArrCleanToJSON = angular.toJson(mediSliceObjTimersTageArrClean);
-    // // console.log(mediSliceObjTimersTageArrCleanToJSON);
+// // var mediSliceObjTimersTageArrCleanToJSON = angular.toJson(mediSliceObjTimersTageArrClean);
+// // console.log(mediSliceObjTimersTageArrCleanToJSON);
 
-    // //isoliere zeiten array
-    // mediSliceObjTimersZeiten = medisSliceObj.timers.zeiten;
-    // console.log(mediSliceObjTimersZeiten);
+// //isoliere zeiten array
+// mediSliceObjTimersZeiten = medisSliceObj.timers.zeiten;
+// console.log(mediSliceObjTimersZeiten);
