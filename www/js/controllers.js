@@ -41,7 +41,7 @@ angular.module('mediApp.controllers', [])
     $scope.holeDatum = function() {
         $scope.date = moment().format('dddd HH:mm');
         console.log('jede Minute:' + $scope.date);
-    }
+    };
 
 
     var compareTimer = function() {
@@ -61,7 +61,7 @@ angular.module('mediApp.controllers', [])
             }
         }
         return null;
-    }
+    };
 
     $interval(function() {
         $scope.holeDatum();
@@ -196,9 +196,9 @@ angular.module('mediApp.controllers', [])
     }
 
     //Fake timerData aus service 
-    // $scope.timerData = Timer.timerData();
+    $scope.timerData = Timer.timerData();
     //real von form
-    $scope.timerData = allTimerData;
+    // $scope.timerData = allTimerData;
     console.log($scope.timerData);
 
 })

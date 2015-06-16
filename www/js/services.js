@@ -76,7 +76,7 @@ angular.module('mediApp.services', [])
         info: 'vor den Mahlzeiten',
         anwendungsform: "Tabletten"
     }, {
-        timer: 'Donnerstag 10:54',
+        timer: 'Dienstag 15:11',
         name: 'Aspirin',
         menge: 2,
         info: 'vor den Mahlzeiten',
