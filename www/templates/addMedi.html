@@ -4,7 +4,8 @@
             <h3>Medikament erfassen</h3>
             <div class="list">
                 <label class="item item-input">
-                    <input type="text" ng-model='medi.name' placeholder="Name" name="mediname" value="Aspirin" ng-init="medi.name='Aspirin'">
+                    <input type="text" ng-model='medi.name' placeholder="Name" name="mediname">
+                    <!-- wenn vorgabe wert erwünscht: ng-init="medi.name='Aspirin'" -->
                 </label>
                 <label class="item item-input">
                     <input type="number" ng-model='medi.menge' min="0" max="10000" placeholder="Menge z.B. 250" name="medimenge">
@@ -93,6 +94,10 @@
                         <!-- <select ng-model="timers.zeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten "> -->
                     </select>
                 </label>
+                <!-- neues html5 element -->
+                <!-- <label class="item item-input">
+                   <input type="time" min="00.00" max="23:30" step="1800" ng-model="medi.timers.zeiten"> 
+                </label> -->
                 <pre>Meine Zeiten = {{medi.timers.zeiten}}</pre>
                 <tt>Tage = {{medi.timers.tage}}</tt>
                 <br/>

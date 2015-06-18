@@ -33,6 +33,8 @@ angular.module('mediApp.controllers', [])
         }, 1000);
     };
 
+    //gesetzte timer und system timer vergleichen und bei übereinstimmung event auslösen
+    //***********************************************************************************
     //initial Datum holen
     $scope.date = moment().format('dddd HH:mm');
     console.log('inizial:' + $scope.date);
@@ -43,6 +45,23 @@ angular.module('mediApp.controllers', [])
         console.log('jede Minute:' + $scope.date);
     };
 
+    //funktioniert mit fake daten
+    // var compareTimer = function() {
+
+    //     var sysTimer = $scope.date;
+    //     var userTimers = $scope.timerData;
+
+    //     for (var i = 0; i < userTimers.length; i++) {
+    //         if (userTimers[i].timer == sysTimer) {
+
+    //             var userTimer = JSON.stringify(userTimers[i], ['name', 'menge']);
+    //             console.log(userTimer);
+    //             $window.confirm('Es ist Zeit ' + JSON.stringify(userTimers[i].menge) + ' ' + JSON.stringify(userTimers[i].anwendungsform) + ' des Meikaments ' + JSON.stringify(userTimers[i].name) + ' einzunehmen, Info: ' + JSON.stringify(userTimers[i].info));
+    //             return userTimer;
+    //         }
+    //     }
+    //     return null;
+    // };
 
     var compareTimer = function() {
 
@@ -50,18 +69,20 @@ angular.module('mediApp.controllers', [])
         var userTimers = $scope.timerData;
 
         for (var i = 0; i < userTimers.length; i++) {
-            if (userTimers[i].timer == sysTimer) {
+            var innerArray = userTimers[i];
+            for (var j = 0; j < innerArray.length; j++) {
+                if (innerArray[j].timer == sysTimer) {
 
-                var userTimer = JSON.stringify(userTimers[i], ['name', 'menge']);
-                console.log(userTimer);
-                $window.confirm('Es ist Zeit ' + JSON.stringify(userTimers[i].menge) + ' ' + JSON.stringify(userTimers[i].anwendungsform) + ' des Meikaments ' + JSON.stringify(userTimers[i].name) + ' einzunehmen, Info: ' + JSON.stringify(userTimers[i].info));
-                // return userTimers[i];
-                //variable ausserhalb der Funktion nicht verwendbar
-                return userTimer;
+                    var userTimer = JSON.stringify(innerArray[j], ['name', 'menge']);
+                    console.log(userTimer);
+                    $window.confirm('Es ist Zeit ' + JSON.stringify(innerArray[j].menge) + ' ' + JSON.stringify(innerArray[j].anwendungsform) + ' des Meikaments ' + JSON.stringify(innerArray[j].name) + ' einzunehmen, Info: ' + JSON.stringify(innerArray[j].info));
+                    return userTimer;
+                }
             }
         }
         return null;
     };
+
 
     $interval(function() {
         $scope.holeDatum();
@@ -75,6 +96,8 @@ angular.module('mediApp.controllers', [])
 
     var medis = $localstorage.getObject('medis');
     console.log(medis);
+
+    var allTimerData = [];
 
     //je array in medi folgenden prozess ausführen:
     for (i = 0; i < medis.length; i++) {
@@ -185,20 +208,16 @@ angular.module('mediApp.controllers', [])
         }
         console.log(timerData);
 
-        var allTimerData = [];
 
-        function allTData(timerData) {
-        return allTimerData.push(timerData);
-        }
-        allTimerData = allTData(timerData);
+        allTimerData.push(timerData);
         console.log(allTimerData);
 
     }
 
     //Fake timerData aus service 
-    $scope.timerData = Timer.timerData();
+    // $scope.timerData = Timer.timerData();
     //real von form
-    // $scope.timerData = allTimerData;
+    $scope.timerData = allTimerData;
     console.log($scope.timerData);
 
 })
