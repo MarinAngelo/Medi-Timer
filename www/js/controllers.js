@@ -264,7 +264,6 @@ angular.module('mediApp.controllers', [])
     $scope.zeiten = range;
 
 
-
     $scope.addMedi = function(medi) {
 
         //Feld "id" generieren und dem "medi"-Objekt hinzufügen
@@ -287,7 +286,6 @@ angular.module('mediApp.controllers', [])
 
         //redirect to List
         $state.go('app.medis');
-
 
     };
 
@@ -319,7 +317,7 @@ angular.module('mediApp.controllers', [])
 
     $scope.toggleEditing = function() {
         // if ($scope.editing) {
-
+        save();
         // }
         $scope.editing = !$scope.editing;
     };
@@ -335,41 +333,42 @@ angular.module('mediApp.controllers', [])
         range.push(itr.next().format('LT'));
     }
 
-    range.push("23:30", "13:15");
+    range.push("23:30", "13:20");
 
     $scope.zeiten = range;
 
-    //********************Timer zu Medi hinzufügen***********************
-
-    // $scope.timers = [{}];
-
-    //Tage aus Service
-    // $scope.tage = Timer.alleTage();
-
-    //zeiten aus Servece
-    // $scope.zeiten = Timer.alleZeiten();
-
-    //Vorausgewählte Zeit
-    // $scope.timers.zeiten = ['06:30'];
-
-    //****************Medi löschen**********************
-    //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
-    $scope.deleteMedi = function(mediId) {
-
+    // vorhandenes medi muss im medis arry mit dem väränderten medi ausgewechselt werden 
+    function save() {
         var medis = $localstorage.getObject('medis');
 
         for (var i = 0; i < medis.length; i++) {
-            if (medis[i].id === $stateParams.mediId) {
-                medis.splice(i, 1);
-                return $localstorage.setObject('medis', medis);
+            if (medis[i].id === $scope.medi.id) {
+                medis[i] = $scope.medi;
+                $localstorage.setObject('medis', medis);
+                console.log("save this");
             }
-            //daten aktualisieren
-            $window.location.reload(true);
-            //redirect to Liste
-            $location.path('/medis');
         }
+        return null;
+    }
 
-    };
+//****************Medi löschen**********************
+//http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
+$scope.deleteMedi = function(mediId) {
+
+    var medis = $localstorage.getObject('medis');
+
+    for (var i = 0; i < medis.length; i++) {
+        if (medis[i].id === $stateParams.mediId) {
+            medis.splice(i, 1);
+            return $localstorage.setObject('medis', medis);
+        }
+        //daten aktualisieren
+        $window.location.reload(true);
+        //redirect to Liste
+        $location.path('/medis');
+    }
+
+};
 });
 
 //Zeiten für Timer-Formulsr
