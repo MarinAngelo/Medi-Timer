@@ -226,7 +226,7 @@ angular.module('mediApp.controllers', [])
 .controller('MedisController', function($scope, $localstorage, $interval, $window) {
 
     //teste ob key "medis" im Local Storage vorhanden ist
-    if (localStorage['medis'] === undefined) {
+    if (localStorage.medis === undefined) {
         //wenn nicht speichere initial Daten
         $localstorage.setInitialData('medis');
         //zeige inizial Daten an
@@ -248,7 +248,7 @@ angular.module('mediApp.controllers', [])
     //zeiten aus Servece um im select anzuzeigen
     // $scope.zeiten = Timer.alleZeiten();
 
-    //versuch zeiten zu generieren
+    //zeiten generieren
 
     var startTime = moment("00:00", "HH:mm");
     var endTime = moment("23:30", "HH:mm");
@@ -259,7 +259,7 @@ angular.module('mediApp.controllers', [])
         range.push(itr.next().format('LT'));
     }
 
-    range.push("23:30", "11:01");
+    range.push("23:30", "11:35");
 
     $scope.zeiten = range;
 
@@ -310,6 +310,34 @@ angular.module('mediApp.controllers', [])
     };
 
     $scope.medi = getMedi($stateParams.mediId);
+
+    //Einzelner Medi Eintrag editieren
+    //
+
+    $scope.editing = false;
+
+
+    $scope.toggleEditing = function() {
+        // if ($scope.editing) {
+
+        // }
+        $scope.editing = !$scope.editing;
+    };
+
+    //zeiten generieren
+
+    var startTime = moment("00:00", "HH:mm");
+    var endTime = moment("23:30", "HH:mm");
+
+    var itr = moment.twix(startTime, endTime).iterate(0.5, "hours");
+    var range = [];
+    while (itr.hasNext()) {
+        range.push(itr.next().format('LT'));
+    }
+
+    range.push("23:30", "13:15");
+
+    $scope.zeiten = range;
 
     //********************Timer zu Medi hinzufügen***********************
 

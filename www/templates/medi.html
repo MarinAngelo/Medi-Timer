@@ -35,5 +35,111 @@
         </div>
         <br/>
         <button class="button button-block button-positive" ng-click="deleteMedi($stateParams.mediId)">delete</button>
+        <button class="button button-block button-positive" ng-click="toggleEditing()">edit</button>
+        <form>
+            <h3>Medikament editieren</h3>
+            <div class="list">
+                <label class="item item-input">
+                    <input type="text" ng-model='medi.name' ng-readonly='!editing'>
+                    <!-- "!editing" -->
+                </label>
+                <label class="item item-input">
+                    <input type="number" ng-model='medi.menge' min="0" max="10000" name="medimenge" ng-readonly='!editing' placeholder="Menge z.B. 250">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model='medi.einheit' name="medieinheit" ng-readonly='!editing'>
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model='medi.anwendungsform' ng-readonly='!editing' name="medianwendungsform">
+                </label>
+                <label class="item item-input">
+                    <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" ng-readonly='!editing' name="medipackungsgroesse">
+                </label>
+                <div class="item item-toggle">
+                    Medikament Rezeptfplichtig
+                    <label class="toggle toggle-assertive">
+                        <input type="checkbox" ng-model='medi.rezeptpflichtig' ng-readonly='!editing'>
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
+                        <!--         <label class="item item-input" ng-show="medi.rezeptpflichtig == true">
+                    <span class="input-label">Rezept gültig bis</span>
+                    <input type="date" ng-model='medi.rezeptende'>
+                </label> -->
+                <li ng-show="!editing">
+                    <h4>Tage:</h4>
+                    <ul>
+                        <li ng-repeat="tag in medi.timers.tage" ng-show="{{tag}} !== false">{{tag}}</li>
+                    </ul>
+                </li>
+                <div ng-show="editing">
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.montag" ng-true-value="'Montag'" >
+                    </label>
+                    Montag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.dienstag" ng-true-value="'Dienstag'">
+                    </label>
+                    Dienstag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.mittwoch" ng-true-value="'Mittwoch'">
+                    </label>
+                    Mittwoch
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.donnerstag" ng-true-value="'Donnerstag'">
+                    </label>
+                    Donnerstag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.freitag" ng-true-value="'Freitag'">
+                    </label>
+                    Freitag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.samstag" ng-true-value="'Samstag'">
+                    </label>
+                    Samstag
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="medi.timers.tage.sonntag" ng-true-value="'Sonntag'">
+                    </label>
+                    Sonntag
+                </li>
+                </div>
+                <li ng-show="!editing">
+                    <h4>Zeiten:</h4>
+                    <ul>
+                        <li ng-repeat="zeit in medi.timers.zeiten">{{zeit}}</li>
+                    </ul>
+                </li>
+                <div ng-show="editing">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Zeit
+                    </div>
+                    <select ng-model="medi.timers.zeiten" multiple ng-options="zeit as zeit for zeit in zeiten">
+                    </select>
+                </label>
+                </div>
+                <label class="item item-input">
+                    <input type="number" ng-model="medi.timers.menge" min="0" max="10" ng-readonly='!editing'>
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model="medi.timers.info" ng-readonly='!editing'>
+                </label>
+                </div>
+                </form>
     </ion-content>
 </ion-view>

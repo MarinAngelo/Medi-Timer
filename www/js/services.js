@@ -45,12 +45,12 @@ angular.module('mediApp.services', [])
     }];
 
     return {
-        set: function(key, value) {
-            $window.localStorage[key] = value;
-        },
-        get: function(key, defaultValue) {
-            return $window.localStorage[key] || defaultValue;
-        },
+        // set: function(key, value) {
+        //     $window.localStorage[key] = value;
+        // },
+        // get: function(key, defaultValue) {
+        //     return $window.localStorage[key] || defaultValue;
+        // },
         setObject: function(key, value) {
             $window.localStorage[key] = JSON.stringify(value);
         },
@@ -85,7 +85,7 @@ angular.module('mediApp.services', [])
 
     }];
 
-    var zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
+    // var zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
 
 
     return {
