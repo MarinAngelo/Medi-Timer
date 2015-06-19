@@ -246,9 +246,24 @@ angular.module('mediApp.controllers', [])
     var existMedis = $localstorage.getObject('medis') || [];
 
     //zeiten aus Servece um im select anzuzeigen
-    $scope.zeiten = Timer.alleZeiten();
+    // $scope.zeiten = Timer.alleZeiten();
 
-    // $scope.timers = [];
+    //versuch zeiten zu generieren
+
+    var startTime = moment("00:00", "HH:mm");
+    var endTime = moment("23:30", "HH:mm");
+
+    var itr = moment.twix(startTime, endTime).iterate(0.5, "hours");
+    var range = [];
+    while (itr.hasNext()) {
+        range.push(itr.next().format('LT'));
+    }
+
+    range.push("23:30", "11:01");
+
+    $scope.zeiten = range;
+
+
 
     $scope.addMedi = function(medi) {
 
