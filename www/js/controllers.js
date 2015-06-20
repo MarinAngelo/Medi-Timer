@@ -111,57 +111,57 @@ angular.module('mediApp.controllers', [])
     }
 
     //den array tage soviel mal kopieren wie entsprechende Zeiten
-        function combiArray(zeiten, tage) {
-            var newArray = [];
-            for (var i = 0; i < zeiten.length; i++) {
-                if (zeiten[i]) {
-                    newArray.push(tage);
+    function combiArray(zeiten, tage) {
+        var newArray = [];
+        for (var i = 0; i < zeiten.length; i++) {
+            if (zeiten[i]) {
+                newArray.push(tage);
+            }
+        }
+        return newArray;
+    }
+
+    //die Zeiten den tages-arrays hinzufügen
+    function mergeArray(combiTage, zeiten) {
+        var advancedArray = [];
+        for (var i = 0; i < combiTage.length; i++) {
+            var innerArray = combiTage[i];
+            for (var j = 0; j < innerArray.length; j++) {
+                for (var z = 0; z < zeiten.length; z++) {
+                    advancedArray.push(innerArray[j]);
+                    advancedArray.push(zeiten[z]);
                 }
             }
-            return newArray;
         }
+        return advancedArray;
+    }
 
-        //die Zeiten den tages-arrays hinzufügen
-        function mergeArray(combiTage, zeiten) {
-            var advancedArray = [];
-            for (var i = 0; i < combiTage.length; i++) {
-                var innerArray = combiTage[i];
-                for (var j = 0; j < innerArray.length; j++) {
-                    for (var z = 0; z < zeiten.length; z++) {
-                        advancedArray.push(innerArray[j]);
-                        advancedArray.push(zeiten[z]);
-                    }
-                }
-            }
-            return advancedArray;
+    //tagesZeiten auf einzelne arrays verteilen
+    function spliceArr(tagesZeiten) {
+        var newArray = [];
+        while (tagesZeiten.length > 0) {
+            newArray.push(tagesZeiten.splice(0, 2));
         }
+        return newArray;
+    }
 
-        //tagesZeiten auf einzelne arrays verteilen
-        function spliceArr(tagesZeiten) {
-            var newArray = [];
-            while (tagesZeiten.length > 0) {
-                newArray.push(tagesZeiten.splice(0, 2));
-            }
-            return newArray;
-        }
+    //duplikate entfernen (liesse sich evtl. auch vermeiden durch verbesserung von funktion mergeArray)
+    function uniqBy(tagesZeiten, key) {
+        var seen = {};
+        return tagesZeiten.filter(function(item) {
+            var k = key(item);
+            return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+        });
+    }
 
-        //duplikate entfernen (liesse sich evtl. auch vermeiden durch verbesserung von funktion mergeArray)
-        function uniqBy(tagesZeiten, key) {
-            var seen = {};
-            return tagesZeiten.filter(function(item) {
-                var k = key(item);
-                return seen.hasOwnProperty(k) ? false : (seen[k] = true);
-            });
+    //tagesZeiten in strings umwandeln und in neuem array speichern
+    function arrToString(tagesZeiten) {
+        newArray = [];
+        for (var i = 0; i < tagesZeiten.length; i++) {
+            newArray.push(tagesZeiten[i].join(' '));
         }
-
-        //tagesZeiten in strings umwandeln und in neuem array speichern
-        function arrToString(tagesZeiten) {
-            newArray = [];
-            for (var i = 0; i < tagesZeiten.length; i++) {
-                newArray.push(tagesZeiten[i].join(' '));
-            }
-            return newArray;
-        }
+        return newArray;
+    }
 
     //je array in medi folgenden prozess ausführen:
     for (var i = 0; i < medis.length; i++) {
@@ -216,7 +216,6 @@ angular.module('mediApp.controllers', [])
         }
         console.log(timerData);
 
-
         allTimerData.push(timerData);
         console.log(allTimerData);
 
@@ -253,11 +252,7 @@ angular.module('mediApp.controllers', [])
     //vorhandene Objekte im "medis" Array in Variable speichern
     var existMedis = $localstorage.getObject('medis') || [];
 
-    //zeiten aus Servece um im select anzuzeigen
-    // $scope.zeiten = Timer.alleZeiten();
-
     //zeiten generieren
-
     var startTime = moment("00:00", "HH:mm");
     var endTime = moment("23:30", "HH:mm");
 

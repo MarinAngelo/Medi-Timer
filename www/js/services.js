@@ -62,7 +62,7 @@ angular.module('mediApp.services', [])
             $window.localStorage[key] = JSON.stringify(initialData);
         }
 
-    }
+    };
 
 }])
 
@@ -85,15 +85,7 @@ angular.module('mediApp.services', [])
 
     }];
 
-    // var zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00'];
-
-
     return {
-
-        //zeiten für Formular bereitstellen
-        alleZeiten: function() {
-            return zeiten;
-        },
 
         timerData: function() {
             return timerData;
