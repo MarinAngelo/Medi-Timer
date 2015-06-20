@@ -99,39 +99,18 @@ angular.module('mediApp.controllers', [])
 
     var allTimerData = [];
 
-    //je array in medi folgenden prozess ausführen:
-    for (i = 0; i < medis.length; i++) {
-
-        //object tage und array zeiten gemäss allgorythmus mergen
-
-        //isoliere tage object
-        tage = medis[i].timers.tage;
-
-        //mache aus tage object ein array nur mit den werten
-        tage = Object.keys(tage).map(function(k) {
-            return tage[k];
-        });
-
-        //enferne falsy values aus tage array
-        function cleanArray(tage) {
-            var newArray = new Array();
-            for (var i = 0; i < tage.length; i++) {
-                if (tage[i]) {
-                    newArray.push(tage[i]);
-                }
+    //enferne falsy value "false" aus tage array
+    function cleanArray(tage) {
+        var newArray = [];
+        for (var i = 0; i < tage.length; i++) {
+            if (tage[i]) {
+                newArray.push(tage[i]);
             }
-            return newArray;
         }
-        tage = cleanArray(tage);
-        console.log(tage);
+        return newArray;
+    }
 
-        //isoliere zeiten array
-        var zeiten = medis[i].timers.zeiten;
-        console.log(zeiten);
-
-        //Schritt 3.1: die zwei arrays in gewünschter weise kombinieren und neu anordnen
-
-        //den array tage soviel mal kopieren wie entsprechende Zeiten
+    //den array tage soviel mal kopieren wie entsprechende Zeiten
         function combiArray(zeiten, tage) {
             var newArray = [];
             for (var i = 0; i < zeiten.length; i++) {
@@ -141,8 +120,6 @@ angular.module('mediApp.controllers', [])
             }
             return newArray;
         }
-        var combiTage = combiArray(zeiten, tage);
-        console.log(combiTage);
 
         //die Zeiten den tages-arrays hinzufügen
         function mergeArray(combiTage, zeiten) {
@@ -158,7 +135,6 @@ angular.module('mediApp.controllers', [])
             }
             return advancedArray;
         }
-        var tagesZeiten = mergeArray(combiTage, zeiten);
 
         //tagesZeiten auf einzelne arrays verteilen
         function spliceArr(tagesZeiten) {
@@ -168,7 +144,6 @@ angular.module('mediApp.controllers', [])
             }
             return newArray;
         }
-        tagesZeiten = spliceArr(tagesZeiten);
 
         //duplikate entfernen (liesse sich evtl. auch vermeiden durch verbesserung von funktion mergeArray)
         function uniqBy(tagesZeiten, key) {
@@ -176,29 +151,62 @@ angular.module('mediApp.controllers', [])
             return tagesZeiten.filter(function(item) {
                 var k = key(item);
                 return seen.hasOwnProperty(k) ? false : (seen[k] = true);
-            })
+            });
         }
-        tagesZeiten = uniqBy(tagesZeiten, JSON.stringify);
 
         //tagesZeiten in strings umwandeln und in neuem array speichern
-        //iterations variable musste innerhalb funktion geändert werden das sonst übergeordnetes "i"
-        //nicht mehr konstant war
         function arrToString(tagesZeiten) {
             newArray = [];
-            for (u = 0; u < tagesZeiten.length; u++) {
-                newArray.push(tagesZeiten[u].join(' '));
+            for (var i = 0; i < tagesZeiten.length; i++) {
+                newArray.push(tagesZeiten[i].join(' '));
             }
             return newArray;
         }
+
+    //je array in medi folgenden prozess ausführen:
+    for (var i = 0; i < medis.length; i++) {
+
+        //object tage und array zeiten gemäss allgorythmus mergen
+
+        //isoliere tage object
+        var tage = medis[i].timers.tage;
+
+        //mache aus tage object ein array nur mit den werten
+        tage = Object.keys(tage).map(function(k) {
+            return tage[k];
+        });
+
+        //enferne falsy value "false" aus tage array
+        tage = cleanArray(tage);
+        console.log(tage);
+
+        //isoliere zeiten array
+        var zeiten = medis[i].timers.zeiten;
+        console.log(zeiten);
+
+        //den array tage soviel mal kopieren wie entsprechende Zeiten
+        var combiTage = combiArray(zeiten, tage);
+        console.log(combiTage);
+
+        //die Zeiten den tages-arrays hinzufügen
+        var tagesZeiten = mergeArray(combiTage, zeiten);
+
+        //tagesZeiten auf einzelne arrays verteilen
+        tagesZeiten = spliceArr(tagesZeiten);
+
+        //duplikate entfernen (liesse sich evtl. auch vermeiden durch verbesserung von funktion mergeArray)
+        tagesZeiten = uniqBy(tagesZeiten, JSON.stringify);
+
+        //tagesZeiten in strings umwandeln und in neuem array speichern
         tagesZeiten = arrToString(tagesZeiten);
         console.log(tagesZeiten);
 
         //neues Objekt generieten, 
         var timerData = [];
 
-        for (p = 0; p < tagesZeiten.length; p++) {
-            timerData[p] = {
-                timer: tagesZeiten[p],
+        for (var j = 0; j < tagesZeiten.length; j++) {
+            timerData[j] = {
+                timer: tagesZeiten[j],
                 id: medis[i].id,
                 name: medis[i].name,
                 menge: medis[i].timers.menge,
@@ -345,30 +353,29 @@ angular.module('mediApp.controllers', [])
             if (medis[i].id === $scope.medi.id) {
                 medis[i] = $scope.medi;
                 $localstorage.setObject('medis', medis);
-                console.log("save this");
             }
         }
         return null;
     }
 
-//****************Medi löschen**********************
-//http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
-$scope.deleteMedi = function(mediId) {
+    //****************Medi löschen**********************
+    //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
+    $scope.deleteMedi = function(mediId) {
 
-    var medis = $localstorage.getObject('medis');
+        var medis = $localstorage.getObject('medis');
 
-    for (var i = 0; i < medis.length; i++) {
-        if (medis[i].id === $stateParams.mediId) {
-            medis.splice(i, 1);
-            return $localstorage.setObject('medis', medis);
+        for (var i = 0; i < medis.length; i++) {
+            if (medis[i].id === $stateParams.mediId) {
+                medis.splice(i, 1);
+                return $localstorage.setObject('medis', medis);
+            }
+            //daten aktualisieren
+            $window.location.reload(true);
+            //redirect to Liste
+            $location.path('/medis');
         }
-        //daten aktualisieren
-        $window.location.reload(true);
-        //redirect to Liste
-        $location.path('/medis');
-    }
 
-};
+    };
 });
 
 //Zeiten für Timer-Formulsr
