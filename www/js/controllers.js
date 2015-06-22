@@ -252,20 +252,7 @@ angular.module('mediApp.controllers', [])
     //vorhandene Objekte im "medis" Array in Variable speichern
     var existMedis = $localstorage.getObject('medis') || [];
 
-    //zeiten generieren
-    var startTime = moment("00:00", "HH:mm");
-    var endTime = moment("23:30", "HH:mm");
-
-    var itr = moment.twix(startTime, endTime).iterate(0.5, "hours");
-    var range = [];
-    while (itr.hasNext()) {
-        range.push(itr.next().format('LT'));
-    }
-
-    range.push("23:30", "11:35");
-
-    $scope.zeiten = range;
-
+    $scope.zeiten = Timer.alleZeiten();
 
     $scope.addMedi = function(medi) {
 
@@ -294,7 +281,7 @@ angular.module('mediApp.controllers', [])
 
 })
 
-.controller('MediController', function($scope, $stateParams, $localstorage, Timer, $location, $window) {
+.controller('MediController', function($scope, $stateParams, $localstorage, Timer, $location, $window, $state) {
 
     //***************Einzelnes Medi anzeigen********************************
     //ein Einzelnes Medi aus dem Objekt "medis" rauslesen
@@ -325,20 +312,7 @@ angular.module('mediApp.controllers', [])
         $scope.editing = !$scope.editing;
     };
 
-    //zeiten generieren
-
-    var startTime = moment("00:00", "HH:mm");
-    var endTime = moment("23:30", "HH:mm");
-
-    var itr = moment.twix(startTime, endTime).iterate(0.5, "hours");
-    var range = [];
-    while (itr.hasNext()) {
-        range.push(itr.next().format('LT'));
-    }
-
-    range.push("23:30", "13:20");
-
-    $scope.zeiten = range;
+    $scope.zeiten = Timer.alleZeiten();
 
     // vorhandenes medi muss im medis arry mit dem väränderten medi ausgewechselt werden 
     function save() {
@@ -366,8 +340,9 @@ angular.module('mediApp.controllers', [])
             }
             //daten aktualisieren
             $window.location.reload(true);
-            //redirect to Liste
-            $location.path('/medis');
+
+            //redirect to List
+        $state.go('app.medis');
         }
 
     };

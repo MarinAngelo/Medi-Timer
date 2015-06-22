@@ -42,7 +42,7 @@
                     <input type="date" ng-model='medi.rezeptende'>
                 </label> -->
                 <!-- *************************************************** -->
-                
+
                 <!-- eingerückte Version -->
                 <!--                 <div ng-show="!editing" class="item">
                     <div class="item item-divider">
@@ -105,13 +105,13 @@
                 <div class="item item-divider">
                     Zeiten:
                 </div>
-                    <ul ng-show="!editing" class="list">
+                    <ul class="list">
                         <li ng-repeat="zeit in medi.timers.zeiten" class="item">{{zeit}}</li>
                     </ul>
                 <div ng-show="editing">
                     <label class="item item-input item-select">
                         <div class="input-label">
-                            Zeit
+                            Zeiten anpassen
                         </div>
                         <select ng-model="medi.timers.zeiten" multiple ng-options="zeit as zeit for zeit in zeiten" required>
                         </select>

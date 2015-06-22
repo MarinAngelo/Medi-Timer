@@ -45,6 +45,9 @@
                         {{tag}}
                     </li>
                 </div> -->
+                <div class="item item-divider">
+                    Tage
+                </div>
                 <li class="item item-checkbox">
                     <label class="checkbox">
                         <input type="checkbox" ng-model="medi.timers.tage.montag" ng-true-value="'Montag'">
@@ -89,9 +92,15 @@
                 </li>
                 <!-- auswahl der Zeiten -->
                 <!-- <input type=time min=9:00 max=17:00 step=900> - 15m increments -->
+                <div class="item item-divider">
+                    Zeiten
+                </div>
+                    <ul class="list">
+                        <li ng-repeat="zeit in medi.timers.zeiten" class="item">{{zeit}}</li>
+                    </ul>
                 <label class="item item-input item-select">
                     <div class="input-label">
-                        Zeit
+                        Zeiten auswählen:
                     </div>
                     <select ng-model="medi.timers.zeiten" multiple ng-options="zeit as zeit for zeit in zeiten" required name="meditimerszeiten">
                         <!-- <select ng-model="timers.zeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten "> -->
