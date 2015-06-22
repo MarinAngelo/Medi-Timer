@@ -86,6 +86,7 @@ angular.module('mediApp.services', [])
     }];
 
     //zeiten generieren
+    //plugin twix hilft moment für time ranges
     var startTime = moment("2015-06-19 06:00", "YYYY-MM-DD HH:mm");
     var endTime = moment("2015-06-20 05:30", "YYYY-MM-DD HH:mm");
 
