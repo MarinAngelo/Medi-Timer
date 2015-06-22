@@ -33,6 +33,8 @@ angular.module('mediApp.controllers', [])
         }, 1000);
     };
 
+    //gesetzte timer und system timer vergleichen und bei übereinstimmung event auslösen
+    //***********************************************************************************
     //initial Datum holen
     $scope.date = moment().format('dddd HH:mm');
     console.log('inizial:' + $scope.date);
@@ -41,8 +43,25 @@ angular.module('mediApp.controllers', [])
     $scope.holeDatum = function() {
         $scope.date = moment().format('dddd HH:mm');
         console.log('jede Minute:' + $scope.date);
-    }
+    };
 
+    //funktioniert mit fake daten
+    // var compareTimer = function() {
+
+    //     var sysTimer = $scope.date;
+    //     var userTimers = $scope.timerData;
+
+    //     for (var i = 0; i < userTimers.length; i++) {
+    //         if (userTimers[i].timer == sysTimer) {
+
+    //             var userTimer = JSON.stringify(userTimers[i], ['name', 'menge']);
+    //             console.log(userTimer);
+    //             $window.confirm('Es ist Zeit ' + JSON.stringify(userTimers[i].menge) + ' ' + JSON.stringify(userTimers[i].anwendungsform) + ' des Meikaments ' + JSON.stringify(userTimers[i].name) + ' einzunehmen, Info: ' + JSON.stringify(userTimers[i].info));
+    //             return userTimer;
+    //         }
+    //     }
+    //     return null;
+    // };
 
     var compareTimer = function() {
 
@@ -50,18 +69,20 @@ angular.module('mediApp.controllers', [])
         var userTimers = $scope.timerData;
 
         for (var i = 0; i < userTimers.length; i++) {
-            if (userTimers[i].timer == sysTimer) {
+            var innerArray = userTimers[i];
+            for (var j = 0; j < innerArray.length; j++) {
+                if (innerArray[j].timer == sysTimer) {
 
-                var userTimer = JSON.stringify(userTimers[i], ['name', 'menge']);
-                console.log(userTimer);
-                $window.confirm('Es ist Zeit ' + JSON.stringify(userTimers[i].menge) + ' ' + JSON.stringify(userTimers[i].anwendungsform) + ' des Meikaments ' + JSON.stringify(userTimers[i].name) + ' einzunehmen, Info: ' + JSON.stringify(userTimers[i].info));
-                // return userTimers[i];
-                //variable ausserhalb der Funktion nicht verwendbar
-                return userTimer;
+                    var userTimer = JSON.stringify(innerArray[j], ['name', 'menge']);
+                    console.log(userTimer);
+                    $window.confirm('Es ist Zeit ' + JSON.stringify(innerArray[j].menge) + ' ' + JSON.stringify(innerArray[j].anwendungsform) + ' des Meikaments ' + JSON.stringify(innerArray[j].name) + ' einzunehmen, Info: ' + JSON.stringify(innerArray[j].info));
+                    return userTimer;
+                }
             }
         }
         return null;
-    }
+    };
+
 
     $interval(function() {
         $scope.holeDatum();
@@ -70,16 +91,141 @@ angular.module('mediApp.controllers', [])
         console.log($scope.userTimer);
     }, 60000, 0);
 
+    //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
+    //************************************************************************
 
+    var medis = $localstorage.getObject('medis');
+    console.log(medis);
 
+    var allTimerData = [];
 
-    //Local Storage String holen um in gewünschtes Format umzuwandeln
-    $scope.lsString = localStorage['medis'];
-    console.log($scope.lsString);
+    //enferne falsy value "false" aus tage array
+    function cleanArray(tage) {
+        var newArray = [];
+        for (var i = 0; i < tage.length; i++) {
+            if (tage[i]) {
+                newArray.push(tage[i]);
+            }
+        }
+        return newArray;
+    }
 
-    $scope.timerData = Timer.timerData();
+    //den array tage soviel mal kopieren wie entsprechende Zeiten
+    function combiArray(zeiten, tage) {
+        var newArray = [];
+        for (var i = 0; i < zeiten.length; i++) {
+            if (zeiten[i]) {
+                newArray.push(tage);
+            }
+        }
+        return newArray;
+    }
+
+    //die Zeiten den tages-arrays hinzufügen
+    function mergeArray(combiTage, zeiten) {
+        var advancedArray = [];
+        for (var i = 0; i < combiTage.length; i++) {
+            var innerArray = combiTage[i];
+            for (var j = 0; j < innerArray.length; j++) {
+                for (var z = 0; z < zeiten.length; z++) {
+                    advancedArray.push(innerArray[j]);
+                    advancedArray.push(zeiten[z]);
+                }
+            }
+        }
+        return advancedArray;
+    }
+
+    //tagesZeiten auf einzelne arrays verteilen
+    function spliceArr(tagesZeiten) {
+        var newArray = [];
+        while (tagesZeiten.length > 0) {
+            newArray.push(tagesZeiten.splice(0, 2));
+        }
+        return newArray;
+    }
+
+    //duplikate entfernen (liesse sich evtl. auch vermeiden durch verbesserung von funktion mergeArray)
+    function uniqBy(tagesZeiten, key) {
+        var seen = {};
+        return tagesZeiten.filter(function(item) {
+            var k = key(item);
+            return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+        });
+    }
+
+    //tagesZeiten in strings umwandeln und in neuem array speichern
+    function arrToString(tagesZeiten) {
+        newArray = [];
+        for (var i = 0; i < tagesZeiten.length; i++) {
+            newArray.push(tagesZeiten[i].join(' '));
+        }
+        return newArray;
+    }
+
+    //je array in medi folgenden prozess ausführen:
+    for (var i = 0; i < medis.length; i++) {
+
+        //object tage und array zeiten gemäss allgorythmus mergen
+
+        //isoliere tage object
+        var tage = medis[i].timers.tage;
+
+        //mache aus tage object ein array nur mit den werten
+        tage = Object.keys(tage).map(function(k) {
+            return tage[k];
+        });
+
+        //enferne falsy value "false" aus tage array
+        tage = cleanArray(tage);
+        console.log(tage);
+
+        //isoliere zeiten array
+        var zeiten = medis[i].timers.zeiten;
+        console.log(zeiten);
+
+        //den array tage soviel mal kopieren wie entsprechende Zeiten
+        var combiTage = combiArray(zeiten, tage);
+        console.log(combiTage);
+
+        //die Zeiten den tages-arrays hinzufügen
+        var tagesZeiten = mergeArray(combiTage, zeiten);
+
+        //tagesZeiten auf einzelne arrays verteilen
+        tagesZeiten = spliceArr(tagesZeiten);
+
+        //duplikate entfernen (liesse sich evtl. auch vermeiden durch verbesserung von funktion mergeArray)
+        tagesZeiten = uniqBy(tagesZeiten, JSON.stringify);
+
+        //tagesZeiten in strings umwandeln und in neuem array speichern
+        tagesZeiten = arrToString(tagesZeiten);
+        console.log(tagesZeiten);
+
+        //neues Objekt generieten, 
+        var timerData = [];
+
+        for (var j = 0; j < tagesZeiten.length; j++) {
+            timerData[j] = {
+                timer: tagesZeiten[j],
+                id: medis[i].id,
+                name: medis[i].name,
+                menge: medis[i].timers.menge,
+                info: medis[i].timers.info,
+                anwendungsform: medis[i].anwendungsform
+            }
+        }
+        console.log(timerData);
+
+        allTimerData.push(timerData);
+        console.log(allTimerData);
+
+    }
+
+    //Fake timerData aus service 
+    // $scope.timerData = Timer.timerData();
+    //real von form
+    $scope.timerData = allTimerData;
     console.log($scope.timerData);
-
 
 })
 
@@ -87,7 +233,7 @@ angular.module('mediApp.controllers', [])
 .controller('MedisController', function($scope, $localstorage, $interval, $window) {
 
     //teste ob key "medis" im Local Storage vorhanden ist
-    if (localStorage['medis'] === undefined) {
+    if (localStorage.medis === undefined) {
         //wenn nicht speichere initial Daten
         $localstorage.setInitialData('medis');
         //zeige inizial Daten an
@@ -106,10 +252,7 @@ angular.module('mediApp.controllers', [])
     //vorhandene Objekte im "medis" Array in Variable speichern
     var existMedis = $localstorage.getObject('medis') || [];
 
-    //zeiten aus Servece um im select anzuzeigen
     $scope.zeiten = Timer.alleZeiten();
-
-    // $scope.timers = [];
 
     $scope.addMedi = function(medi) {
 
@@ -134,12 +277,11 @@ angular.module('mediApp.controllers', [])
         //redirect to List
         $state.go('app.medis');
 
-
     };
 
 })
 
-.controller('MediController', function($scope, $stateParams, $localstorage, Timer, $location, $window) {
+.controller('MediController', function($scope, $stateParams, $localstorage, Timer, $location, $window, $state) {
 
     //***************Einzelnes Medi anzeigen********************************
     //ein Einzelnes Medi aus dem Objekt "medis" rauslesen
@@ -157,18 +299,33 @@ angular.module('mediApp.controllers', [])
 
     $scope.medi = getMedi($stateParams.mediId);
 
-    //********************Timer zu Medi hinzufügen***********************
+    //Einzelner Medi Eintrag editieren
+    //
 
-    // $scope.timers = [{}];
+    $scope.editing = false;
 
-    //Tage aus Service
-    // $scope.tage = Timer.alleTage();
 
-    //zeiten aus Servece
-    // $scope.zeiten = Timer.alleZeiten();
+    $scope.toggleEditing = function() {
+        // if ($scope.editing) {
+        save();
+        // }
+        $scope.editing = !$scope.editing;
+    };
 
-    //Vorausgewählte Zeit
-    // $scope.timers.zeiten = ['06:30'];
+    $scope.zeiten = Timer.alleZeiten();
+
+    // vorhandenes medi muss im medis arry mit dem väränderten medi ausgewechselt werden 
+    function save() {
+        var medis = $localstorage.getObject('medis');
+
+        for (var i = 0; i < medis.length; i++) {
+            if (medis[i].id === $scope.medi.id) {
+                medis[i] = $scope.medi;
+                $localstorage.setObject('medis', medis);
+            }
+        }
+        return null;
+    }
 
     //****************Medi löschen**********************
     //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
@@ -183,8 +340,9 @@ angular.module('mediApp.controllers', [])
             }
             //daten aktualisieren
             $window.location.reload(true);
-            //redirect to Liste
-            $location.path('/medis');
+
+            //redirect to List
+        $state.go('app.medis');
         }
 
     };
@@ -244,3 +402,58 @@ angular.module('mediApp.controllers', [])
 //Vorausgewählte Zeit
 // $scope.timers = [{}];
 // $scope.timers.zeiten = ['06:30'];
+
+//Schritt 1
+// var medisSlice = medis.slice(0, 1);
+
+// //Schritt 2
+
+// //löschen geht nur wenn array in object umgewandelt wird
+// var medisSliceObj = medisSlice[0];
+// delete medisSliceObj.einheit;
+// delete medisSliceObj.menge;
+// delete medisSliceObj.packungsgroesse;
+// delete medisSliceObj.rezeptpflichtig;
+// delete medisSliceObj.rezeptende;
+// var medisSliceDel = medisSliceObj;
+// console.log(medisSliceDel);
+
+// //Property picking
+// var medisSliceObjName = medisSliceObj.name;
+// console.log(medisSliceObjName);
+
+// //schritt 3
+
+// //isoliere timers object
+// mediSliceObjTimers = medisSliceObj.timers;
+// console.log(mediSliceObjTimers);
+
+// //isoliere tage object
+// mediSliceObjTimersTage = medisSliceObj.timers.tage;
+// console.log(mediSliceObjTimersTage);
+
+// //mache aus tage object ein array nur mit den werten
+// var mediSliceObjTimersTageArr = Object.keys(mediSliceObjTimersTage).map(function(k) {
+//     return mediSliceObjTimersTage[k]
+// });
+// console.log(mediSliceObjTimersTageArr);
+
+// //enferne falsy values aus array
+// function cleanArray(actual) {
+//     var newArray = new Array();
+//     for (var i = 0; i < actual.length; i++) {
+//         if (actual[i]) {
+//             newArray.push(actual[i]);
+//         }
+//     }
+//     return newArray;
+// }
+// var mediSliceObjTimersTageArrClean = cleanArray(mediSliceObjTimersTageArr);
+// console.log(mediSliceObjTimersTageArrClean);
+
+// // var mediSliceObjTimersTageArrCleanToJSON = angular.toJson(mediSliceObjTimersTageArrClean);
+// // console.log(mediSliceObjTimersTageArrCleanToJSON);
+
+// //isoliere zeiten array
+// mediSliceObjTimersZeiten = medisSliceObj.timers.zeiten;
+// console.log(mediSliceObjTimersZeiten);

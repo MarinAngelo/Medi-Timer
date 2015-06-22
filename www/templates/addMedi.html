@@ -1,10 +1,12 @@
 <ion-view view-title="Medikament hinzufügen">
     <ion-content>
-        <form name="myForm">
+        <form name="addMediForm" ng-submit="addMedi(medi)" novalidate>
             <h3>Medikament erfassen</h3>
             <div class="list">
+
                 <label class="item item-input">
-                    <input type="text" ng-model='medi.name' placeholder="Name" name="mediname" value="Aspirin" ng-init="medi.name='Aspirin'">
+                    <input type="text" ng-model='medi.name' placeholder="Name" name="mediname" required autofocus>
+                    <!-- wenn vorgabe wert erwünscht: ng-init="medi.name='Aspirin'" -->
                 </label>
                 <label class="item item-input">
                     <input type="number" ng-model='medi.menge' min="0" max="10000" placeholder="Menge z.B. 250" name="medimenge">
@@ -18,7 +20,9 @@
                 <label class="item item-input">
                     <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" placeholder="Packungsgrösse (Stk)" name="medipackungsgroesse">
                 </label>
-                <div class="item item-toggle">
+                <!-- Rezept Funktion -->
+                <!-- ******************************************************* -->
+<!--                 <div class="item item-toggle">
                     Medikament Rezeptfplichtig
                     <label class="toggle toggle-assertive">
                         <input type="checkbox" ng-model='medi.rezeptpflichtig'>
@@ -30,8 +34,8 @@
                 <label class="item item-input" ng-show="medi.rezeptpflichtig == true">
                     <span class="input-label">Rezept gültig bis</span>
                     <input type="date" ng-model='medi.rezeptende'>
-                </label>
-                <h3>Medikament terminieren</h3>
+                </label> -->
+                <!-- *************************************************************** -->
                 <!-- selektieren der Tage -->
                 <!--                 <div ng-repeat="tag in tage">
                     <li class="item item-checkbox">
@@ -41,6 +45,9 @@
                         {{tag}}
                     </li>
                 </div> -->
+                <div class="item item-divider">
+                    Tage
+                </div>
                 <li class="item item-checkbox">
                     <label class="checkbox">
                         <input type="checkbox" ng-model="medi.timers.tage.montag" ng-true-value="'Montag'">
@@ -85,29 +92,39 @@
                 </li>
                 <!-- auswahl der Zeiten -->
                 <!-- <input type=time min=9:00 max=17:00 step=900> - 15m increments -->
+                <div class="item item-divider">
+                    Zeiten
+                </div>
+                    <ul class="list">
+                        <li ng-repeat="zeit in medi.timers.zeiten" class="item">{{zeit}}</li>
+                    </ul>
                 <label class="item item-input item-select">
                     <div class="input-label">
-                        Zeit
+                        Zeiten auswählen:
                     </div>
-                    <select ng-model="medi.timers.zeiten" multiple ng-options="zeit as zeit for zeit in zeiten">
+                    <select ng-model="medi.timers.zeiten" multiple ng-options="zeit as zeit for zeit in zeiten" required name="meditimerszeiten">
                         <!-- <select ng-model="timers.zeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten "> -->
                     </select>
                 </label>
-                <pre>Meine Zeiten = {{medi.timers.zeiten}}</pre>
-                <tt>Tage = {{medi.timers.tage}}</tt>
-                <br/>
+                <!-- neues html5 element -->
+                <!-- <label class="item item-input">
+                   <input type="time" min="00.00" max="23:30" step="1800" ng-model="medi.timers.zeiten"> 
+                </label> -->
+                <!-- <pre>Meine Zeiten = {{medi.timers.zeiten}}</pre> -->
+<!--                 <tt>Tage = {{medi.timers.tage}}</tt>
+ -->                <br/>
                 <label class="item item-input">
                     <input type="number" ng-model="medi.timers.menge" min="0" max="10" placeholder="Menge (z.B. 0,5)">
                 </label>
                 <label class="item item-input">
                     <input type="text" ng-model="medi.timers.info" placeholder="Infos (z.B. nach den Mahlzeiten)">
                 </label>
-                <button class="button button-block button-positive" ng-click="addMedi(medi)">
+                <button type="submit" class="button button-block button-positive" ng-disabled="addMediForm.mediname.$invalid || addMediForm.meditimerszeiten.$invalid || medi.timers.tage==null">
                     Medikament speichern
                 </button>
             </div>
         </form>
-        <pre>Medi = {{medi | json}}</pre>
-    </ion-content>
+<!--         <pre>Medi = {{medi | json}}</pre>
+ -->    </ion-content>
 </ion-view>
 <!-- <input type="checkbox" ng-model="timers.tage[tag.tagE]" ng-checked="true"> -->

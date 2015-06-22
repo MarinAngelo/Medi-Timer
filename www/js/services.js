@@ -45,12 +45,12 @@ angular.module('mediApp.services', [])
     }];
 
     return {
-        set: function(key, value) {
-            $window.localStorage[key] = value;
-        },
-        get: function(key, defaultValue) {
-            return $window.localStorage[key] || defaultValue;
-        },
+        // set: function(key, value) {
+        //     $window.localStorage[key] = value;
+        // },
+        // get: function(key, defaultValue) {
+        //     return $window.localStorage[key] || defaultValue;
+        // },
         setObject: function(key, value) {
             $window.localStorage[key] = JSON.stringify(value);
         },
@@ -62,7 +62,7 @@ angular.module('mediApp.services', [])
             $window.localStorage[key] = JSON.stringify(initialData);
         }
 
-    }
+    };
 
 }])
 
@@ -76,7 +76,7 @@ angular.module('mediApp.services', [])
         info: 'vor den Mahlzeiten',
         anwendungsform: "Tabletten"
     }, {
-        timer: 'Donnerstag 10:54',
+        timer: 'Donnerstag 16:17',
         name: 'Aspirin',
         menge: 2,
         info: 'vor den Mahlzeiten',
@@ -84,47 +84,33 @@ angular.module('mediApp.services', [])
 
    }];
 
-    var zeiten = ['00:00', '00:30', '01:00', '01:30', '02:00', '02:30'];
+    //zeiten generieren
+    //plugin twix hilft moment für time ranges
+    var startTime = moment("2015-06-19 06:00", "YYYY-MM-DD HH:mm");
+    var endTime = moment("2015-06-20 05:30", "YYYY-MM-DD HH:mm");
 
+    var itr = moment.twix(startTime, endTime).iterate(0.5, "hours");
+    var range = [];
+    while (itr.hasNext()) {
+        range.push(itr.next().format('LT'));
+    }
+
+    range.push("05:30");
 
     return {
 
         //zeiten für Formular bereitstellen
         alleZeiten: function() {
-            return zeiten;
+            return range;
         },
 
         timerData: function() {
             return timerData;
         }
 
-    }
+    };
 });
 
-
-// .factory('Medis', function() {
-// Might use a resource here that returns a JSON array
-
-// Some fake testing data
-
-// var medis = [{
-//     id: 0,
-//     name: 'Actiq®',
-//     einheit: '800 Mikrogramm',
-//     anwendungsform: 'Lutschtabletten',
-//     packungsgroesse: '20 Stk',
-//     rezeptpflichtig: true,
-//     rezeptende: '16.07.2015'
-// },
-// {
-//     id: 1,
-//     name: 'Alkaselzer®',
-//     einheit: '80 mg',
-//     anwendungsform: 'Tabletten',
-//     packungsgroesse: '20 Stk',
-//     rezeptpflichtig: false,
-//     rezeptende: ''
-// }];
 
 // // untenstehende 2 ausdrücke machen aus dem medis objekt einen String
 // window.localStorage['medis'] = JSON.stringify(medis);
@@ -150,85 +136,4 @@ angular.module('mediApp.services', [])
 // };
 
 
-// });
 
-// [{
-//     'tagD': 'Montag',
-//     'tagE': 'Monday'
-// }, {
-//     'tagD': 'Dienstag',
-//     'tagE': 'Tuesday'
-// }, {
-//     'tagD': 'Mittwoch',
-//     'tagE': 'Wednesday'
-// }, {
-//     'tagD': 'Donnerstag',
-//     'tagE': 'Thursday'
-// }, {
-//     'tagD': 'Freitag',
-//     'tagE': 'Friday'
-// }, {
-//     'tagD': 'Samstag',
-//     'tagE': 'Saturday'
-// }, {
-//     'tagD': 'Sonntag',
-//     'tagE': 'Sunday'
-// }];
-
-//für Variante mit ng-repeat
-// var tage = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
-
-// var tage = {
-//     timers: [{
-//         tage: {
-//             montag: 'Montag',
-//             dienstag: 'Dienstag',
-//             mittwoch: 'Mittwoch',
-//             donnerstag: 'Donnerstag',
-//             freitag: 'Freitag',
-//             samstag: 'Samstag',
-//             sonntag: 'Sonntag'
-//         }
-//     }]
-// };
-
-// ,
-// alleTage: function() {
-//     return tage;
-// }
-
-//struktur mit mehreren Timern
-//             id: '2015-06-05T08:58:53.372Z',
-//             name: 'Actiq®',
-//             menge: 500,
-//             einheit: 'Mikrogramm',
-//             anwendungsform: 'Lutschtabletten',
-//             packungsgroesse: 20,
-//             rezeptpflichtig: true,
-//             rezeptende: '16.07.2015',
-//             timers: [{
-//                 timerId : 1,
-//                 tage: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
-//                 zeiten: ['08:00', '18:30'],
-//                 info: 'vor den Mahlzeiten'
-//             }]
-//         }, {
-//             id: '2015-07-05T08:58:53.372Z',
-//             name: 'Acidum folicum Streuli®',
-//             menge: 5,
-//             einheit: 'mg',
-//             anwendungsform: 'Tabletten',
-//             packungsgroesse: 25,
-//             rezeptpflichtig: false,
-//             rezeptende: '',
-//             timers: [{
-//                 timerId : 1,
-//                 tage: ['Montag', 'Mittwoch', 'Freitag', 'Sonntag'],
-//                 zeiten: ['08:00'],
-//                 info: 'vor den Mahlzeiten'
-//             }, {
-//                 timerId : 2,
-//                 tage: ['Dienstag', 'Donnerstag', 'Samstag'],
-//                 zeiten: ['18:30'],
-//                 info: 'nach den Mahlzeiten'
-//             }]
