@@ -68,33 +68,38 @@ angular.module('mediApp.controllers', [])
     //     return null;
     // };
 
-    var compareTimer = function() {
+    // var compareTimer = function() {
+     function compareTimer() {
 
         var sysTimer = $scope.date;
         var userTimers = $scope.timerData;
-
+        var alerts = [];
+        //zweidimensionaler array
+        //loop stopt nach erstem match
         for (var i = 0; i < userTimers.length; i++) {
             var innerArray = userTimers[i];
             for (var j = 0; j < innerArray.length; j++) {
-                if (innerArray[j].timer == sysTimer) {
-
-                    var userTimer = JSON.stringify(innerArray[j], ['name', 'menge']);
+                //es werden zwei strings verglichen, darum geht nur genaue übereinstimmung
+                if (innerArray[j].timer == sysTimer && innerArray[j].trigered === false) {
+                    innerArray[j].trigered = true;
+                    innerArray[j].confirmed = $window.confirm('Es ist Zeit ' + JSON.stringify(innerArray[j].menge) + ' ' + JSON.stringify(innerArray[j].anwendungsform) + ' des Meikaments ' + JSON.stringify(innerArray[j].name) + ' einzunehmen, Info: ' + JSON.stringify(innerArray[j].info));
+                    var userTimer = JSON.stringify(innerArray[j], ['name', 'menge', 'trigered', 'result']);
                     console.log(userTimer);
-                    $window.confirm('Es ist Zeit ' + JSON.stringify(innerArray[j].menge) + ' ' + JSON.stringify(innerArray[j].anwendungsform) + ' des Meikaments ' + JSON.stringify(innerArray[j].name) + ' einzunehmen, Info: ' + JSON.stringify(innerArray[j].info));
                     return userTimer;
                 }
             }
         }
         return null;
-    };
+    }
 
 
     $interval(function() {
         $scope.holeDatum();
+        // compareTimer();
         $scope.userTimer = compareTimer();
         // nach OK von $window.confirm wird wert zurückgegeben
         console.log($scope.userTimer);
-    }, 60000, 0);
+    }, 6000, 0);
 
     //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
     //************************************************************************
@@ -216,7 +221,9 @@ angular.module('mediApp.controllers', [])
                 name: medis[i].name,
                 menge: medis[i].timers.menge,
                 info: medis[i].timers.info,
-                anwendungsform: medis[i].anwendungsform
+                anwendungsform: medis[i].anwendungsform,
+                trigered: false,
+                confirmed: false
             };
         }
         console.log(timerData);
