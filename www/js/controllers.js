@@ -1,6 +1,6 @@
 angular.module('mediApp.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $localstorage, $interval, Timer, $window) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $localstorage, $interval, Timer, $window, $state) {
     // Form data for the login modal
     $scope.loginData = {};
 
@@ -31,6 +31,11 @@ angular.module('mediApp.controllers', [])
         $timeout(function() {
             $scope.closeLogin();
         }, 1000);
+    };
+
+        // helper für navigation via button, version mit $state, spezifisch
+    $scope.goAddMedi = function() {
+        $state.go('app.addMedi');
     };
 
     //gesetzte timer und system timer vergleichen und bei übereinstimmung event auslösen
@@ -212,7 +217,7 @@ angular.module('mediApp.controllers', [])
                 menge: medis[i].timers.menge,
                 info: medis[i].timers.info,
                 anwendungsform: medis[i].anwendungsform
-            }
+            };
         }
         console.log(timerData);
 
@@ -230,7 +235,7 @@ angular.module('mediApp.controllers', [])
 })
 
 //templeate medis.html (Liste)
-.controller('MedisController', function($scope, $localstorage, $interval, $window) {
+.controller('MedisController', function($scope, $localstorage, $interval, $window, $location, $state) {
 
     //teste ob key "medis" im Local Storage vorhanden ist
     if (localStorage.medis === undefined) {
@@ -243,7 +248,23 @@ angular.module('mediApp.controllers', [])
 
         $scope.medis = $localstorage.getObject('medis');
 
+    }
+
+    //helper für navigation via button, version mit $state, generisch
+    //         $scope.go = function(path) {
+    //     $state.go(path);
+    // };
+
+    // helper für navigation via button, version mit $state, spezifisch
+    $scope.goAddMedi = function() {
+        $state.go('app.addMedi');
     };
+    //helper für navigation via button Version mit $location,
+    // sollte gemäss einigen posts auf stackoverflow nicht verwendet werden
+    // $scope.go = function(path) {
+    //     $location.path(path);
+    //     console.log(path);
+    // };
 
 })
 
@@ -342,7 +363,7 @@ angular.module('mediApp.controllers', [])
             $window.location.reload(true);
 
             //redirect to List
-        $state.go('app.medis');
+            $state.go('app.medis');
         }
 
     };

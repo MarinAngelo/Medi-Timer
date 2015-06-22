@@ -1,11 +1,11 @@
 <ion-view view-title="Medi-Liste">
     <ion-content>
-        <a href="#/app/addMedi">
-            <button class="button button-block button-balanced">
+            <!-- <button class="button icon ion-plus-circled" ng-click="goAddMedi()"> -->
+            <!-- ng-click="go('app.medis')" -->
              <!-- ng-click="$state.go('app.medis')" -->
-                Medikament hinzufügen
-            </button>
-        </a>
+             <!-- ng-click="go('/app/addMedi')" -->
+                <!-- Medikament hinzufügen -->
+            <!-- </button> -->
         <ion-list>
             <ion-item ng-repeat="medi in medis" href="#/app/medis/{{medi.id}}">
                 {{medi.name}}
