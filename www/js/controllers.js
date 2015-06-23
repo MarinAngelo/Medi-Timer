@@ -1,6 +1,6 @@
 angular.module('mediApp.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $localstorage, $interval, Timer, $window, $state) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, $timeout, $localstorage, $interval, Timer, $window, $state) {
     // Form data for the login modal
     $scope.loginData = {};
 
@@ -68,12 +68,77 @@ angular.module('mediApp.controllers', [])
     //     return null;
     // };
 
+//ionic popup test
+//****************************************************************************************
+
+    // Triggered on a button click, or some other target
+// $scope.showPopup = function() {
+  // $scope.data = {};
+
+  // An elaborate, custom popup
+ //  var myPopup = $ionicPopup.show({
+ //    template: '<input type="password" ng-model="data.wifi">',
+ //    title: 'Enter Wi-Fi Password',
+ //    subTitle: 'Please use normal things',
+ //    scope: $scope,
+ //    buttons: [
+ //      { text: 'Cancel' },
+ //      {
+ //        text: '<b>Save</b>',
+ //        type: 'button-positive',
+ //        onTap: function(e) {
+ //          if (!$scope.data.wifi) {
+ //            //don't allow the user to close unless he enters wifi password
+ //            e.preventDefault();
+ //          } else {
+ //            return $scope.data.wifi;
+ //          }
+ //        }
+ //      }
+ //    ]
+ //  });
+ //  myPopup.then(function(res) {
+ //    console.log('Tapped!', res);
+ //  });
+ //  $timeout(function() {
+ //     myPopup.close(); //close the popup after 6 seconds for some reason
+ //  }, 6000);
+ // };
+
+
+ // A confirm dialog
+ // $scope.showConfirm = function() {
+ //   var confirmPopup = $ionicPopup.confirm({
+ //     title: 'Consume Ice Cream',
+ //     template: 'Are you sure you want to eat this ice cream?'
+ //   });
+ //   confirmPopup.then(function(res) {
+ //     if(res) {
+ //       console.log('You are sure');
+ //     } else {
+ //       console.log('You are not sure');
+ //     }
+ //   });
+ // };
+
+ // An alert dialog
+ $scope.showAlert = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Medikamente Alarm',
+     template: 'JSON.stringify(innerArray[j].menge)'
+   });
+   alertPopup.then(function(res) {
+     console.log('Danke für Medi Einnahme');
+   });
+ };
+//************************************************************************************
+
     // var compareTimer = function() {
      function compareTimer() {
 
         var sysTimer = $scope.date;
         var userTimers = $scope.timerData;
-        var alerts = [];
+        // var alerts = [];
         //zweidimensionaler array
         //loop stopt nach erstem match
         for (var i = 0; i < userTimers.length; i++) {
@@ -82,10 +147,13 @@ angular.module('mediApp.controllers', [])
                 //es werden zwei strings verglichen, darum geht nur genaue übereinstimmung
                 if (innerArray[j].timer == sysTimer && innerArray[j].trigered === false) {
                     innerArray[j].trigered = true;
-                    innerArray[j].confirmed = $window.confirm('Es ist Zeit ' + JSON.stringify(innerArray[j].menge) + ' ' + JSON.stringify(innerArray[j].anwendungsform) + ' des Meikaments ' + JSON.stringify(innerArray[j].name) + ' einzunehmen, Info: ' + JSON.stringify(innerArray[j].info));
-                    var userTimer = JSON.stringify(innerArray[j], ['name', 'menge', 'trigered', 'result']);
-                    console.log(userTimer);
-                    return userTimer;
+                    // return $scope.showPopup();    
+                    return $scope.showAlert();    
+
+                    // innerArray[j].confirmed = $window.alert('Es ist Zeit ' + JSON.stringify(innerArray[j].menge) + ' ' + JSON.stringify(innerArray[j].anwendungsform) + ' des Meikaments ' + JSON.stringify(innerArray[j].name) + ' einzunehmen, Info: ' + JSON.stringify(innerArray[j].info));
+                    // var userTimer = JSON.stringify(innerArray[j], ['name', 'menge', 'trigered', 'result']);
+                    // console.log(userTimer);
+                    // return userTimer;
                 }
             }
         }

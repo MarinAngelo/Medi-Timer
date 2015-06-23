@@ -18,8 +18,9 @@
     "org.apache.cordova.console",
     "com.ionic.keyboard",
     "cordova-plugin-device",
-    "https://github.com/katzer/cordova-plugin-local-notifications",
-    "de.appplant.cordova.plugin.local-notification"
+    "https://github.com/katzer/cordova-plugin-local-notifications"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "android"
+  ]
 }
