@@ -1,6 +1,7 @@
 angular.module('mediApp.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, $timeout, $localstorage, $interval, Timer, $window, $state) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, $timeout,
+    $localstorage, $interval, Timer, $window, $state, $cordovaLocalNotification) {
     // Form data for the login modal
     $scope.loginData = {};
 
@@ -33,7 +34,7 @@ angular.module('mediApp.controllers', [])
         }, 1000);
     };
 
-        // helper für navigation via button, version mit $state, spezifisch
+    // helper für navigation via button, version mit $state, spezifisch
     $scope.goAddMedi = function() {
         $state.go('app.addMedi');
     };
@@ -41,133 +42,65 @@ angular.module('mediApp.controllers', [])
     //gesetzte timer und system timer vergleichen und bei übereinstimmung event auslösen
     //***********************************************************************************
     //initial Datum holen
-    $scope.date = moment().format('dddd HH:mm');
-    console.log('inizial:' + $scope.date);
+    // $scope.date = moment().format('dddd HH:mm');
+    // console.log('inizial:' + $scope.date);
 
-    // jede Minute Datum holen
-    $scope.holeDatum = function() {
-        $scope.date = moment().format('dddd HH:mm');
-        console.log('jede Minute:' + $scope.date);
-    };
+    // // jede Minute Datum holen
+    // $scope.holeDatum = function() {
+    //     $scope.date = moment().format('dddd HH:mm');
+    //     console.log('jede Minute:' + $scope.date);
+    // };
 
-    //funktioniert mit fake daten
+    //ionic popup test
+    //****************************************************************************************
+
+    // An alert dialog
+    // $scope.showAlert = function() {
+    //   var alertPopup = $ionicPopup.alert({
+    //     title: 'Medikamente Alarm',
+    //     template: 'JSON.stringify(innerArray[j].menge)'
+    //   });
+    //   alertPopup.then(function(res) {
+    //     console.log('Danke für Medi Einnahme');
+    //   });
+    // };
+    //************************************************************************************
+
     // var compareTimer = function() {
+    //  function compareTimer() {
 
     //     var sysTimer = $scope.date;
     //     var userTimers = $scope.timerData;
-
+    //     // var alerts = [];
+    //     //zweidimensionaler array
+    //     //loop stopt nach erstem match
     //     for (var i = 0; i < userTimers.length; i++) {
-    //         if (userTimers[i].timer == sysTimer) {
+    //         var innerArray = userTimers[i];
+    //         for (var j = 0; j < innerArray.length; j++) {
+    //             //es werden zwei strings verglichen, darum geht nur genaue übereinstimmung
+    //             if (innerArray[j].timer == sysTimer && innerArray[j].trigered === false) {
+    //                 innerArray[j].trigered = true;
+    //                 // return $scope.showPopup();    
+    //                 return $scope.showAlert();    
 
-    //             var userTimer = JSON.stringify(userTimers[i], ['name', 'menge']);
-    //             console.log(userTimer);
-    //             $window.confirm('Es ist Zeit ' + JSON.stringify(userTimers[i].menge) + ' ' + JSON.stringify(userTimers[i].anwendungsform) + ' des Meikaments ' + JSON.stringify(userTimers[i].name) + ' einzunehmen, Info: ' + JSON.stringify(userTimers[i].info));
-    //             return userTimer;
+    //                 // innerArray[j].confirmed = $window.alert('Es ist Zeit ' + JSON.stringify(innerArray[j].menge) + ' ' + JSON.stringify(innerArray[j].anwendungsform) + ' des Meikaments ' + JSON.stringify(innerArray[j].name) + ' einzunehmen, Info: ' + JSON.stringify(innerArray[j].info));
+    //                 // var userTimer = JSON.stringify(innerArray[j], ['name', 'menge', 'trigered', 'result']);
+    //                 // console.log(userTimer);
+    //                 // return userTimer;
+    //             }
     //         }
     //     }
     //     return null;
-    // };
-
-//ionic popup test
-//****************************************************************************************
-
-    // Triggered on a button click, or some other target
-// $scope.showPopup = function() {
-  // $scope.data = {};
-
-  // An elaborate, custom popup
- //  var myPopup = $ionicPopup.show({
- //    template: '<input type="password" ng-model="data.wifi">',
- //    title: 'Enter Wi-Fi Password',
- //    subTitle: 'Please use normal things',
- //    scope: $scope,
- //    buttons: [
- //      { text: 'Cancel' },
- //      {
- //        text: '<b>Save</b>',
- //        type: 'button-positive',
- //        onTap: function(e) {
- //          if (!$scope.data.wifi) {
- //            //don't allow the user to close unless he enters wifi password
- //            e.preventDefault();
- //          } else {
- //            return $scope.data.wifi;
- //          }
- //        }
- //      }
- //    ]
- //  });
- //  myPopup.then(function(res) {
- //    console.log('Tapped!', res);
- //  });
- //  $timeout(function() {
- //     myPopup.close(); //close the popup after 6 seconds for some reason
- //  }, 6000);
- // };
+    // }
 
 
- // A confirm dialog
- // $scope.showConfirm = function() {
- //   var confirmPopup = $ionicPopup.confirm({
- //     title: 'Consume Ice Cream',
- //     template: 'Are you sure you want to eat this ice cream?'
- //   });
- //   confirmPopup.then(function(res) {
- //     if(res) {
- //       console.log('You are sure');
- //     } else {
- //       console.log('You are not sure');
- //     }
- //   });
- // };
-
- // An alert dialog
- $scope.showAlert = function() {
-   var alertPopup = $ionicPopup.alert({
-     title: 'Medikamente Alarm',
-     template: 'JSON.stringify(innerArray[j].menge)'
-   });
-   alertPopup.then(function(res) {
-     console.log('Danke für Medi Einnahme');
-   });
- };
-//************************************************************************************
-
-    // var compareTimer = function() {
-     function compareTimer() {
-
-        var sysTimer = $scope.date;
-        var userTimers = $scope.timerData;
-        // var alerts = [];
-        //zweidimensionaler array
-        //loop stopt nach erstem match
-        for (var i = 0; i < userTimers.length; i++) {
-            var innerArray = userTimers[i];
-            for (var j = 0; j < innerArray.length; j++) {
-                //es werden zwei strings verglichen, darum geht nur genaue übereinstimmung
-                if (innerArray[j].timer == sysTimer && innerArray[j].trigered === false) {
-                    innerArray[j].trigered = true;
-                    // return $scope.showPopup();    
-                    return $scope.showAlert();    
-
-                    // innerArray[j].confirmed = $window.alert('Es ist Zeit ' + JSON.stringify(innerArray[j].menge) + ' ' + JSON.stringify(innerArray[j].anwendungsform) + ' des Meikaments ' + JSON.stringify(innerArray[j].name) + ' einzunehmen, Info: ' + JSON.stringify(innerArray[j].info));
-                    // var userTimer = JSON.stringify(innerArray[j], ['name', 'menge', 'trigered', 'result']);
-                    // console.log(userTimer);
-                    // return userTimer;
-                }
-            }
-        }
-        return null;
-    }
-
-
-    $interval(function() {
-        $scope.holeDatum();
-        // compareTimer();
-        $scope.userTimer = compareTimer();
-        // nach OK von $window.confirm wird wert zurückgegeben
-        console.log($scope.userTimer);
-    }, 6000, 0);
+    // $interval(function() {
+    //     $scope.holeDatum();
+    //     // compareTimer();
+    //     $scope.userTimer = compareTimer();
+    //     // nach OK von $window.confirm wird wert zurückgegeben
+    //     console.log($scope.userTimer);
+    // }, 6000, 0);
 
     //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
     //************************************************************************
@@ -307,10 +240,115 @@ angular.module('mediApp.controllers', [])
     $scope.timerData = allTimerData;
     console.log($scope.timerData);
 
+    //local notification
+    //*************************************
+    // will execute when device is ready, or immediately if the device is already ready.
+    ionic.Platform.ready(function() {
+
+
+        $cordovaLocalNotification.cancelAll();
+        document.addEventListener('resume', function resume() {
+            $cordovaLocalNotification.cancelAll();
+        });
+
+        // while (today.getTime() <= end.getTime()) {
+
+        // };
+
+        //             //wenn app neu geledan wird?
+        //             on.resume(function() {
+
+
+        //             });
+
+        //             //wenn app im hintergrund ist
+        document.addEventListener('pause', function unload() {
+
+            var timers = Timer.timerData();
+            console.log(timers);
+            var days = ["sonntag", "montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag"];
+            var now = new Date();
+            var today = new Date();
+            var end = new Date();
+            end.setMonth(now.getMonth() + 1);
+            // var i = 0;
+            console.log(end);
+            var notifications = [];
+            //range von daten in die zukunft, mit enddatum projeziert
+            while (today.getTime() <= end.getTime()) {
+                timers.forEach(function(timer) {
+                    var time = timer.timer.split(/[\s:.]+/);
+                    console.log(time);
+                    //gibt Wochentag index zurück, der bei sonntag = 0 beginnt
+                    var day = days.indexOf(time[0].toLowerCase());
+                    console.log(day);
+                    var hour = parseInt(time[1], 10);
+                    console.log(hour);
+                    var minute = parseInt(time[2], 10);
+                    console.log(minute);
+                    console.log(today.getDay());
+                    //??????????????????????????????
+                    if (today.getDay() !== day) {
+                        return;
+                    }
+                    var notificationTime = new Date(today.getTime());
+                    notificationTime.setHours(hour, minute);
+                    console.log(notificationTime);
+                    //??????????????????????????????????????????????
+                    if (notificationTime.getTime() < now.getTime()) {
+                        return;
+                    }
+                    notifications.push({
+                        title: "" + timer.name + " jetzt einnehmen",
+                        text: "" + timer.menge + " " + timer.anwendungsform + " " + timer.info + " ist jetzt fällig.",
+                        at: notificationTime,
+                        badge: 1,
+                        data: timer
+                    });
+                });
+                
+                today.setDate(today.getDate() + 1);
+            }
+            console.log(notifications);
+
+            var notifi = function() {
+                $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
+            };
+            notifi();
+            console.log('ich bin in Pause');
+        }, false);
+
+    });
+
 })
 
 //templeate medis.html (Liste)
-.controller('MedisController', function($scope, $localstorage, $interval, $window, $location, $state) {
+.controller('MedisController', function($scope, $localstorage, $interval, $window, $location,
+    $state, $cordovaLocalNotification) {
+
+    //local notification test
+    //***************************************************
+    $scope.add = function() {
+        var alarmTime = new Date();
+        alarmTime.setMinutes(alarmTime.getMinutes() + 1);
+        $cordovaLocalNotification.add({
+            id: "1234",
+            date: alarmTime,
+            message: "This is a message",
+            title: "This is a title",
+            autoCancel: true,
+            sound: null
+        }).then(function() {
+            console.log("The notification has been set");
+        });
+    };
+
+    $scope.isScheduled = function() {
+        $cordovaLocalNotification.isScheduled("1234").then(function(isScheduled) {
+            alert("Notification 1234 Scheduled: " + isScheduled);
+        });
+    };
+    //*********************************************************************
 
     //teste ob key "medis" im Local Storage vorhanden ist
     if (localStorage.medis === undefined) {

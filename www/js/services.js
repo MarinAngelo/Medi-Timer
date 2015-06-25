@@ -70,19 +70,23 @@ angular.module('mediApp.services', [])
 
     //Datenstruktur, zur Verwendung der Funktion "Timewatcher"
     var timerData = [{
-        timer: 'Dienstag 21:30',
+        timer: 'Donnerstag 18:07',
         name: 'Aspirin',
         menge: 1,
         info: 'vor den Mahlzeiten',
         anwendungsform: "Tabletten"
     }, {
-        timer: 'Mittwoch 11:50',
-        name: 'Aspirin',
+        timer: 'Donnerstag 18:10',
+        name: 'Dafalgan',
         menge: 2,
         info: 'vor den Mahlzeiten',
         anwendungsform: "Tabletten"
-
-
+    }, {
+        timer: 'Donnerstag 18:15',
+        name: 'Meridon',
+        menge: 2,
+        info: 'vor den Mahlzeiten',
+        anwendungsform: "Tabletten"
     }];
 
     //zeiten generieren
@@ -135,6 +139,3 @@ angular.module('mediApp.services', [])
 //         return null;
 //     }
 // };
-
-
-
