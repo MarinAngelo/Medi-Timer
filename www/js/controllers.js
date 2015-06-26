@@ -1,6 +1,6 @@
 angular.module('mediApp.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopup, $timeout,
+.controller('AppCtrl', function($scope, $rootScope, $ionicPlatform, $ionicModal, $ionicPopup, $timeout,
     $localstorage, $interval, Timer, $window, $state, $cordovaLocalNotification) {
     // Form data for the login modal
     $scope.loginData = {};
@@ -51,21 +51,6 @@ angular.module('mediApp.controllers', [])
     //     console.log('jede Minute:' + $scope.date);
     // };
 
-    //ionic popup test
-    //****************************************************************************************
-
-    // An alert dialog
-    // $scope.showAlert = function() {
-    //   var alertPopup = $ionicPopup.alert({
-    //     title: 'Medikamente Alarm',
-    //     template: 'JSON.stringify(innerArray[j].menge)'
-    //   });
-    //   alertPopup.then(function(res) {
-    //     console.log('Danke für Medi Einnahme');
-    //   });
-    // };
-    //************************************************************************************
-
     // var compareTimer = function() {
     //  function compareTimer() {
 
@@ -73,7 +58,6 @@ angular.module('mediApp.controllers', [])
     //     var userTimers = $scope.timerData;
     //     // var alerts = [];
     //     //zweidimensionaler array
-    //     //loop stopt nach erstem match
     //     for (var i = 0; i < userTimers.length; i++) {
     //         var innerArray = userTimers[i];
     //         for (var j = 0; j < innerArray.length; j++) {
@@ -234,97 +218,145 @@ angular.module('mediApp.controllers', [])
 
     }
 
+    //2d arr in 1d arr verwandeln
+        function get1DArray(arr){
+
+        var result = [];
+
+        for (var x = 0; x < arr.length; x++){
+            for (var y = 0; y < arr[x].length; y++){
+
+            result.push(arr[x][y]);
+
+            }
+        }
+
+        return result;
+    }
+
+    allTimerData1d = get1DArray(allTimerData);
+
     //Fake timerData aus service 
     // $scope.timerData = Timer.timerData();
     //real von form
-    $scope.timerData = allTimerData;
+    $scope.timerData = allTimerData1d;
     console.log($scope.timerData);
 
     //local notification
     //*************************************
     // will execute when device is ready, or immediately if the device is already ready.
-    ionic.Platform.ready(function() {
+    $ionicPlatform.ready(function() {
 
-
-        $cordovaLocalNotification.cancelAll();
-        document.addEventListener('resume', function resume() {
+        var cancel = function() {
             $cordovaLocalNotification.cancelAll();
+        };
+        cancel();
+
+        $rootScope.$on('$cordovaLocalNotification:cancelall',
+            function(event, state) {
+                alert("notifications cancelled");
+            });
+
+        document.addEventListener('resume', function resume() {
+            cancel();
+            $rootScope.$on('$cordovaLocalNotification:cancelall',
+                function(event, state) {
+                    alert("cancelled after resume: " + notification.id + " " + notification.at);
+                });
         });
 
-        // while (today.getTime() <= end.getTime()) {
-
-        // };
-
-        //             //wenn app neu geledan wird?
-        //             on.resume(function() {
-
-
-        //             });
-
-        //             //wenn app im hintergrund ist
+        //wenn app im hintergrund ist
         document.addEventListener('pause', function unload() {
 
-            var timers = Timer.timerData();
-            console.log(timers);
-            var days = ["sonntag", "montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag"];
-            var now = new Date();
-            var today = new Date();
-            var end = new Date();
-            end.setMonth(now.getMonth() + 1);
-            // var i = 0;
-            console.log(end);
-            var notifications = [];
-            //range von daten in die zukunft, mit enddatum projeziert
-            while (today.getTime() <= end.getTime()) {
-                timers.forEach(function(timer) {
-                    var time = timer.timer.split(/[\s:.]+/);
-                    console.log(time);
-                    //gibt Wochentag index zurück, der bei sonntag = 0 beginnt
-                    var day = days.indexOf(time[0].toLowerCase());
-                    console.log(day);
-                    var hour = parseInt(time[1], 10);
-                    console.log(hour);
-                    var minute = parseInt(time[2], 10);
-                    console.log(minute);
-                    console.log(today.getDay());
-                    //??????????????????????????????
-                    if (today.getDay() !== day) {
-                        return;
-                    }
-                    var notificationTime = new Date(today.getTime());
-                    notificationTime.setHours(hour, minute);
-                    console.log(notificationTime);
-                    //??????????????????????????????????????????????
-                    if (notificationTime.getTime() < now.getTime()) {
-                        return;
-                    }
-                    notifications.push({
-                        title: "" + timer.name + " jetzt einnehmen",
-                        text: "" + timer.menge + " " + timer.anwendungsform + " " + timer.info + " ist jetzt fällig.",
-                        at: notificationTime,
-                        badge: 1,
-                        data: timer
-                    });
+                // var timers = Timer.timerData();
+                var timers = Timer.timerData();
+        console.log(timers);
+        var days = ["sonntag", "montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag"];
+        var now = new Date();
+        var today = new Date();
+        var end = new Date();
+        end.setMonth(now.getMonth() + 0.5);
+        // var i = 0;
+        console.log(end);
+        var notifications = [];
+        //range von daten in die zukunft, mit enddatum projeziert
+        while (today.getTime() <= end.getTime()) {
+            timers.forEach(function(timer) {
+                var time = timer.timer.split(/[\s:.]+/);
+                console.log(time);
+                //gibt Wochentag index zurück, der bei sonntag = 0 beginnt
+                var day = days.indexOf(time[0].toLowerCase());
+                console.log(day);
+                var hour = parseInt(time[1], 10);
+                console.log(hour);
+                var minute = parseInt(time[2], 10);
+                console.log(minute);
+                console.log(today.getDay());
+                //stellt sicher, dass vom aktuellen Tag an in die Zukunft hinein Notifications generiert werden
+                if (today.getDay() !== day) {
+                    return;
+                }
+                var notificationTime = new Date(today.getTime());
+                notificationTime.setHours(hour, minute);
+                console.log(notificationTime);
+                //stellt sicher, dass keine Notificatins mit Datum in der Vergangenheit erstellt werden
+                if (notificationTime.getTime() < now.getTime()) {
+                    return;
+                }
+                notifications.push({
+                    id: timer.id,
+                    title: "" + timer.name + " jetzt einnehmen",
+                    text: "" + timer.menge + " " + timer.anwendungsform + " " + timer.info + " ist jetzt fällig.",
+                    at: notificationTime,
+                    badge: 1,
+                    data: timer
                 });
-                
-                today.setDate(today.getDate() + 1);
-            }
-            console.log(notifications);
+            });
 
-            var notifi = function() {
-                $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
-            };
-            notifi();
+            today.setDate(today.getDate() + 1);
+        }
+        console.log(notifications);
+
+        //ngCordova methode funktioniert nicht?????????????????
+        // $scope.scheduleSingleNotification = function() {
+        //     $cordovaLocalNotification.schedule(notifications).then(function(result) {
+        //         console.log("The Medi-Timer notification has been set");
+        //     });
+        // };
+
+        var notifi = function() {
+            $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
+        };
+        notifi();
+
+        // cordova.plugins.notification.local.on("schedule", function(notification) {
+        //     alert("scheduled: " + notification.id);
+        // });
+
+        $rootScope.$on('$cordovaLocalNotification:schedule',
+            function(event, notification, state) {
+                alert("scheduled: " + notification.id + " " + notification.at);
+            });
+
+        $rootScope.$on('$cordovaLocalNotification:trigger',
+            function(event, notification, state) {
+                alert("triggered: " + notification.id + " " + notification.at);
+            });
             console.log('ich bin in Pause');
+
         }, false);
 
     });
+
 
 })
 
 //templeate medis.html (Liste)
 .controller('MedisController', function($scope, $localstorage, $interval, $window, $location,
-    $state, $cordovaLocalNotification) {
+    $state, $cordovaLocalNotification, Timer) {
+
+    $scope.timersData = Timer.timersData();
+    $scope.timerData = Timer.timerData();
 
     //local notification test
     //***************************************************

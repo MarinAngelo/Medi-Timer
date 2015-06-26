@@ -68,7 +68,7 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
 
 });
 
-// .run(function(Timer, $ionicPlatform, $cordovaLocalNotification) {
+// .run(function($ionicPlatform, $rootScope, Timer, $cordovaLocalNotification) {
 //     var local, granted;
 
 //     // document.addEventListener('deviceready', function deviceready() {
@@ -136,23 +136,108 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
 
 // });
 
-// .run(function($ionicPlatform, $rootScope, $timeout) {
+
+// .run(function($ionicPlatform, $rootScope, Timer, $cordovaLocalNotification) {
+
+//     //local notification
+//     //*************************************
+//     // will execute when device is ready, or immediately if the device is already ready.
 //     $ionicPlatform.ready(function() {
-//         if(window.cordova && window.cordova.plugins.Keyboard) {
-//             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-//         }
-//         if(window.StatusBar) {
-//             StatusBar.styleDefault();
-//         }
-//         window.plugin.notification.local.onadd = function (id, state, json) {
-//             var notification = {
-//                 id: id,
-//                 state: state,
-//                 json: json
-//             };
-//             $timeout(function() {
-//                 $rootScope.$broadcast("$cordovaLocalNotification:added", notification);
-//             });
+
+//         var cancel = function() {
+//             $cordovaLocalNotification.cancelAll();
 //         };
+//         cancel();
+
+//         $rootScope.$on('$cordovaLocalNotification:cancelall',
+//             function(event, state) {
+//                 alert("notifications cancelled");
+//             });
+
+//         document.addEventListener('resume', function resume() {
+//             cancel();
+//             $rootScope.$on('$cordovaLocalNotification:cancelall',
+//                 function(event, state) {
+//                     alert("cancelled after resume: " + notification.id + " " + notification.at);
+//                 });
+//         });
+
+//         //wenn app im hintergrund ist
+//         document.addEventListener('pause', function unload() {
+
+//                 var timers = Timer.timerData();
+//         console.log(timers);
+//         var days = ["sonntag", "montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag"];
+//         var now = new Date();
+//         var today = new Date();
+//         var end = new Date();
+//         end.setMonth(now.getMonth() + 0.5);
+//         // var i = 0;
+//         console.log(end);
+//         var notifications = [];
+//         //range von daten in die zukunft, mit enddatum projeziert
+//         while (today.getTime() <= end.getTime()) {
+//             timers.forEach(function(timer) {
+//                 var time = timer.timer.split(/[\s:.]+/);
+//                 console.log(time);
+//                 //gibt Wochentag index zurück, der bei sonntag = 0 beginnt
+//                 var day = days.indexOf(time[0].toLowerCase());
+//                 console.log(day);
+//                 var hour = parseInt(time[1], 10);
+//                 console.log(hour);
+//                 var minute = parseInt(time[2], 10);
+//                 console.log(minute);
+//                 console.log(today.getDay());
+//                 //stellt sicher, dass vom aktuellen Tag an in die Zukunft hinein Notifications generiert werden
+//                 if (today.getDay() !== day) {
+//                     return;
+//                 }
+//                 var notificationTime = new Date(today.getTime());
+//                 notificationTime.setHours(hour, minute);
+//                 console.log(notificationTime);
+//                 //stellt sicher, dass keine Notificatins mit Datum in der Vergangenheit erstellt werden
+//                 if (notificationTime.getTime() < now.getTime()) {
+//                     return;
+//                 }
+//                 notifications.push({
+//                     id: timer.id,
+//                     title: "" + timer.name + " jetzt einnehmen",
+//                     text: "" + timer.menge + " " + timer.anwendungsform + " " + timer.info + " ist jetzt fällig.",
+//                     at: notificationTime,
+//                     badge: 1,
+//                     data: timer
+//                 });
+//             });
+
+//             today.setDate(today.getDate() + 1);
+//         }
+//         console.log(notifications);
+
+//         //ngCordova methode funktioniert nicht?????????????????
+//         // $scope.scheduleSingleNotification = function() {
+//         //     $cordovaLocalNotification.schedule(notifications).then(function(result) {
+//         //         console.log("The Medi-Timer notification has been set");
+//         //     });
+//         // };
+
+//         var notifi = function() {
+//             $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
+//         };
+//         notifi();
+
+//         $rootScope.$on('$cordovaLocalNotification:schedule',
+//             function(event, notification, state) {
+//                 alert("scheduled: " + notification.id + " " + notification.at);
+//             });
+
+//         $rootScope.$on('$cordovaLocalNotification:trigger',
+//             function(event, notification, state) {
+//                 alert("triggered: " + notification.id + " " + notification.at);
+//             });
+//             console.log('ich bin in Pause');
+
+//         }, false);
+
 //     });
+
 // });
