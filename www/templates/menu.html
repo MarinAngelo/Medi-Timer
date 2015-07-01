@@ -10,6 +10,7 @@
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
 <button class="button icon ion-plus-circled" ng-click="goAddMedi()"></button>
+<button class="button icon ion-ios-refresh-empty" ng-click="reload()"></button>
       </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
@@ -26,6 +27,8 @@
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/addMedi">
           Medi hinzufügen
+        </ion-item><ion-item nav-clear menu-close href="#/app/notifications">
+          Benachrichtigungen
         </ion-item>
       </ion-list>
     </ion-content>

@@ -1,0 +1,11 @@
+<ion-view view-title="Medi-Liste">
+    <ion-content>
+    <h1>Benachrichtigungen:</h1>
+<!--             {{allNotifications}}
+ -->        <ion-list>
+            <ion-item ng-repeat="notification in allNotifications" href="#/app/notifications/{{notification.id}}">
+                {{notification.data.timer}} {{notification.at | date: 'dd.MM.yyyy HH:mm'}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

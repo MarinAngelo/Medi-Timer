@@ -46,6 +46,7 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
         //Listen-Ansicht
         .state('app.medis', {
             url: "/medis",
+            cache: "false",
             views: {
                 'menuContent': {
                     templateUrl: "templates/medis.html",
@@ -62,11 +63,34 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
                     controller: 'MediController'
                 }
             }
+        })
+        //Notifications
+        .state('app.notifications', {
+            url: "/notifications",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/notifications.html",
+                    controller: 'AppCtrl'
+                }
+            }
         });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/medis');
 
 });
+// page reloader
+// .config(function($provide) {
+//     $provide.decorator('$state', function($delegate, $stateParams) {
+//         $delegate.forceReload = function() {
+//             return $delegate.go($delegate.current, $stateParams, {
+//                 reload: true,
+//                 inherit: false,
+//                 notify: true
+//             });
+//         };
+//         return $delegate;
+//     });
+// });
 
 // .run(function($ionicPlatform, $rootScope, Timer, $cordovaLocalNotification) {
 //     var local, granted;
