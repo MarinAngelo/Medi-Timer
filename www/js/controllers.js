@@ -273,8 +273,8 @@ angular.module('mediApp.controllers', [])
                 console.log(i);
                 notifications.push({
                     id: i,
-                    title: "" + timer.name + " jetzt einnehmen",
-                    text: "" + timer.menge + " " + timer.anwendungsform + " " + timer.info + " ist jetzt fällig.",
+                    title: timer.name,
+                    text: "jetzt einnehmen" + timer.menge + " " + timer.anwendungsform + " " + timer.info + " ist jetzt fällig.",
                     at: notificationTime,
                     badge: 1,
                     data: timer
@@ -293,34 +293,41 @@ angular.module('mediApp.controllers', [])
         //     });
         // };
 
-        var notifi = function() {
+        // var notifi = function() {
+        //     $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
+        // };
+        // notifi();
+
+        (function notifi() {
             $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
-        };
-        notifi();
 
-        //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen
-        cordova.plugins.notification.local.getAll(function(notifications) {
+        })();
 
-            $scope.allNotifications = notifications;
-            console.log(new Date($scope.allNotifications[0].at * 1000));
+        //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen - auch alte werden angezeigt
+        // cordova.plugins.notification.local.getAll(function(notifications) {
 
-            for (var i = 0; i < $scope.allNotifications.length; i++) {
-                $scope.allNotifications[i].at = new Date($scope.allNotifications[i].at * 1000);
+        //     $scope.allNotifications = notifications;
+        //     console.log(new Date($scope.allNotifications[0].at * 1000));
 
-            }
+        //     for (var i = 0; i < $scope.allNotifications.length; i++) {
+        //         $scope.allNotifications[i].at = new Date($scope.allNotifications[i].at * 1000);
 
-        });
+        //     }
 
-
-
-        // cordova.plugins.notification.local.on("schedule", function(notification) {
-        //     alert("scheduled: " + notification.id);
         // });
-
-        // $rootScope.$on('$cordovaLocalNotification:schedule',
-        //     function(event, notification, state) {
-        //         alert("scheduled: " + notification.id + " " + new Date(notification.at * 1000));
-        //     });
+        
+        //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen
+        var allNotifications = [];
+        $rootScope.$on('$cordovaLocalNotification:schedule',
+            function(event, notification, state) {
+                allNotifications.push({
+                    name: notification.title,
+                    //new Date() wandelt unix timestamp in normales Datumsvormat um
+                    date: new Date(notification.at * 1000)
+                });
+                $scope.allNotifications = allNotifications;
+                // alert("scheduled: " + notification.id + " " + new Date(notification.at * 1000));
+            });
 
         $rootScope.$on('$cordovaLocalNotification:trigger',
             function(event, notification, state) {
