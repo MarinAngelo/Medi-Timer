@@ -1,6 +1,8 @@
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content>
-    <ion-nav-bar class="bar-stable">
+
+  <!-- obere nav-bar -->
+    <ion-nav-bar class="bar-positive">
       <ion-nav-back-button>
       </ion-nav-back-button>
 
@@ -10,9 +12,10 @@
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
 <button class="button icon ion-plus-circled" ng-click="goAddMedi()"></button>
-<button class="button icon ion-ios-refresh-empty" ng-click="reload()"></button>
+<!-- <button class="button icon ion-ios-refresh-empty" ng-click="reload()"></button> -->
       </ion-nav-buttons>
     </ion-nav-bar>
+    
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 

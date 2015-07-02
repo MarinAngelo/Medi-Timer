@@ -39,10 +39,10 @@ angular.module('mediApp.controllers', [])
         $state.go('app.addMedi');
     };
 
-    //page refresher
-    $scope.reload = function() {
-        $state.forceReload();
-    };
+    //page refresher -> funtioniert nicht
+    // $scope.reload = function() {
+    //     $state.forceReload();
+    // };
 
 
     //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
@@ -273,7 +273,7 @@ angular.module('mediApp.controllers', [])
                 console.log(i);
                 notifications.push({
                     id: i,
-                    title: "Medikament" + timer.name,
+                    title: timer.name + " Medikament",
                     text: "jetzt" + timer.menge + " " + timer.anwendungsform + " einnehmen " + timer.info,
                     at: notificationTime,
                     badge: 1,
@@ -444,9 +444,6 @@ angular.module('mediApp.controllers', [])
         //mit den Parametern key=medis und value=existMedis
         $localstorage.setObject('medis', existMedis);
 
-        //daten aktualisieren
-        $window.location.reload(true);
-
         //redirect to List
         $state.go('app.medis');
 
@@ -468,9 +465,7 @@ angular.module('mediApp.controllers', [])
     //***************Einzelnes Medi anzeigen********************************
     //ein Einzelnes Medi aus dem Objekt "medis" rauslesen
     var getMedi = function(mediId) {
-
         var medis = $localstorage.getObject('medis');
-
         for (var i = 0; i < medis.length; i++) {
             if (medis[i].id === mediId) {
                 return medis[i];
@@ -478,19 +473,15 @@ angular.module('mediApp.controllers', [])
         }
         return null;
     };
-
     $scope.medi = getMedi($stateParams.mediId);
 
     //Einzelner Medi Eintrag editieren
-    //
-
     $scope.editing = false;
 
-
     $scope.toggleEditing = function() {
-        // if ($scope.editing) {
+        if ($scope.editing) {
         save();
-        // }
+        }
         $scope.editing = !$scope.editing;
     };
 
@@ -504,30 +495,24 @@ angular.module('mediApp.controllers', [])
             if (medis[i].id === $scope.medi.id) {
                 medis[i] = $scope.medi;
                 $localstorage.setObject('medis', medis);
-                $state.go('app.single');
+                $state.go('app.medis');
             }
         }
-        return null;
+        
     }
 
     //****************Medi löschen**********************
     //http://stackoverflow.com/questions/8127075/localstorage-json-how-can-i-delete-only-1-array-inside-a-key-since-localstora
     $scope.deleteMedi = function(mediId) {
-
         var medis = $localstorage.getObject('medis');
-
         for (var i = 0; i < medis.length; i++) {
             if (medis[i].id === $stateParams.mediId) {
                 medis.splice(i, 1);
-
-                //daten aktualisieren
-                // $window.location.reload(true);
-                return $localstorage.setObject('medis', medis);
-
-            }
-
-        }
-        //redirect to List
+                        //redirect to List
         $state.go('app.medis');
+                return $localstorage.setObject('medis', medis);
+            }
+        }
+
     };
 });

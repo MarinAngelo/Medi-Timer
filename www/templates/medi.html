@@ -1,12 +1,13 @@
 <ion-view view-title="Medi Detail">
     <ion-content>
-        <div class="row">
-            <div class="col">
-                <h1 class="title">{{medi.name}}</h1></div>
-            <div class="col.col-25">
-                <button class="button icon ion-edit" ng-click="toggleEditing()" ng-show="!editing"></button>
-                <button class="button icon ion-trash-b" ng-click="deleteMedi($stateParams.mediId)"></button>
-            </div>
+        <div class="bar bar-header bar-royal">
+            <!--         <div class="row">
+            <div class="col"> -->
+            <h2 class="title">{{medi.name}}</h2>
+            <button class="button icon ion-edit" ng-click="toggleEditing()" ng-show="!editing"></button>
+            <button class="button icon ion-trash-b" ng-click="deleteMedi($stateParams.mediId)"></button>
+            <!--             </div>
+        </div> -->
         </div>
         <form name="mediEditForm" ng-submit="toggleEditing()" novalidate>
             <div class="list">
@@ -15,21 +16,25 @@
                 </label>
                 <div class="row">
                     <div class="col">
-                        <label class="item item-input">
-                            <input type="number" ng-model='medi.menge' min="0" max="10000" name="medimenge" ng-readonly='!editing' placeholder="Menge z.B. 250">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Menge</span>
+                            <input type="number" ng-model='medi.menge' min="0" max="10000" name="medimenge" ng-readonly='!editing' placeholder="z.B. 250">
                         </label>
                     </div>
                     <div class="col">
-                        <label class="item item-input">
-                            <input type="text" ng-model='medi.einheit' name="medieinheit" ng-readonly='!editing' placeholder="Einheit z.B. mg">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Einheit</span>
+                            <input type="text" ng-model='medi.einheit' name="medieinheit" ng-readonly='!editing' placeholder="z.B. mg">
                         </label>
                     </div>
                 </div>
-                <label class="item item-input">
-                    <input type="text" ng-model='medi.anwendungsform' ng-readonly='!editing' name="medianwendungsform" placeholder="Anwendungsform z.B. Tabletten">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Anwendungsform</span>
+                    <input type="text" ng-model='medi.anwendungsform' ng-readonly='!editing' name="medianwendungsform" placeholder="z.B. Tabletten">
                 </label>
-                <label class="item item-input">
-                    <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" ng-readonly='!editing' name="medipackungsgroesse" placeholder="Packungsgrösse (Stk)">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Packungsgrösse</span>
+                    <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" ng-readonly='!editing' name="medipackungsgroesse" placeholder="(Stk)">
                 </label>
                 <!-- Rezept Funktion -->
                 <!-- ***************************************** -->
@@ -121,13 +126,23 @@
                         </select>
                     </label>
                 </div>
-                <label class="item item-input">
-                    <input type="number" ng-model="medi.timers.menge" min="0" max="10" ng-readonly='!editing' placeholder="Menge (z.B. 0,5)">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Einnahme Menge</span>
+                    <input type="number" ng-model="medi.timers.menge" min="0" max="10" ng-readonly='!editing' placeholder="z.B. 1">
                 </label>
-                <label class="item item-input">
-                    <input type="text" ng-model="medi.timers.info" ng-readonly='!editing' placeholder="Infos (z.B. nach den Mahlzeiten)">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Zusätzliche Informationen</span>
+                    <input type="text" ng-model="medi.timers.info" ng-readonly='!editing' placeholder="z.B. nach den Mahlzeiten">
                 </label>
-                <button type="submit" class="button icon-left ion-android-done button-balanced" ng-show="editing" ng-disabled="mediEditForm.mediname.$invalid || mediEditForm.meditimerszeiten.$invalid">speichern</button>
+                <button type="submit" class="button button-block icon-left ion-android-done button-balanced" ng-show="editing" ng-disabled="mediEditForm.mediname.$invalid || mediEditForm.meditimerszeiten.$invalid">speichern
+                </button>
+<!--                         <div class="row">
+            <div class="bar bar-footer bar-royal">
+                <button class="button icon ion-edit" ng-click="toggleEditing()" ng-show="!editing"></button>
+                <div class="title">{{medi.name}}</div>
+                <button class="button icon ion-trash-b" ng-click="deleteMedi($stateParams.mediId)"></button>
+            </div>
+        </div> -->
             </div>
         </form>
     </ion-content>
