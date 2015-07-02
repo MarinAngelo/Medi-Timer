@@ -67,6 +67,7 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
         //Notifications
         .state('app.notifications', {
             url: "/notifications",
+            cache: "false",
             views: {
                 'menuContent': {
                     templateUrl: "templates/notifications.html",

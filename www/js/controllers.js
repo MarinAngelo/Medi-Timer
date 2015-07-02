@@ -273,8 +273,8 @@ angular.module('mediApp.controllers', [])
                 console.log(i);
                 notifications.push({
                     id: i,
-                    title: timer.name,
-                    text: "jetzt einnehmen" + timer.menge + " " + timer.anwendungsform + " " + timer.info + " ist jetzt fällig.",
+                    title: "Medikament" + timer.name,
+                    text: "jetzt" + timer.menge + " " + timer.anwendungsform + " einnehmen " + timer.info,
                     at: notificationTime,
                     badge: 1,
                     data: timer

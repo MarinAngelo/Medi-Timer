@@ -1,9 +1,9 @@
 <ion-view view-title="Medi-Liste">
     <ion-content>
-    <h1>Benachrichtigungen:</h1>
-<!--             {{allNotifications}}
- -->        <ion-list>
-            <ion-item ng-repeat="notification in allNotifications | orderBy: 'at'" href="#/app/notifications/{{notification.id}}">
+        <h3>Geplante Benachrichtigungen:</h3>
+        <ion-list>
+            <ion-item ng-repeat="notification in allNotifications | orderBy : 'date'">
+             <!-- | orderBy: 'at' -->
                 <!-- {{notification.title}} {{notification.at | date: 'dd.MM.yyyy HH:mm'}} -->
                 {{notification.name}} {{notification.date | date: 'dd.MM HH:mm'}}
             </ion-item>
