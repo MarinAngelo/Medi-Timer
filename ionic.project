@@ -1,4 +1,12 @@
 {
   "name": "mediApp",
-  "app_id": "6df17b56"
+  "app_id": "6df17b56",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }

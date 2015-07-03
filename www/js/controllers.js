@@ -196,10 +196,10 @@ angular.module('mediApp.controllers', [])
     // will execute when device is ready, or immediately if the device is already ready.
     $ionicPlatform.ready(function() {
 
-        var cancel = function() {
-            $cordovaLocalNotification.cancelAll();
-        };
-        cancel();
+        // var cancel = function() {
+        //     $cordovaLocalNotification.cancelAll();
+        // };
+        // cancel();
 
         // $rootScope.$on('$cordovaLocalNotification:cancelall',
         //     function(event, state) {
@@ -291,10 +291,10 @@ angular.module('mediApp.controllers', [])
         // notifi();
 
         //replaces function above
-        (function notifi() {
-            $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
+        // (function notifi() {
+        //     $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
 
-        })();
+        // })();
 
         //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen
         var allNotifications = [];
