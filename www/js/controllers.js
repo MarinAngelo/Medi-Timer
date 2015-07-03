@@ -39,12 +39,6 @@ angular.module('mediApp.controllers', [])
         $state.go('app.addMedi');
     };
 
-    //page refresher -> funtioniert nicht
-    // $scope.reload = function() {
-    //     $state.forceReload();
-    // };
-
-
     //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
     //************************************************************************
 
@@ -179,17 +173,12 @@ angular.module('mediApp.controllers', [])
 
     //2d arr in 1d arr verwandeln
     function get1DArray(arr) {
-
         var result = [];
-
         for (var x = 0; x < arr.length; x++) {
             for (var y = 0; y < arr[x].length; y++) {
-
                 result.push(arr[x][y]);
-
             }
         }
-
         return result;
     }
 
@@ -207,10 +196,10 @@ angular.module('mediApp.controllers', [])
     // will execute when device is ready, or immediately if the device is already ready.
     $ionicPlatform.ready(function() {
 
-        // var cancel = function() {
-        //     $cordovaLocalNotification.cancelAll();
-        // };
-        // cancel();
+        var cancel = function() {
+            $cordovaLocalNotification.cancelAll();
+        };
+        cancel();
 
         // $rootScope.$on('$cordovaLocalNotification:cancelall',
         //     function(event, state) {
@@ -269,12 +258,14 @@ angular.module('mediApp.controllers', [])
                 }
                 console.log("notification time after return: " + notificationTime);
                 console.log("timer id: " + timer.id);
+
+                //increment i to generate notification id
                 i++;
-                console.log(i);
+                
                 notifications.push({
                     id: i,
-                    title: timer.name + " Medikament",
-                    text: "jetzt" + timer.menge + " " + timer.anwendungsform + " einnehmen " + timer.info,
+                    title: timer.name,
+                    text: "jetzt " + timer.menge + " " + timer.anwendungsform + timer.name + " einnehmen " + timer.info,
                     at: notificationTime,
                     badge: 1,
                     data: timer
@@ -293,31 +284,21 @@ angular.module('mediApp.controllers', [])
         //     });
         // };
 
+        //attach notifications to the notificatin center
         // var notifi = function() {
         //     $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
         // };
         // notifi();
 
+        //replaces function above
         (function notifi() {
             $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
 
         })();
 
-        //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen - auch alte werden angezeigt
-        // cordova.plugins.notification.local.getAll(function(notifications) {
-
-        //     $scope.allNotifications = notifications;
-        //     console.log(new Date($scope.allNotifications[0].at * 1000));
-
-        //     for (var i = 0; i < $scope.allNotifications.length; i++) {
-        //         $scope.allNotifications[i].at = new Date($scope.allNotifications[i].at * 1000);
-
-        //     }
-
-        // });
-        
         //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen
         var allNotifications = [];
+        //event fires when notifications are scheduled
         $rootScope.$on('$cordovaLocalNotification:schedule',
             function(event, notification, state) {
                 allNotifications.push({
@@ -329,63 +310,19 @@ angular.module('mediApp.controllers', [])
                 // alert("scheduled: " + notification.id + " " + new Date(notification.at * 1000));
             });
 
-        $rootScope.$on('$cordovaLocalNotification:trigger',
-            function(event, notification, state) {
-                alert("triggered: " + notification.id + " " + new Date(notification.at * 1000));
-            });
+        //kommt immer 2x je notification, warum blos?
+        // $rootScope.$on('$cordovaLocalNotification:trigger',
+        //     function(event, notification, state) {
+        //         alert("triggered: " + notification.id + " " + new Date(notification.at * 1000));
+        //     });
 
     });
-    //**********local notification generieren****************
-
-    //wenn app in den hintergrund geht
-    document.addEventListener('pause', function unload() {
-
-        console.log('ich bin in Pause');
-
-    });
+    //**********ende local notification generieren****************
 
 })
 
-//templeate medis.html (Liste)
 .controller('MedisController', function($scope, $localstorage, $interval, $window, $location,
     $state, $cordovaLocalNotification, Timer) {
-
-    //daten aktualisieren
-    // , $other, $depencies (zugehörige dependencies)
-    // $scope.$on('$ionicView.beforeEnter',
-    //     function() {
-    //         // Code here is always executed when entering this state
-    //         //reload page each time when routed
-    //         // $state.forceReload();
-    //         // $window.location.reload(true);
-    //     }
-    // );
-
-
-
-    //local notification test
-    //***************************************************
-    // $scope.add = function() {
-    //     var alarmTime = new Date();
-    //     alarmTime.setMinutes(alarmTime.getMinutes() + 1);
-    //     $cordovaLocalNotification.add({
-    //         id: "1234",
-    //         date: alarmTime,
-    //         message: "This is a message",
-    //         title: "This is a title",
-    //         autoCancel: true,
-    //         sound: null
-    //     }).then(function() {
-    //         console.log("The notification has been set");
-    //     });
-    // };
-
-    // $scope.isScheduled = function() {
-    //     $cordovaLocalNotification.isScheduled("1234").then(function(isScheduled) {
-    //         alert("Notification 1234 Scheduled: " + isScheduled);
-    //     });
-    // };
-    //*********************************************************************
 
     //teste ob key "medis" im Local Storage vorhanden ist
     if (localStorage.medis === undefined) {
@@ -400,23 +337,10 @@ angular.module('mediApp.controllers', [])
 
     }
 
-
-
-    //helper für navigation via button, version mit $state, generisch
-    //         $scope.go = function(path) {
-    //     $state.go(path);
-    // };
-
     // helper für navigation via button, version mit $state, spezifisch
     $scope.goAddMedi = function() {
         $state.go('app.addMedi');
     };
-    //helper für navigation via button Version mit $location,
-    // sollte gemäss einigen posts auf stackoverflow nicht verwendet werden
-    // $scope.go = function(path) {
-    //     $location.path(path);
-    //     console.log(path);
-    // };
 
 })
 
@@ -453,16 +377,9 @@ angular.module('mediApp.controllers', [])
 
 .controller('MediController', function($scope, $stateParams, $localstorage, Timer, $location, $window, $state) {
 
-    $scope.$on('$ionicView.beforeEnter',
-        function() {
-            // Code here is always executed when entering this state
-            //reload page each time when routed
-            // $state.forceReload();
-        }
-    );
-
-
     //***************Einzelnes Medi anzeigen********************************
+    $scope.zeiten = Timer.alleZeiten();
+
     //ein Einzelnes Medi aus dem Objekt "medis" rauslesen
     var getMedi = function(mediId) {
         var medis = $localstorage.getObject('medis');
@@ -480,17 +397,14 @@ angular.module('mediApp.controllers', [])
 
     $scope.toggleEditing = function() {
         if ($scope.editing) {
-        save();
+            save();
         }
         $scope.editing = !$scope.editing;
     };
 
-    $scope.zeiten = Timer.alleZeiten();
-
-    // vorhandenes medi muss im medis arry mit dem väränderten medi ausgewechselt werden 
+    // speichern: altes medi im medis arry mit neuem medi ausgewechsln 
     function save() {
         var medis = $localstorage.getObject('medis');
-
         for (var i = 0; i < medis.length; i++) {
             if (medis[i].id === $scope.medi.id) {
                 medis[i] = $scope.medi;
@@ -498,7 +412,6 @@ angular.module('mediApp.controllers', [])
                 $state.go('app.medis');
             }
         }
-        
     }
 
     //****************Medi löschen**********************
@@ -508,11 +421,76 @@ angular.module('mediApp.controllers', [])
         for (var i = 0; i < medis.length; i++) {
             if (medis[i].id === $stateParams.mediId) {
                 medis.splice(i, 1);
-                        //redirect to List
-        $state.go('app.medis');
+                //redirect to List
+                $state.go('app.medis');
                 return $localstorage.setObject('medis', medis);
             }
         }
 
     };
 });
+
+// $scope.$on('$ionicView.beforeEnter',
+//     function() {
+//         // Code here is always executed when entering this state
+//         //reload page each time when routed
+//         // $state.forceReload();
+//     }
+// );
+
+//alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen 
+//- auch alte werden angezeigt??
+// cordova.plugins.notification.local.getAll(function(notifications) {
+
+//     $scope.allNotifications = notifications;
+//     console.log(new Date($scope.allNotifications[0].at * 1000));
+
+//     for (var i = 0; i < $scope.allNotifications.length; i++) {
+//         $scope.allNotifications[i].at = new Date($scope.allNotifications[i].at * 1000);
+
+//     }
+
+// });
+
+//daten aktualisieren
+// , $other, $depencies (zugehörige dependencies)
+// $scope.$on('$ionicView.beforeEnter',
+//     function() {
+//         // Code here is always executed when entering this state
+//         //reload page each time when routed
+//         // $state.forceReload();
+//         // $window.location.reload(true);
+//     }
+// );
+
+
+//local notification test
+//***************************************************
+// $scope.add = function() {
+//     var alarmTime = new Date();
+//     alarmTime.setMinutes(alarmTime.getMinutes() + 1);
+//     $cordovaLocalNotification.add({
+//         id: "1234",
+//         date: alarmTime,
+//         message: "This is a message",
+//         title: "This is a title",
+//         autoCancel: true,
+//         sound: null
+//     }).then(function() {
+//         console.log("The notification has been set");
+//     });
+// };
+
+// $scope.isScheduled = function() {
+//     $cordovaLocalNotification.isScheduled("1234").then(function(isScheduled) {
+//         alert("Notification 1234 Scheduled: " + isScheduled);
+//     });
+// };
+//*********************************************************************
+
+    //wenn app in den hintergrund geht
+    // document.addEventListener('pause', function unload() {
+
+    //     console.log('ich bin in Pause');
+
+    // });
