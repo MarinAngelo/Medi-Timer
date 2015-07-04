@@ -1,3 +1,103 @@
+//--------------------------------------------------- 
+//mk styles
+//--------------------------------------------------
+
+// //fonts
+//****************************************************
+$font-size-base:                  18px !default;
+// $font-size-base:                  14px !default;
+$font-size-large:                 22px !default;
+// $font-size-large:                 18px !default;
+$font-size-small:                 15px !default;
+// $font-size-small:                 11px !default;
+
+//colos
+//************************************************
+// $royal:                           black !default;
+$royal:                           #886aea !default;
+// $positive:                        black !default;
+$positive:                        #387ef5 !default;
+
+//butons
+//**************************************************
+$button-height:                   50px !default;
+// $button-height:                   42px !default;
+$button-icon-size:                50px !default;
+
+// $button-icon-size:                24px !default;
+// save und submit buttons
+$button-font-size:                24px !default;
+// $button-font-size:                16px !default;
+
+// $button-bar-button-font-size:     13px !default;
+// $button-bar-button-font-size:     13px !default;
+
+//plus edit und trash button
+$button-bar-button-icon-size:     50px !default;
+// $button-bar-button-icon-size:     20px !default;
+$button-bar-button-height:        50px !default;
+// $button-bar-button-height:        32px !default;
+$button-border-width:             0 !default;
+// $button-border-width:             1px !default;
+
+// //bar
+//************************************************
+$bar-height:                      65px !default;
+// $bar-height:                      44px !default;
+$bar-title-font-size:             34px !default;
+// $bar-title-font-size:             17px !default;
+// $bar-padding-portrait:            50px !default;
+// $bar-padding-portrait:            5px !default;
+
+// Items (of list)
+// *************************************************
+$item-font-size:                  18px !default;
+// $item-font-size:                  16px !default;
+$item-padding:                    20px !default;
+// $item-padding:                    16px !default;
+
+// Checkbox
+// ************************************************
+$checkbox-width:                  50px !default;
+$checkbox-width:                  28px !default;
+$checkbox-height:                 50px !default;
+$checkbox-height:                 28px !default;
+
+// Lists
+// -------------------------------
+//Problem: oberste Items der Liste werden von top bar überdeckt
+// $list-header-padding:             20px 40px !default;
+// $list-header-padding:             5px 15px !default;
+// $list-header-margin-top:          120px !default;
+// $list-header-margin-top:          20px !default;
+
+//custom css
+//************************************************************
+
+//nav-icon bigger
+// .ion-navicon {
+// 	color: orange !important;
+// 	// font-size: 160px !important;
+// 	// size: 100px !important;
+// }
+
+// .larger {
+// 	font-size: 100px !important;
+// 	color: orange;
+// }
+
+// .ion-navicon:before {
+//   content: "" !important; 
+// }
+
+// .ion-navicon {
+//   background: url('http://www.clker.com/cliparts/e/6/d/1/136637426736471240hamburger.svg.hi.png');
+//   // background: url('http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css/ion-social-tux.png');
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: 50px 50px;
+// }
+
 /*
 To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
@@ -20,4 +120,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+
+
+
 

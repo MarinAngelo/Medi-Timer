@@ -34,7 +34,7 @@ angular.module('mediApp.controllers', [])
         }, 1000);
     };
 
-    // helper für navigation via button, version mit $state, spezifisch
+    // helper für navigation via button, version mit $state, spezifisch (+ button in nav bar)
     $scope.goAddMedi = function() {
         $state.go('app.addMedi');
     };
@@ -196,10 +196,10 @@ angular.module('mediApp.controllers', [])
     // will execute when device is ready, or immediately if the device is already ready.
     $ionicPlatform.ready(function() {
 
-        // var cancel = function() {
-        //     $cordovaLocalNotification.cancelAll();
-        // };
-        // cancel();
+        var cancel = function() {
+            $cordovaLocalNotification.cancelAll();
+        };
+        cancel();
 
         // $rootScope.$on('$cordovaLocalNotification:cancelall',
         //     function(event, state) {
@@ -265,7 +265,7 @@ angular.module('mediApp.controllers', [])
                 notifications.push({
                     id: i,
                     title: timer.name,
-                    text: "jetzt " + timer.menge + " " + timer.anwendungsform + timer.name + " einnehmen " + timer.info,
+                    text: "Jetzt " + timer.menge + " " + timer.anwendungsform + " " + timer.name + " einnehmen, " + timer.info,
                     at: notificationTime,
                     badge: 1,
                     data: timer
@@ -291,10 +291,10 @@ angular.module('mediApp.controllers', [])
         // notifi();
 
         //replaces function above
-        // (function notifi() {
-        //     $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
+        (function notifi() {
+            $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
 
-        // })();
+        })();
 
         //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen
         var allNotifications = [];

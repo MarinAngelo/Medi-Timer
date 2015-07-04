@@ -1,23 +1,23 @@
 <ion-view view-title="Medi Detail">
     <ion-content>
         <div class="bar bar-header bar-royal">
-            <!--         <div class="row">
-            <div class="col"> -->
-            <h2 class="title">{{medi.name}}</h2>
+            <button class="button icon ion-trash-a" ng-click="deleteMedi($stateParams.mediId)"></button>
+            <h1 class="title">{{medi.name}}</h1>
             <button class="button icon ion-edit" ng-click="toggleEditing()" ng-show="!editing"></button>
-            <button class="button icon ion-trash-b" ng-click="deleteMedi($stateParams.mediId)"></button>
-            <!--             </div>
-        </div> -->
         </div>
         <form name="mediEditForm" ng-submit="toggleEditing()" novalidate>
             <div class="list">
-                <label class="item item-input">
+            <!-- abstand gewinnen zur bar -->
+            <div class="item item-divider"><h1>&nbsp;</h1></div>
+
+                <label class="item item-input item-stacked-label">
+                <span class="input-label">Medikamenten Bezeichnung</span>
                     <input type="text" ng-model='medi.name' ng-readonly='!editing' required name="mediname">
                 </label>
                 <div class="row">
                     <div class="col">
                         <label class="item item-input item-stacked-label">
-                            <span class="input-label">Menge</span>
+                            <span class="input-label">Dosis</span>
                             <input type="number" ng-model='medi.menge' min="0" max="10000" name="medimenge" ng-readonly='!editing' placeholder="z.B. 250">
                         </label>
                     </div>
@@ -121,6 +121,7 @@
                     <label class="item item-input item-select">
                         <div class="input-label">
                             Zeiten anpassen
+                            <p>&nbsp;</p>
                         </div>
                         <select ng-model="medi.timers.zeiten" multiple ng-options="zeit as zeit for zeit in zeiten" required>
                         </select>
@@ -134,7 +135,7 @@
                     <span class="input-label">Zusätzliche Informationen</span>
                     <input type="text" ng-model="medi.timers.info" ng-readonly='!editing' placeholder="z.B. nach den Mahlzeiten">
                 </label>
-                <button type="submit" class="button button-block icon-left ion-android-done button-balanced" ng-show="editing" ng-disabled="mediEditForm.mediname.$invalid || mediEditForm.meditimerszeiten.$invalid">speichern
+                <button type="submit" class="button button-block button-balanced" ng-show="editing" ng-disabled="mediEditForm.mediname.$invalid || mediEditForm.meditimerszeiten.$invalid">Änderungen speichern
                 </button>
 <!--                         <div class="row">
             <div class="bar bar-footer bar-royal">

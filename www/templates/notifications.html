@@ -1,8 +1,5 @@
-<ion-view view-title="Medi-Liste">
+<ion-view view-title="Benachrichtigungen">
     <ion-content>
-        <div class="bar bar-header bar-royal">
-            <h3 class="title">Geplante Benachrichtigungen</h3>
-        </div>
         <ion-list>
             <ion-item ng-repeat="notification in allNotifications | orderBy : 'date'">
                 {{notification.date | date: 'dd.MM HH:mm'}} {{notification.name}}
