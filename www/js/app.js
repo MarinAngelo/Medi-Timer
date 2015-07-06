@@ -28,6 +28,7 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
 
         .state('app', {
         url: "/app",
+        //????????????
         abstract: true,
         templateUrl: "templates/menu.html",
         controller: 'AppCtrl'
@@ -74,25 +75,29 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
                     controller: 'AppCtrl'
                 }
             }
+        })
+        //Cover
+        .state('app.cover', {
+            url: "/cover",
+            views: {
+                //Versuch Cover ohne Menue darzustellen
+                // templateUrl: "templates/cover.html",
+                // controller: 'AppCtrl'
+
+                'menuContent': {
+                    templateUrl: "templates/cover.html",
+                    controller: 'AppCtrl'
+                }
+            }
         });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/medis');
+    $urlRouterProvider.otherwise('/app/cover');
+    // $urlRouterProvider.otherwise('/app/medis');
 
 });
-// page reloader
-// .config(function($provide) {
-//     $provide.decorator('$state', function($delegate, $stateParams) {
-//         $delegate.forceReload = function() {
-//             return $delegate.go($delegate.current, $stateParams, {
-//                 reload: true,
-//                 inherit: false,
-//                 notify: true
-//             });
-//         };
-//         return $delegate;
-//     });
-// });
 
+//Code von Raphi
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // .run(function($ionicPlatform, $rootScope, Timer, $cordovaLocalNotification) {
 //     var local, granted;
 
@@ -160,109 +165,5 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
 //     }, false);
 
 // });
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-// .run(function($ionicPlatform, $rootScope, Timer, $cordovaLocalNotification) {
-
-//     //local notification
-//     //*************************************
-//     // will execute when device is ready, or immediately if the device is already ready.
-//     $ionicPlatform.ready(function() {
-
-//         var cancel = function() {
-//             $cordovaLocalNotification.cancelAll();
-//         };
-//         cancel();
-
-//         $rootScope.$on('$cordovaLocalNotification:cancelall',
-//             function(event, state) {
-//                 alert("notifications cancelled");
-//             });
-
-//         document.addEventListener('resume', function resume() {
-//             cancel();
-//             $rootScope.$on('$cordovaLocalNotification:cancelall',
-//                 function(event, state) {
-//                     alert("cancelled after resume: " + notification.id + " " + notification.at);
-//                 });
-//         });
-
-//         //wenn app im hintergrund ist
-//         document.addEventListener('pause', function unload() {
-
-//                 var timers = Timer.timerData();
-//         console.log(timers);
-//         var days = ["sonntag", "montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag"];
-//         var now = new Date();
-//         var today = new Date();
-//         var end = new Date();
-//         end.setMonth(now.getMonth() + 0.5);
-//         // var i = 0;
-//         console.log(end);
-//         var notifications = [];
-//         //range von daten in die zukunft, mit enddatum projeziert
-//         while (today.getTime() <= end.getTime()) {
-//             timers.forEach(function(timer) {
-//                 var time = timer.timer.split(/[\s:.]+/);
-//                 console.log(time);
-//                 //gibt Wochentag index zurück, der bei sonntag = 0 beginnt
-//                 var day = days.indexOf(time[0].toLowerCase());
-//                 console.log(day);
-//                 var hour = parseInt(time[1], 10);
-//                 console.log(hour);
-//                 var minute = parseInt(time[2], 10);
-//                 console.log(minute);
-//                 console.log(today.getDay());
-//                 //stellt sicher, dass vom aktuellen Tag an in die Zukunft hinein Notifications generiert werden
-//                 if (today.getDay() !== day) {
-//                     return;
-//                 }
-//                 var notificationTime = new Date(today.getTime());
-//                 notificationTime.setHours(hour, minute);
-//                 console.log(notificationTime);
-//                 //stellt sicher, dass keine Notificatins mit Datum in der Vergangenheit erstellt werden
-//                 if (notificationTime.getTime() < now.getTime()) {
-//                     return;
-//                 }
-//                 notifications.push({
-//                     id: timer.id,
-//                     title: "" + timer.name + " jetzt einnehmen",
-//                     text: "" + timer.menge + " " + timer.anwendungsform + " " + timer.info + " ist jetzt fällig.",
-//                     at: notificationTime,
-//                     badge: 1,
-//                     data: timer
-//                 });
-//             });
-
-//             today.setDate(today.getDate() + 1);
-//         }
-//         console.log(notifications);
-
-//         //ngCordova methode funktioniert nicht?????????????????
-//         // $scope.scheduleSingleNotification = function() {
-//         //     $cordovaLocalNotification.schedule(notifications).then(function(result) {
-//         //         console.log("The Medi-Timer notification has been set");
-//         //     });
-//         // };
-
-//         var notifi = function() {
-//             $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
-//         };
-//         notifi();
-
-//         $rootScope.$on('$cordovaLocalNotification:schedule',
-//             function(event, notification, state) {
-//                 alert("scheduled: " + notification.id + " " + notification.at);
-//             });
-
-//         $rootScope.$on('$cordovaLocalNotification:trigger',
-//             function(event, notification, state) {
-//                 alert("triggered: " + notification.id + " " + notification.at);
-//             });
-//             console.log('ich bin in Pause');
-
-//         }, false);
-
-//     });
-
-// });
