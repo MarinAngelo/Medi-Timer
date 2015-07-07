@@ -34,9 +34,13 @@ angular.module('mediApp.controllers', [])
         }, 1000);
     };
 
-    // helper für navigation via button, version mit $state, spezifisch (+ button in nav bar)
+            // helper für navigation via button, version mit $state, spezifisch (+ button in nav bar)
     $scope.goAddMedi = function() {
         $state.go('app.addMedi');
+    };
+
+    $scope.goMedis = function() {
+        $state.go('app.medis');
     };
 
     //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
@@ -196,10 +200,11 @@ angular.module('mediApp.controllers', [])
     // will execute when device is ready, or immediately if the device is already ready.
     $ionicPlatform.ready(function() {
 
-        var cancel = function() {
-            $cordovaLocalNotification.cancelAll();
-        };
-        cancel();
+        //auskommentieren bei ionic serve
+        // var cancel = function() {
+        //     $cordovaLocalNotification.cancelAll();
+        // };
+        // cancel();
 
         // $rootScope.$on('$cordovaLocalNotification:cancelall',
         //     function(event, state) {
@@ -290,11 +295,11 @@ angular.module('mediApp.controllers', [])
         // };
         // notifi();
 
-        //replaces function above
-        (function notifi() {
-            $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
+        //replaces function above, auskommentieren bei ionic serve
+        // (function notifi() {
+        //     $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
 
-        })();
+        // })();
 
         //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen
         var allNotifications = [];
@@ -323,6 +328,11 @@ angular.module('mediApp.controllers', [])
 
 .controller('MedisController', function($scope, $localstorage, $interval, $window, $location,
     $state, $cordovaLocalNotification, Timer) {
+
+        // helper für navigation via button, version mit $state, spezifisch (+ button in nav bar)
+    $scope.goAddMedi = function() {
+        $state.go('app.addMedi');
+    };
 
     //teste ob key "medis" im Local Storage vorhanden ist
     if (localStorage.medis === undefined) {

@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.cover {
+  background: #886aea !important;
+  padding: 40px; }
+
 /*
 To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
@@ -2565,9 +2569,9 @@ body, .ionic-body {
   padding: 0;
   color: #000;
   word-wrap: break-word;
-  font-size: 18px;
+  font-size: 20px;
   font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
-  line-height: 25px;
+  line-height: 28px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
   -webkit-user-drag: none;
@@ -2780,7 +2784,7 @@ ion-infinite-scroll {
  * --------------------------------------------------
  */
 p {
-  margin: 0 0 12.5px; }
+  margin: 0 0 14px; }
 
 small {
   font-size: 85%; }
@@ -2807,46 +2811,46 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     line-height: 1; }
 
 h1, .h1, h2, .h2, h3, .h3 {
-  margin-top: 25px;
-  margin-bottom: 12.5px; }
+  margin-top: 28px;
+  margin-bottom: 14px; }
   h1:first-child, .h1:first-child, h2:first-child, .h2:first-child, h3:first-child, .h3:first-child {
     margin-top: 0; }
   h1 + h1, h1 + .h1, h1 + h2, h1 + .h2, h1 + h3, h1 + .h3, .h1 + h1, .h1 + .h1, .h1 + h2, .h1 + .h2, .h1 + h3, .h1 + .h3, h2 + h1, h2 + .h1, h2 + h2, h2 + .h2, h2 + h3, h2 + .h3, .h2 + h1, .h2 + .h1, .h2 + h2, .h2 + .h2, .h2 + h3, .h2 + .h3, h3 + h1, h3 + .h1, h3 + h2, h3 + .h2, h3 + h3, h3 + .h3, .h3 + h1, .h3 + .h1, .h3 + h2, .h3 + .h2, .h3 + h3, .h3 + .h3 {
-    margin-top: 12.5px; }
+    margin-top: 14px; }
 
 h4, .h4, h5, .h5, h6, .h6 {
-  margin-top: 12.5px;
-  margin-bottom: 12.5px; }
+  margin-top: 14px;
+  margin-bottom: 14px; }
 
 h1, .h1 {
-  font-size: 46px; }
+  font-size: 52px; }
 
 h2, .h2 {
-  font-size: 38px; }
+  font-size: 43px; }
 
 h3, .h3 {
-  font-size: 31px; }
+  font-size: 34px; }
 
 h4, .h4 {
-  font-size: 23px; }
+  font-size: 25px; }
 
 h5, .h5 {
-  font-size: 18px; }
+  font-size: 20px; }
 
 h6, .h6 {
-  font-size: 16px; }
+  font-size: 17px; }
 
 h1 small, .h1 small {
-  font-size: 31px; }
+  font-size: 34px; }
 
 h2 small, .h2 small {
-  font-size: 23px; }
+  font-size: 25px; }
 
 h3 small, .h3 small, h4 small, .h4 small {
-  font-size: 18px; }
+  font-size: 20px; }
 
 dl {
-  margin-bottom: 25px; }
+  margin-bottom: 28px; }
 
 dt, dd {
   line-height: 1.42857; }
@@ -2855,12 +2859,12 @@ dt {
   font-weight: bold; }
 
 blockquote {
-  margin: 0 0 25px;
-  padding: 12.5px 25px;
+  margin: 0 0 28px;
+  padding: 14px 28px;
   border-left: 5px solid gray; }
   blockquote p {
     font-weight: 300;
-    font-size: 22.5px;
+    font-size: 25px;
     line-height: 1.25; }
   blockquote p:last-child {
     margin-bottom: 0; }
@@ -2875,7 +2879,7 @@ q:before, q:after, blockquote:before, blockquote:after {
 
 address {
   display: block;
-  margin-bottom: 25px;
+  margin-bottom: 28px;
   font-style: normal;
   line-height: 1.42857; }
 
@@ -5642,7 +5646,7 @@ legend {
   width: 100%;
   border: 1px solid #ddd;
   color: #444;
-  font-size: 27px;
+  font-size: 30px;
   line-height: 2.85714; }
   legend small {
     color: #f8f8f8;
@@ -5650,7 +5654,7 @@ legend {
 
 label, input, button, select, textarea {
   font-weight: normal;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.42857; }
 
 input, button, select, textarea {
@@ -5798,7 +5802,7 @@ input, button, select, textarea {
 
 .item-stacked-label input {
   overflow: hidden;
-  height: 55px; }
+  height: 60px; }
 
 .item-floating-label {
   display: block;
@@ -5821,11 +5825,11 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   display: block;
   padding-top: 2px;
   padding-left: 0;
-  height: 43px;
+  height: 48px;
   color: #111;
   vertical-align: middle;
-  font-size: 18px;
-  line-height: 20px; }
+  font-size: 20px;
+  line-height: 22px; }
 
 .platform-ios input[type="datetime-local"], .platform-ios input[type="date"], .platform-ios input[type="month"], .platform-ios input[type="time"], .platform-ios input[type="week"], .platform-android input[type="datetime-local"], .platform-android input[type="date"], .platform-android input[type="month"], .platform-android input[type="time"], .platform-android input[type="week"] {
   padding-top: 8px; }
@@ -5857,7 +5861,7 @@ input[type="radio"], input[type="checkbox"] {
   width: auto; }
 
 input[type="file"] {
-  line-height: 39px; }
+  line-height: 42px; }
 
 .previous-input-focus, .cloned-text-input + input, .cloned-text-input + textarea {
   position: absolute !important;
@@ -6452,7 +6456,7 @@ input[type="radio"][disabled], input[type="checkbox"][disabled], input[type="rad
     text-indent: .01px;
     text-overflow: '';
     white-space: nowrap;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     direction: rtl; }
   .item-select select::-ms-expand {

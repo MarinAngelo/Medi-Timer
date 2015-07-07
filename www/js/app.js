@@ -80,10 +80,6 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
         .state('app.cover', {
             url: "/cover",
             views: {
-                //Versuch Cover ohne Menue darzustellen
-                // templateUrl: "templates/cover.html",
-                // controller: 'AppCtrl'
-
                 'menuContent': {
                     templateUrl: "templates/cover.html",
                     controller: 'AppCtrl'

@@ -1,17 +1,22 @@
 <ion-view view-title="Medi Detail">
+    <ion-header-bar align-title="center" class="bar-subheader bar-royal">
+        <button class="button icon ion-trash-a" ng-click="deleteMedi($stateParams.mediId)"></button>
+        <h2 class="title">{{medi.name}}</h2>
+        <button class="button icon ion-edit" ng-click="toggleEditing()" ng-show="!editing"></button>
+    </ion-header-bar>
     <ion-content>
-        <div class="bar bar-header bar-royal">
-            <button class="button icon ion-trash-a" ng-click="deleteMedi($stateParams.mediId)"></button>
-            <h1 class="title">{{medi.name}}</h1>
-            <button class="button icon ion-edit" ng-click="toggleEditing()" ng-show="!editing"></button>
-        </div>
+        <!-- <div class="bar bar-header bar-royal">
+    <button class="button icon ion-trash-a" ng-click="deleteMedi($stateParams.mediId)"></button>
+    <h2 class="title">{{medi.name}}</h2>
+    <button class="button icon ion-edit" ng-click="toggleEditing()" ng-show="!editing"></button>
+</div>
+ -->
         <form name="mediEditForm" ng-submit="toggleEditing()" novalidate>
             <div class="list">
-            <!-- abstand gewinnen zur bar -->
-            <div class="item item-divider"><h1>&nbsp;</h1></div>
-
+                <!-- abstand gewinnen zur bar -->
+                <!-- <ion-item><h3>&nbsp;</h3></ion-item> -->
                 <label class="item item-input item-stacked-label">
-                <span class="input-label">Medikamenten Bezeichnung</span>
+                    <span class="input-label">Medikamenten Bezeichnung</span>
                     <input type="text" ng-model='medi.name' ng-readonly='!editing' required name="mediname">
                 </label>
                 <div class="row">
@@ -137,7 +142,7 @@
                 </label>
                 <button type="submit" class="button button-block button-balanced" ng-show="editing" ng-disabled="mediEditForm.mediname.$invalid || mediEditForm.meditimerszeiten.$invalid">Änderungen speichern
                 </button>
-<!--                         <div class="row">
+                <!--                         <div class="row">
             <div class="bar bar-footer bar-royal">
                 <button class="button icon ion-edit" ng-click="toggleEditing()" ng-show="!editing"></button>
                 <div class="title">{{medi.name}}</div>
