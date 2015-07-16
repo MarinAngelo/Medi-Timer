@@ -19,8 +19,6 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
         }
     });
 
-
-
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

@@ -105,7 +105,7 @@ angular.module('mediApp.services', [])
         range.push(itr.next().format('LT'));
     }
 
-    range.push("05:30", "20:20", "20:22","20:24","20:26");
+    range.push("05:30", "18:10", "18:40","18:50","19:10");
 
     return {
 

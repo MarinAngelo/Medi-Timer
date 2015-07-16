@@ -34,8 +34,8 @@ angular.module('mediApp.controllers', [])
         }, 1000);
     };
 
-            // helper für navigation via button, version mit $state, spezifisch (+ button in nav bar)
-    $scope.goAddMedi = function() {
+    // helper für navigation via button, version mit $state, spezifisch (+ button in nav bar)
+    $scope.goAddMedis = function() {
         $state.go('app.addMedi');
     };
 
@@ -201,10 +201,10 @@ angular.module('mediApp.controllers', [])
     $ionicPlatform.ready(function() {
 
         //auskommentieren bei ionic serve
-        // var cancel = function() {
-        //     $cordovaLocalNotification.cancelAll();
-        // };
-        // cancel();
+        var cancel = function() {
+            $cordovaLocalNotification.cancelAll();
+        };
+        cancel();
 
         // $rootScope.$on('$cordovaLocalNotification:cancelall',
         //     function(event, state) {
@@ -266,7 +266,7 @@ angular.module('mediApp.controllers', [])
 
                 //increment i to generate notification id
                 i++;
-                
+
                 notifications.push({
                     id: i,
                     title: timer.name,
@@ -296,10 +296,10 @@ angular.module('mediApp.controllers', [])
         // notifi();
 
         //replaces function above, auskommentieren bei ionic serve
-        // (function notifi() {
-        //     $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
+        (function notifi() {
+            $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
 
-        // })();
+        })();
 
         //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen
         var allNotifications = [];
@@ -329,11 +329,6 @@ angular.module('mediApp.controllers', [])
 .controller('MedisController', function($scope, $localstorage, $interval, $window, $location,
     $state, $cordovaLocalNotification, Timer) {
 
-        // helper für navigation via button, version mit $state, spezifisch (+ button in nav bar)
-    $scope.goAddMedi = function() {
-        $state.go('app.addMedi');
-    };
-
     //teste ob key "medis" im Local Storage vorhanden ist
     if (localStorage.medis === undefined) {
         //wenn nicht speichere initial Daten
@@ -347,7 +342,7 @@ angular.module('mediApp.controllers', [])
 
     }
 
-    // helper für navigation via button, version mit $state, spezifisch
+    // helper für navigation via button, version mit $state, spezifisch (+ button in nav bar)
     $scope.goAddMedi = function() {
         $state.go('app.addMedi');
     };
@@ -498,9 +493,9 @@ angular.module('mediApp.controllers', [])
 // };
 //*********************************************************************
 
-    //wenn app in den hintergrund geht
-    // document.addEventListener('pause', function unload() {
+//wenn app in den hintergrund geht
+// document.addEventListener('pause', function unload() {
 
-    //     console.log('ich bin in Pause');
+//     console.log('ich bin in Pause');
 
-    // });
+// });
