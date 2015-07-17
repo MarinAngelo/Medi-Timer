@@ -85,7 +85,7 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
             }
         });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/cover');
+    $urlRouterProvider.otherwise('/app/medis');
     // $urlRouterProvider.otherwise('/app/medis');
 
 });
