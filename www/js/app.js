@@ -21,6 +21,12 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
 
 })
 
+.run(function($cordovaSplashscreen) {
+  setTimeout(function() {
+    $cordovaSplashscreen.hide();
+  }, 50000);
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
