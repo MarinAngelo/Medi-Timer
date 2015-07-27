@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.mediapp183707" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>mediApp</name>
-  <description>
-        The purpose of this app is to help people take thaire medicines in time
+  <name>medi timer</name>
+  <description>&#xD;
+        The purpose of this app is to help people take thaire medicines in time&#xD;
     </description>
-  <author email="marinus@klap-wedevelopment.com" href="http://www.klap-wedevelopment.com/">
-      Ionic Framework Team
+  <author email="marinus@klap-wedevelopment.com" href="http://www.klap-wedevelopment.com/">&#xD;
+      Ionic Framework Team&#xD;
     </author>
   <content src="index.html"/>
   <access origin="*"/>

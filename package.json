@@ -1,7 +1,7 @@
 {
-  "name": "mediapp",
+  "name": "meditimer",
   "version": "1.0.0",
-  "description": "mediApp: An Ionic project",
+  "description": "meditimer: Hilft Patienten Medikamente rechtzeitig und vollständig einzunehmen",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^1.3.3",

@@ -1,9 +1,13 @@
 /* Empty. Add your own CSS if you like */
-.centerText, .centerText h5 {
-	text-align: center;
-	color: white;
+
+.centerText,
+.centerText h5 {
+    text-align: center;
+    color: white;
 }
 
 .centerText h1 {
-color: #0C7E34;
+    /*font-family: 'Ubuntu Condensed', sans-serif;*/
+    font-family: 'Righteous', cursive;
+    color: #0C7E34;
 }
