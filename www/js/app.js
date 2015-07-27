@@ -81,19 +81,14 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
             }
         })
         //Cover
-        .state('app.cover', {
+        //wird nicht in navi-stack einbezogen
+        .state('cover', {
             url: "/cover",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/cover.html",
-                    controller: 'AppCtrl'
-                }
-            }
+            templateUrl: "templates/cover.html",
+            controller: "AppCtrl"
         });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/medis');
-    // $urlRouterProvider.otherwise('/app/medis');
-
 });
 
 //Code von Raphi

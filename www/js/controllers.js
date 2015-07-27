@@ -324,7 +324,8 @@ angular.module('mediApp.controllers', [])
 
     //teste ob key "medis" im Local Storage vorhanden ist (produktion)
         if (localStorage.medis === undefined) {
-            $state.go('app.cover');
+            $state.go('cover');
+            // $state.go('app.cover');
 
     } else {
 
