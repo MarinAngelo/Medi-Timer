@@ -105,24 +105,11 @@ angular.module('mediApp.services', [])
 
     range.push("05:30");
 
-    var tage = {
-        montag : true,
-        dienstag : 'Dienstag',
-        mittwoch : 'Mittwoch',
-        donnerstag : 'Donnerstag',
-        freitag : 'Freitag',
-        samstag : 'Samstag',
-        sonntag : 'Sonntag'
-    };
-
     return {
 
         //zeiten für Formular bereitstellen
         alleZeiten: function() {
             return range;
-        },
-        alleTage: function() {
-            return tage;
         }
         
         // || nur während dev

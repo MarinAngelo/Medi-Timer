@@ -343,12 +343,6 @@ angular.module('mediApp.controllers', [])
 
     $scope.zeiten = Timer.alleZeiten();
 
-    $scope.tage = Timer.alleTage();
-
-    // $scope.tage = {
-    //     montag : 'Montag'
-    // };
-
     $scope.addMedi = function(medi) {
 
         //Feld "id" generieren und dem "medi"-Objekt hinzufügen
