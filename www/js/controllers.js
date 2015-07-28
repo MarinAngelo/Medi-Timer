@@ -172,9 +172,9 @@ angular.module('mediApp.controllers', [])
     $ionicPlatform.ready(function() {
 
         //auskommentieren bei ionic serve
-        // (function() {
-        //     $cordovaLocalNotification.cancelAll();
-        // })();
+        (function() {
+            $cordovaLocalNotification.cancelAll();
+        })();
 
         // $rootScope.$on('$cordovaLocalNotification:cancelall',
         //     function(event, state) {
@@ -266,9 +266,9 @@ angular.module('mediApp.controllers', [])
         // notifi();
 
         //replaces function above, auskommentieren bei ionic serve
-        // (function() {
-        //     $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
-        // })();
+        (function() {
+            $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
+        })();
 
         //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen
         var allNotifications = [];

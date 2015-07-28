@@ -128,7 +128,8 @@
                 <label class="item item-input">
                     <input type="text" ng-model="medi.timers.info" placeholder="Infos (z.B. nach den Mahlzeiten)">
                 </label>
-                <button type="submit" class="button button-block button-balanced" ng-disabled="addMediForm.mediname.$invalid || addMediForm.meditimerszeiten.$invalid || medi.timers.tage==null">
+                <button type="submit" class="button button-block button-balanced" ng-disabled="addMediForm.mediname.$invalid || addMediForm.meditimerszeiten.$invalid">
+                 <!-- || medi.timers.tage==null -->
                     Medikament speichern
                 </button>
             </div>
