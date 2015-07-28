@@ -1,4 +1,4 @@
-<ion-view view-title="Medi-Timer">
+<ion-view view-title="medi timer">
     <ion-header-bar align-title="left" class="bar-subheader bar-balanced">
         <h1 class="title">Medikamenten Liste</h1>
             <a class="button icon ion-plus" ng-click="goAddMedi()"></a>
@@ -8,7 +8,7 @@
         <!-- abstand gewinnen zur bar -->
         <!-- <ion-item><h3>&nbsp;</h3></ion-item> -->
             <ion-item ng-repeat="medi in medis" href="#/app/medis/{{medi.id}}">
-                {{medi.name}}
+                <i class="flaticon-medicine"></i>{{medi.name}}
             </ion-item>
         </ion-list>
     </ion-content>

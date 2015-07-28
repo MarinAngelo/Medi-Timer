@@ -40,6 +40,9 @@ font-style: normal;
 }
 .flaticon-medicine:before {
 	content: "\e007";
+	font-size: 2em;
+	padding-right: 0.5em;
+	color: #6620A6;
 }
 .flaticon-pill:before {
 	content: "\e008";
