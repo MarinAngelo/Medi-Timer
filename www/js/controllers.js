@@ -1,18 +1,23 @@
 angular.module('mediApp.controllers', [])
 
-.controller('AppCtrl', function($scope, $rootScope, $ionicPlatform, $ionicModal, $ionicPopup, $timeout,
-    $localstorage, $interval, Timer, $window, $state, $cordovaLocalNotification) {
-
+.controller('CoverController', function($scope, $state, $ionicHistory) {
 
     // helper für navigation via button, version mit $state, spezifisch (Cover)
     $scope.goAddMedis = function() {
         $state.go('app.addMedi');
     };
 
-    //cover
-    $scope.goMedis = function() {
-        $state.go('app.medis');
-    };
+    // $ionicHistory.clearHistory();
+    // $ionicHistory.nextViewOptions({
+    //     disableAnimate: true,
+    //     disableBack: true
+    // });
+
+})
+
+.controller('AppCtrl', function($scope, $rootScope, $ionicPlatform, $ionicModal, $ionicPopup, $timeout,
+    $localstorage, $interval, Timer, $window, $state, $cordovaLocalNotification) {
+
 
     //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
     //************************************************************************
@@ -172,9 +177,9 @@ angular.module('mediApp.controllers', [])
     $ionicPlatform.ready(function() {
 
         //auskommentieren bei ionic serve
-        // (function() {
-        //     $cordovaLocalNotification.cancelAll();
-        // })();
+        (function() {
+            $cordovaLocalNotification.cancelAll();
+        })();
 
         // $rootScope.$on('$cordovaLocalNotification:cancelall',
         //     function(event, state) {
@@ -266,9 +271,9 @@ angular.module('mediApp.controllers', [])
         // notifi();
 
         //replaces function above, auskommentieren bei ionic serve
-        // (function() {
-        //     $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
-        // })();
+        (function() {
+            $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
+        })();
 
         //alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen
         var allNotifications = [];
@@ -303,29 +308,11 @@ angular.module('mediApp.controllers', [])
         $state.go('app.addMedi');
     };
 
-    //     (function showCover() {
-    //     if(localStorage.medis === undefined) {
-    //         $state.go('app.cover');
-    //     }
-    // })();
-
-    //teste ob key "medis" im Local Storage vorhanden ist (entwicklung)
-    // if (localStorage.medis === undefined) {
-    //     //wenn nicht speichere initial Daten
-    //     $localstorage.setInitialData('medis');
-    //     //zeige inizial Daten an
-    //     $scope.medis = $localstorage.getObject('medis');
-
-    // } else {
-
-    //     $scope.medis = $localstorage.getObject('medis');
-
-    // }
-
+    //Wellcome Screen anzeigen, wenn noch keine Medis gespeicheret sind
+    //sonst wird die Medikamenten Liste angezeigt
     //teste ob key "medis" im Local Storage vorhanden ist (produktion)
     if (localStorage.medis === undefined) {
         $state.go('cover');
-        // $state.go('app.cover');
 
     } else {
 
@@ -336,16 +323,18 @@ angular.module('mediApp.controllers', [])
 
 })
 
-.controller('AddMediController', function($scope, $localstorage, Timer, $window, $state) {
+.controller('AddMediController', function($scope, $localstorage, Timer, $window, $state, $ionicHistory) {
 
     //vorhandene Objekte im "medis" Array in Variable speichern
     var existMedis = $localstorage.getObject('medis') || [];
 
     $scope.zeiten = Timer.alleZeiten();
 
-    $scope.isChecked = function() {
-        return true;
-    };
+    //Verhindert zurück Navi
+    $ionicHistory.nextViewOptions({
+        disableAnimate: true,
+        disableBack: true
+    });
 
     $scope.addMedi = function(medi) {
 
@@ -364,8 +353,18 @@ angular.module('mediApp.controllers', [])
         //mit den Parametern key=medis und value=existMedis
         $localstorage.setObject('medis', existMedis);
 
+        // $ionicHistory.clearHistory();
+
         //redirect to List
         $state.go('app.medis');
+
+        //disable back button
+        // $ionicHistory.nextViewOptions({
+        //     disableBack: true,
+        //     historyRoot: true
+        // });
+
+        // $ionicHistory.clearHistory();
 
     };
 

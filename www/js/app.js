@@ -24,7 +24,7 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
 .run(function($cordovaSplashscreen) {
     setTimeout(function() {
         $cordovaSplashscreen.hide();
-    }, 5000);
+    }, 8000);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -81,11 +81,12 @@ angular.module('mediApp', ['ionic', 'mediApp.controllers', 'mediApp.services', '
             }
         })
         //Cover
-        //wird nicht in navi-stack einbezogen
+        //wird nur in den navi-stack einbezogen wenn aufgerufen
         .state('cover', {
             url: "/cover",
             templateUrl: "templates/cover.html",
-            controller: "AppCtrl"
+            controller: "CoverController"
+            // controller: "AppCtrl"
         });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/medis');
