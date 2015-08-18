@@ -323,9 +323,9 @@ angular.module('mediApp.controllers', [])
     // }
 
     //teste ob key "medis" im Local Storage vorhanden ist (produktion)
-        if (localStorage.medis === undefined) {
-            $state.go('cover');
-            // $state.go('app.cover');
+    if (localStorage.medis === undefined) {
+        $state.go('cover');
+        // $state.go('app.cover');
 
     } else {
 
@@ -342,6 +342,10 @@ angular.module('mediApp.controllers', [])
     var existMedis = $localstorage.getObject('medis') || [];
 
     $scope.zeiten = Timer.alleZeiten();
+
+    $scope.isChecked = function() {
+        return true;
+    };
 
     $scope.addMedi = function(medi) {
 

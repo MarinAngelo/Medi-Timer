@@ -56,43 +56,43 @@
                 </div>
                 <li class="item item-checkbox">
                     <label class="checkbox">
-                        <input type="checkbox" ng-model="medi.timers.tage.montag" ng-true-value="'Montag'" ng-checked="true">
+                        <input type="checkbox" ng-model="medi.timers.tage.montag" ng-true-value="'Montag'">
                     </label>
                     Montag
                 </li>
                 <li class="item item-checkbox">
                     <label class="checkbox">
-                        <input type="checkbox" ng-model="medi.timers.tage.dienstag" ng-true-value="'Dienstag'" ng-checked="true">
+                        <input type="checkbox" ng-model="medi.timers.tage.dienstag" ng-true-value="'Dienstag'">
                     </label>
                     Dienstag
                 </li>
                 <li class="item item-checkbox">
                     <label class="checkbox">
-                        <input type="checkbox" ng-model="medi.timers.tage.mittwoch" ng-true-value="'Mittwoch'" ng-checked="true">
+                        <input type="checkbox" ng-model="medi.timers.tage.mittwoch" ng-true-value="'Mittwoch'">
                     </label>
                     Mittwoch
                 </li>
                 <li class="item item-checkbox">
                     <label class="checkbox">
-                        <input type="checkbox" ng-model="medi.timers.tage.donnerstag" ng-true-value="'Donnerstag'" ng-checked="true">
+                        <input type="checkbox" ng-model="medi.timers.tage.donnerstag" ng-true-value="'Donnerstag'">
                     </label>
                     Donnerstag
                 </li>
                 <li class="item item-checkbox">
                     <label class="checkbox">
-                        <input type="checkbox" ng-model="medi.timers.tage.freitag" ng-true-value="'Freitag'" ng-checked="true">
+                        <input type="checkbox" ng-model="medi.timers.tage.freitag" ng-true-value="'Freitag'">
                     </label>
                     Freitag
                 </li>
                 <li class="item item-checkbox">
                     <label class="checkbox">
-                        <input type="checkbox" ng-model="medi.timers.tage.samstag" ng-true-value="'Samstag'" ng-checked="true">
+                        <input type="checkbox" ng-model="medi.timers.tage.samstag" ng-true-value="'Samstag'">
                     </label>
                     Samstag
                 </li>
                 <li class="item item-checkbox">
                     <label class="checkbox">
-                        <input type="checkbox" ng-model="medi.timers.tage.sonntag" ng-true-value="'Sonntag'" ng-checked="true">
+                        <input type="checkbox" ng-model="medi.timers.tage.sonntag" ng-true-value="'Sonntag'">
                     </label>
                     Sonntag
                 </li>
@@ -128,7 +128,7 @@
                 <label class="item item-input">
                     <input type="text" ng-model="medi.timers.info" placeholder="Infos (z.B. nach den Mahlzeiten)">
                 </label>
-                <button type="submit" class="button button-block button-balanced" ng-disabled="addMediForm.mediname.$invalid || addMediForm.meditimerszeiten.$invalid">
+                <button type="submit" class="button button-block button-balanced" ng-disabled="addMediForm.mediname.$invalid || addMediForm.meditimerszeiten.$invalid || medi.timers.tage==null">
                  <!-- || medi.timers.tage==null -->
                     Medikament speichern
                 </button>
