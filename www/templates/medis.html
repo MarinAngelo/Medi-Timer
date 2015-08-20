@@ -5,8 +5,6 @@
     </ion-header-bar>
     <ion-content>
         <ion-list>
-        <!-- abstand gewinnen zur bar -->
-        <!-- <ion-item><h3>&nbsp;</h3></ion-item> -->
             <ion-item ng-repeat="medi in medis" href="#/app/medis/{{medi.id}}">
                 <i class="flaticon-medicine"></i>{{medi.name}}
             </ion-item>

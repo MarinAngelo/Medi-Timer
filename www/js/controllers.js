@@ -242,6 +242,18 @@ angular.module('mediApp.controllers', [])
                 //increment i to generate notification id
                 i++;
 
+                if (timer.menge === undefined) {
+                    timer.menge = ' ';
+                }
+
+                if (timer.anwendungsform === undefined) {
+                    timer.anwendungsform = ' ';
+                }
+
+                if (timer.info === undefined) {
+                    timer.info = ' ';
+                }
+
                 notifications.push({
                     id: i,
                     title: timer.name,

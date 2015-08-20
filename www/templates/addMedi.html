@@ -1,47 +1,14 @@
 <ion-view view-title="Medikament hinzufügen">
     <ion-content>
         <form name="addMediForm" ng-submit="addMedi(medi)" novalidate>
-            <div class="list list">
+            <div class="list list-inset">
+                <div class="item item-divider">
+                    Medikement Bezeichnung <sup>*</sup>
+                </div>
                 <label class="item item-input">
-                    <input type="text" ng-model='medi.name' placeholder="Medikament*" name="mediname" required autofocus>
+                    <input type="text" ng-model='medi.name' placeholder="Medikament" name="mediname" required autofocus>
                     <!-- wenn vorgabe wert erwünscht: ng-init="medi.name='Aspirin'" -->
                 </label>
-                <div class="row">
-                    <div class="col">
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label">Dosierung</span>
-                            <input type="number" ng-model='medi.menge' min="0" max="10000" placeholder="z.B. 250" name="medimenge">
-                        </label>
-                    </div>
-                    <div class="col">
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label">Einheit</span>
-                            <input type="text" ng-model='medi.einheit' placeholder="z.B. mg" name="medieinheit">
-                        </label>
-                    </div>
-                </div>
-                <label class="item item-input">
-                    <input type="text" ng-model='medi.anwendungsform' placeholder="Anwendungsform z.B. Tabletten" name="medianwendungsform">
-                </label>
-                <label class="item item-input">
-                    <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" placeholder="Packungsgrösse (Stk)" name="medipackungsgroesse">
-                </label>
-                <!-- Rezept Funktion -->
-                <!-- ******************************************************* -->
-                <!--                 <div class="item item-toggle">
-                    Medikament Rezeptfplichtig
-                    <label class="toggle toggle-assertive">
-                        <input type="checkbox" ng-model='medi.rezeptpflichtig'>
-                        <div class="track">
-                            <div class="handle"></div>
-                        </div>
-                    </label>
-                </div>
-                <label class="item item-input" ng-show="medi.rezeptpflichtig == true">
-                    <span class="input-label">Rezept gültig bis</span>
-                    <input type="date" ng-model='medi.rezeptende'>
-                </label> -->
-                <!-- *************************************************************** -->
                 <!-- selektieren der Tage -->
                 <!--                 <div ng-repeat="tag in tage">
                     <li class="item item-checkbox">
@@ -52,7 +19,7 @@
                     </li>
                 </div> -->
                 <div class="item item-divider">
-                    Tage*
+                    Tage <sup>*</sup>
                 </div>
                 <li class="item item-checkbox">
                     <label class="checkbox">
@@ -99,14 +66,14 @@
                 <!-- auswahl der Zeiten -->
                 <!-- <input type=time min=9:00 max=17:00 step=900> - 15m increments -->
                 <div class="item item-divider">
-                    Zeiten
+                    Zeiten <sup>*</sup>
                 </div>
                 <ul class="list">
                     <li ng-repeat="zeit in medi.timers.zeiten" class="item">{{zeit}}</li>
                 </ul>
                 <label class="item item-input item-select">
                     <div class="input-label">
-                        Zeiten auswählen*
+                        Zeiten auswählen
                         <!-- abstand -->
                         <p>&nbsp;</p>
                     </div>
@@ -114,6 +81,46 @@
                         <!-- <select ng-model="timers.zeiten" multiple ng-options="zeit.zeitE as zeit.zeitD for zeit in zeiten "> -->
                     </select>
                 </label>
+                <br>
+                <div class="item item-divider">
+                    Weitere Angaben
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Dosierung</span>
+                            <input type="number" ng-model='medi.menge' min="0" max="10000" placeholder="z.B. 250" name="medimenge">
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Einheit</span>
+                            <input type="text" ng-model='medi.einheit' placeholder="z.B. mg" name="medieinheit">
+                        </label>
+                    </div>
+                </div>
+                <label class="item item-input">
+                    <input type="text" ng-model='medi.anwendungsform' placeholder="Anwendungsform z.B. Tabletten" name="medianwendungsform">
+                </label>
+                <label class="item item-input">
+                    <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" placeholder="Packungsgrösse (Stk)" name="medipackungsgroesse">
+                </label>
+                <!-- Rezept Funktion -->
+                <!-- ******************************************************* -->
+                <!--                 <div class="item item-toggle">
+                    Medikament Rezeptfplichtig
+                    <label class="toggle toggle-assertive">
+                        <input type="checkbox" ng-model='medi.rezeptpflichtig'>
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
+                <label class="item item-input" ng-show="medi.rezeptpflichtig == true">
+                    <span class="input-label">Rezept gültig bis</span>
+                    <input type="date" ng-model='medi.rezeptende'>
+                </label> -->
+                <!-- *************************************************************** -->
                 <!-- neues html5 element -->
                 <!-- <label class="item item-input">
                    <input type="time" min="00.00" max="23:30" step="1800" ng-model="medi.timers.zeiten"> 
@@ -121,16 +128,17 @@
                 <!-- <pre>Meine Zeiten = {{medi.timers.zeiten}}</pre> -->
                 <!--                 <tt>Tage = {{medi.timers.tage}}</tt>
  -->
-                <br/>
                 <label class="item item-input">
                     <input type="number" ng-model="medi.timers.menge" min="0" max="10" placeholder="Einnahme Dosis (Stk)">
                 </label>
                 <label class="item item-input">
                     <input type="text" ng-model="medi.timers.info" placeholder="Infos (z.B. nach den Mahlzeiten)">
                 </label>
-                <p>Mit * markierte Felder müssen zwingend ausgefüllt werden</p>
+                <div class="item item-divider" ng-show="addMediForm.mediname.$invalid || addMediForm.meditimerszeiten.$invalid || medi.timers.tage==null">
+                    <sup>*</sup> Bitte markierte Felder ausfüllen!
+                </div>
                 <button type="submit" class="button button-block button-balanced" ng-disabled="addMediForm.mediname.$invalid || addMediForm.meditimerszeiten.$invalid || medi.timers.tage==null">
-                 <!-- || medi.timers.tage==null -->
+                    <!-- || medi.timers.tage==null -->
                     Medikament speichern
                 </button>
             </div>
