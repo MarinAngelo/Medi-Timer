@@ -289,6 +289,7 @@ angular.module('mediApp.controllers', [])
                 // alert("scheduled: " + notification.id + " " + new Date(notification.at * 1000));
             });
 
+
         //kommt immer 2x je notification, warum blos?
         // $rootScope.$on('$cordovaLocalNotification:trigger',
         //     function(event, notification, state) {
@@ -297,6 +298,18 @@ angular.module('mediApp.controllers', [])
 
     });
     //**********ende local notification generieren****************
+
+    //Wellcome Screen anzeigen, wenn noch keine Medis gespeicheret sind
+    //sonst wird der Benachrichtigungs-Plan angezeigt
+    //teste ob key "medis" im Local Storage vorhanden ist (produktion)
+    // if (localStorage.medis === undefined) {
+    //     $state.go('cover');
+
+    // } else {
+
+    //     $scope.medis = $localstorage.getObject('medis');
+
+    // }
 
 })
 
@@ -353,18 +366,8 @@ angular.module('mediApp.controllers', [])
         //mit den Parametern key=medis und value=existMedis
         $localstorage.setObject('medis', existMedis);
 
-        // $ionicHistory.clearHistory();
-
         //redirect to List
         $state.go('app.medis');
-
-        //disable back button
-        // $ionicHistory.nextViewOptions({
-        //     disableBack: true,
-        //     historyRoot: true
-        // });
-
-        // $ionicHistory.clearHistory();
 
     };
 

@@ -3,13 +3,13 @@
         <form name="addMediForm" ng-submit="addMedi(medi)" novalidate>
             <div class="list list">
                 <label class="item item-input">
-                    <input type="text" ng-model='medi.name' placeholder="Name" name="mediname" required autofocus>
+                    <input type="text" ng-model='medi.name' placeholder="Medikament*" name="mediname" required autofocus>
                     <!-- wenn vorgabe wert erwünscht: ng-init="medi.name='Aspirin'" -->
                 </label>
                 <div class="row">
                     <div class="col">
                         <label class="item item-input item-stacked-label">
-                            <span class="input-label">Menge</span>
+                            <span class="input-label">Dosierung</span>
                             <input type="number" ng-model='medi.menge' min="0" max="10000" placeholder="z.B. 250" name="medimenge">
                         </label>
                     </div>
@@ -52,7 +52,7 @@
                     </li>
                 </div> -->
                 <div class="item item-divider">
-                    Tage
+                    Tage*
                 </div>
                 <li class="item item-checkbox">
                     <label class="checkbox">
@@ -106,7 +106,7 @@
                 </ul>
                 <label class="item item-input item-select">
                     <div class="input-label">
-                        Zeiten auswählen
+                        Zeiten auswählen*
                         <!-- abstand -->
                         <p>&nbsp;</p>
                     </div>
@@ -123,11 +123,12 @@
  -->
                 <br/>
                 <label class="item item-input">
-                    <input type="number" ng-model="medi.timers.menge" min="0" max="10" placeholder="Menge (z.B. 0,5)">
+                    <input type="number" ng-model="medi.timers.menge" min="0" max="10" placeholder="Einnahme Dosis (Stk)">
                 </label>
                 <label class="item item-input">
                     <input type="text" ng-model="medi.timers.info" placeholder="Infos (z.B. nach den Mahlzeiten)">
                 </label>
+                <p>Mit * markierte Felder müssen zwingend ausgefüllt werden</p>
                 <button type="submit" class="button button-block button-balanced" ng-disabled="addMediForm.mediname.$invalid || addMediForm.meditimerszeiten.$invalid || medi.timers.tage==null">
                  <!-- || medi.timers.tage==null -->
                     Medikament speichern
