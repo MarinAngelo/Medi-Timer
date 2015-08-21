@@ -3,7 +3,9 @@
         <button class="button icon ion-trash-a" ng-click="deleteMedi($stateParams.mediId)"></button>
         <h2 class="title">{{medi.name}}</h2>
         <button class="button icon ion-edit" ng-click="toggleEditing()" ng-show="!editing"></button>
-    </ion-header-bar>
+        <!-- Aktion abbrechen -->
+        <!-- <button class="button icon ion-edit" ng-click="#" ng-show="editing"></button> -->
+            </ion-header-bar>
     <ion-content>
         <!-- <div class="bar bar-header bar-royal">
     <button class="button icon ion-trash-a" ng-click="deleteMedi($stateParams.mediId)"></button>
@@ -15,59 +17,21 @@
             <div class="list">
                 <!-- abstand gewinnen zur bar -->
                 <!-- <ion-item><h3>&nbsp;</h3></ion-item> -->
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Medikamenten Bezeichnung</span>
+                <div class="item item-divider" ng-hide="editing">
+                    Medikement Bezeichnung
+                </div>
+                <div class="item item-divider" ng-show="editing">
+                    Medikement Bezeichnung <sup>*</sup>
+                </div>
+                <label class="item item-input">
+                    <!-- <span class="input-label">Medikamenten Bezeichnung</span> -->
                     <input type="text" ng-model='medi.name' ng-readonly='!editing' required name="mediname">
                 </label>
-                <div class="row">
-                    <div class="col">
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label">Dosis</span>
-                            <input type="number" ng-model='medi.menge' min="0" max="10000" name="medimenge" ng-readonly='!editing' placeholder="z.B. 250">
-                        </label>
-                    </div>
-                    <div class="col">
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label">Einheit</span>
-                            <input type="text" ng-model='medi.einheit' name="medieinheit" ng-readonly='!editing' placeholder="z.B. mg">
-                        </label>
-                    </div>
+                <div class="item item-divider" ng-hide="editing">
+                    Tage
                 </div>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Anwendungsform</span>
-                    <input type="text" ng-model='medi.anwendungsform' ng-readonly='!editing' name="medianwendungsform" placeholder="z.B. Tabletten">
-                </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Packungsgrösse</span>
-                    <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" ng-readonly='!editing' name="medipackungsgroesse" placeholder="(Stk)">
-                </label>
-                <!-- Rezept Funktion -->
-                <!-- ***************************************** -->
-                <!--                 <div class="item item-toggle">
-                    Medikament Rezeptfplichtig
-                    <label class="toggle toggle-assertive">
-                        <input type="checkbox" ng-model='medi.rezeptpflichtig' ng-readonly='!editing'>
-                        <div class="track">
-                            <div class="handle"></div>
-                        </div>
-                    </label>
-                </div>
-                <label class="item item-input" ng-show="medi.rezeptpflichtig == true">
-                    <span class="input-label">Rezept gültig bis</span>
-                    <input type="date" ng-model='medi.rezeptende'>
-                </label> -->
-                <!-- *************************************************** -->
-                <!-- eingerückte Version -->
-                <!--                 <div ng-show="!editing" class="item">
-                    <div class="item item-divider">
-                        Tage:
-                    </div>
-                    <ul class="list">
-                        <li class="item" ng-repeat="tag in medi.timers.tage" ng-show="{{tag}} !== false">{{tag}}</li>
-                    </ul>
-                    </div> -->
-                <div class="item item-divider">
-                    Tage:
+                <div class="item item-divider" ng-show="editing">
+                    Tage <sup>*</sup>
                 </div>
                 <ul class="list" ng-show="!editing">
                     <li class="item" ng-repeat="tag in medi.timers.tage" ng-show="{{tag}} !== false">{{tag}}</li>
@@ -116,8 +80,11 @@
                         Sonntag
                     </li>
                 </div>
-                <div class="item item-divider">
-                    Zeiten:
+                <div class="item item-divider" ng-hide="editing">
+                    Zeiten
+                </div>
+                <div class="item item-divider" ng-show="editing">
+                    Zeiten <sup>*</sup>
                 </div>
                 <ul class="list">
                     <li ng-repeat="zeit in medi.timers.zeiten" class="item">{{zeit}}</li>
@@ -132,6 +99,53 @@
                         </select>
                     </label>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Dosis</span>
+                            <input type="number" ng-model='medi.menge' min="0" max="10000" name="medimenge" ng-readonly='!editing' placeholder="z.B. 250">
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Einheit</span>
+                            <input type="text" ng-model='medi.einheit' name="medieinheit" ng-readonly='!editing' placeholder="z.B. mg">
+                        </label>
+                    </div>
+                </div>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Anwendungsform</span>
+                    <input type="text" ng-model='medi.anwendungsform' ng-readonly='!editing' name="medianwendungsform" placeholder="z.B. Tabletten">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Packungsgrösse</span>
+                    <input type="number" ng-model='medi.packungsgroesse' min="1" max="1000" ng-readonly='!editing' name="medipackungsgroesse" placeholder="(Stk)">
+                </label>
+                <!-- Rezept Funktion -->
+                <!-- ***************************************** -->
+                <!--                 <div class="item item-toggle">
+                    Medikament Rezeptfplichtig
+                    <label class="toggle toggle-assertive">
+                        <input type="checkbox" ng-model='medi.rezeptpflichtig' ng-readonly='!editing'>
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
+                <label class="item item-input" ng-show="medi.rezeptpflichtig == true">
+                    <span class="input-label">Rezept gültig bis</span>
+                    <input type="date" ng-model='medi.rezeptende'>
+                </label> -->
+                <!-- *************************************************** -->
+                <!-- eingerückte Version -->
+                <!--                 <div ng-show="!editing" class="item">
+                    <div class="item item-divider">
+                        Tage:
+                    </div>
+                    <ul class="list">
+                        <li class="item" ng-repeat="tag in medi.timers.tage" ng-show="{{tag}} !== false">{{tag}}</li>
+                    </ul>
+                    </div> -->
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Einnahme Menge</span>
                     <input type="number" ng-model="medi.timers.menge" min="0" max="10" ng-readonly='!editing' placeholder="z.B. 1">
@@ -140,7 +154,10 @@
                     <span class="input-label">Zusätzliche Informationen</span>
                     <input type="text" ng-model="medi.timers.info" ng-readonly='!editing' placeholder="z.B. nach den Mahlzeiten">
                 </label>
-                <button type="submit" class="button button-block button-balanced" ng-show="editing" ng-disabled="mediEditForm.mediname.$invalid || mediEditForm.meditimerszeiten.$invalid">Änderungen speichern
+                <div class="item item-divider" ng-show="mediEditForm.mediname.$invalid || medi.timers.zeiten==null || medi.timers.tage.montag==false && medi.timers.tage.dienstag==false && medi.timers.tage.mittwoch==false && medi.timers.tage.donnerstag==false && medi.timers.tage.freitag==false && medi.timers.tage.samstag==false && medi.timers.tage.sonntag==false">
+                    <sup>*</sup> Bitte markierte Felder ausfüllen!
+                </div>
+                <button type="submit" class="button button-block button-balanced" ng-show="editing" ng-disabled="mediEditForm.mediname.$invalid || medi.timers.zeiten==null || medi.timers.tage.montag==false && medi.timers.tage.dienstag==false && medi.timers.tage.mittwoch==false && medi.timers.tage.donnerstag==false && medi.timers.tage.freitag==false && medi.timers.tage.samstag==false && medi.timers.tage.sonntag==false">Änderungen speichern
                 </button>
                 <!--                         <div class="row">
             <div class="bar bar-footer bar-royal">
