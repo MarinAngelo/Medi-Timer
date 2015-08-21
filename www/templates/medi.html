@@ -5,7 +5,7 @@
         <button class="button icon ion-edit" ng-click="toggleEditing()" ng-show="!editing"></button>
         <!-- Aktion abbrechen -->
         <!-- <button class="button icon ion-edit" ng-click="#" ng-show="editing"></button> -->
-            </ion-header-bar>
+    </ion-header-bar>
     <ion-content>
         <!-- <div class="bar bar-header bar-royal">
     <button class="button icon ion-trash-a" ng-click="deleteMedi($stateParams.mediId)"></button>
@@ -99,6 +99,9 @@
                         </select>
                     </label>
                 </div>
+                <div class="item item-divider">
+                    Weitere Angaben
+                </div>
                 <div class="row">
                     <div class="col">
                         <label class="item item-input item-stacked-label">
@@ -155,14 +158,14 @@
                     <input type="text" ng-model="medi.timers.info" ng-readonly='!editing' placeholder="z.B. nach den Mahlzeiten">
                 </label>
                 <div class="item item-divider" ng-show="mediEditForm.mediname.$invalid || medi.timers.zeiten==null">
-                <!-- siehe Kommentar unten -->
-                 <!--  || medi.timers.tage.montag==false && medi.timers.tage.dienstag==false && medi.timers.tage.mittwoch==false && medi.timers.tage.donnerstag==false && medi.timers.tage.freitag==false && medi.timers.tage.samstag==false && medi.timers.tage.sonntag==false -->
+                    <!-- siehe Kommentar unten -->
+                    <!--  || medi.timers.tage.montag==false && medi.timers.tage.dienstag==false && medi.timers.tage.mittwoch==false && medi.timers.tage.donnerstag==false && medi.timers.tage.freitag==false && medi.timers.tage.samstag==false && medi.timers.tage.sonntag==false -->
                     <sup>*</sup> Bitte markierte Felder ausfüllen!
                 </div>
                 <button type="submit" class="button button-block button-balanced" ng-show="editing" ng-disabled="mediEditForm.mediname.$invalid || medi.timers.zeiten==null">Änderungen speichern
-                <!-- zu verhindern das alle Tage gelöscht werden hat so nicht funktioniert -->
-                <!-- dies kann nun dazu verwendet werden, dass ein Medikament "deaktiviert wird" -->
-                 <!-- || medi.timers.tage.montag==false && medi.timers.tage.dienstag==false && medi.timers.tage.mittwoch==false && medi.timers.tage.donnerstag==false && medi.timers.tage.freitag==false && medi.timers.tage.samstag==false && medi.timers.tage.sonntag==false -->
+                    <!-- zu verhindern das alle Tage gelöscht werden hat so nicht funktioniert -->
+                    <!-- dies kann nun dazu verwendet werden, dass ein Medikament "deaktiviert wird" -->
+                    <!-- || medi.timers.tage.montag==false && medi.timers.tage.dienstag==false && medi.timers.tage.mittwoch==false && medi.timers.tage.donnerstag==false && medi.timers.tage.freitag==false && medi.timers.tage.samstag==false && medi.timers.tage.sonntag==false -->
                 </button>
                 <!--                         <div class="row">
             <div class="bar bar-footer bar-royal">
