@@ -27,12 +27,12 @@
                     <!-- <span class="input-label">Medikamenten Bezeichnung</span> -->
                     <input type="text" ng-model='medi.name' ng-readonly='!editing' required name="mediname">
                 </label>
-                <div class="item item-divider" ng-hide="editing">
+                <div class="item item-divider">
                     Tage
                 </div>
-                <div class="item item-divider" ng-show="editing">
+                <!-- <div class="item item-divider" ng-show="editing">
                     Tage <sup>*</sup>
-                </div>
+                </div> -->
                 <ul class="list" ng-show="!editing">
                     <li class="item" ng-repeat="tag in medi.timers.tage" ng-show="{{tag}} !== false">{{tag}}</li>
                 </ul>
@@ -154,10 +154,15 @@
                     <span class="input-label">Zusätzliche Informationen</span>
                     <input type="text" ng-model="medi.timers.info" ng-readonly='!editing' placeholder="z.B. nach den Mahlzeiten">
                 </label>
-                <div class="item item-divider" ng-show="mediEditForm.mediname.$invalid || medi.timers.zeiten==null || medi.timers.tage.montag==false && medi.timers.tage.dienstag==false && medi.timers.tage.mittwoch==false && medi.timers.tage.donnerstag==false && medi.timers.tage.freitag==false && medi.timers.tage.samstag==false && medi.timers.tage.sonntag==false">
+                <div class="item item-divider" ng-show="mediEditForm.mediname.$invalid || medi.timers.zeiten==null">
+                <!-- siehe Kommentar unten -->
+                 <!--  || medi.timers.tage.montag==false && medi.timers.tage.dienstag==false && medi.timers.tage.mittwoch==false && medi.timers.tage.donnerstag==false && medi.timers.tage.freitag==false && medi.timers.tage.samstag==false && medi.timers.tage.sonntag==false -->
                     <sup>*</sup> Bitte markierte Felder ausfüllen!
                 </div>
-                <button type="submit" class="button button-block button-balanced" ng-show="editing" ng-disabled="mediEditForm.mediname.$invalid || medi.timers.zeiten==null || medi.timers.tage.montag==false && medi.timers.tage.dienstag==false && medi.timers.tage.mittwoch==false && medi.timers.tage.donnerstag==false && medi.timers.tage.freitag==false && medi.timers.tage.samstag==false && medi.timers.tage.sonntag==false">Änderungen speichern
+                <button type="submit" class="button button-block button-balanced" ng-show="editing" ng-disabled="mediEditForm.mediname.$invalid || medi.timers.zeiten==null">Änderungen speichern
+                <!-- zu verhindern das alle Tage gelöscht werden hat so nicht funktioniert -->
+                <!-- dies kann nun dazu verwendet werden, dass ein Medikament "deaktiviert wird" -->
+                 <!-- || medi.timers.tage.montag==false && medi.timers.tage.dienstag==false && medi.timers.tage.mittwoch==false && medi.timers.tage.donnerstag==false && medi.timers.tage.freitag==false && medi.timers.tage.samstag==false && medi.timers.tage.sonntag==false -->
                 </button>
                 <!--                         <div class="row">
             <div class="bar bar-footer bar-royal">

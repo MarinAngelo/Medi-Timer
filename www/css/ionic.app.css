@@ -3176,7 +3176,7 @@ a.subdued {
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 34px;
+    font-size: 17px;
     font-weight: 500;
     line-height: 65px; }
     .bar .title.title-left {
@@ -3199,7 +3199,7 @@ a.subdued {
       font-size: 50px;
       line-height: 50px; }
     .bar .button.button-icon {
-      font-size: 34px; }
+      font-size: 17px; }
       .bar .button.button-icon .icon:before, .bar .button.button-icon:before, .bar .button.button-icon.icon-left:before, .bar .button.button-icon.icon-right:before {
         vertical-align: top;
         font-size: 32px;
@@ -3208,7 +3208,7 @@ a.subdued {
       padding-right: 2px;
       padding-left: 2px;
       font-weight: 300;
-      font-size: 34px; }
+      font-size: 17px; }
       .bar .button.button-clear .icon:before, .bar .button.button-clear.icon:before, .bar .button.button-clear.icon-left:before, .bar .button.button-clear.icon-right:before {
         font-size: 32px;
         line-height: 50px; }
@@ -3265,7 +3265,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: #444;
-    font-size: 34px; }
+    font-size: 17px; }
   .bar-light .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3286,7 +3286,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: #444;
-    font-size: 34px; }
+    font-size: 17px; }
   .bar-stable .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3307,7 +3307,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: #fff;
-    font-size: 34px; }
+    font-size: 17px; }
   .bar-positive .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3328,7 +3328,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: #fff;
-    font-size: 34px; }
+    font-size: 17px; }
   .bar-calm .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3349,7 +3349,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: #fff;
-    font-size: 34px; }
+    font-size: 17px; }
   .bar-assertive .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3370,7 +3370,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: #fff;
-    font-size: 34px; }
+    font-size: 17px; }
   .bar-balanced .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3391,7 +3391,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: #fff;
-    font-size: 34px; }
+    font-size: 17px; }
   .bar-energized .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3412,7 +3412,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: #fff;
-    font-size: 34px; }
+    font-size: 17px; }
   .bar-royal .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3433,7 +3433,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: #fff;
-    font-size: 34px; }
+    font-size: 17px; }
   .bar-dark .button.button-icon {
     border-color: transparent;
     background: none; }
