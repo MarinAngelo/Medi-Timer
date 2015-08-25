@@ -7,12 +7,6 @@ angular.module('mediApp.controllers', [])
         $state.go('app.addMedi');
     };
 
-    // $ionicHistory.clearHistory();
-    // $ionicHistory.nextViewOptions({
-    //     disableAnimate: true,
-    //     disableBack: true
-    // });
-
 })
 
 .controller('AppCtrl', function($scope, $rootScope, $ionicPlatform, $ionicModal, $ionicPopup, $timeout,
@@ -176,23 +170,11 @@ angular.module('mediApp.controllers', [])
     // will execute when device is ready, or immediately if the device is already ready.
     $ionicPlatform.ready(function() {
 
+        //Alle Notifications werden vorerst gelöscht
         //auskommentieren bei ionic serve
         (function() {
             $cordovaLocalNotification.cancelAll();
         })();
-
-        // $rootScope.$on('$cordovaLocalNotification:cancelall',
-        //     function(event, state) {
-        //         alert("notifications cancelled");
-        //     });
-
-        // document.addEventListener('resume', function resume() {
-        //     cancel();
-        //     $rootScope.$on('$cordovaLocalNotification:cancelall',
-        //         function(event, state) {
-        //             alert("cancelled after resume");
-        //         });
-        // });
 
 
         //**********local notification generieren****************
@@ -268,7 +250,7 @@ angular.module('mediApp.controllers', [])
             today.setDate(today.getDate() + 1);
         }
 
-        console.log(notifications);
+        //console.log(notifications);
 
         //ngCordova methode funktioniert nicht?????????????????
         // $scope.scheduleSingleNotification = function() {
@@ -277,13 +259,13 @@ angular.module('mediApp.controllers', [])
         //     });
         // };
 
-        //attach notifications to the notificatin center
+        //replaces function above, auskommentieren bei ionic serve
         // var notifi = function() {
         //     $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
         // };
         // notifi();
 
-        //replaces function above, auskommentieren bei ionic serve
+        //attach notifications to the notificatin center
         (function() {
             $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
         })();
