@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.mediapp183707" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ionicframework.mediapp183707" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>medi timer</name>
   <description>&#xD;
-        The purpose of this app is to help people take thaire medicines in time&#xD;
+        Hilft Patienten Medikamente rechtzeitig einzunehmen und Übersicht zu behalten&#xD;
     </description>
   <author email="marinus@klap-wedevelopment.com" href="http://www.klap-wedevelopment.com/">&#xD;
       Ionic Framework Team&#xD;
