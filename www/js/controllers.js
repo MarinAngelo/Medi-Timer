@@ -186,7 +186,7 @@ angular.module('mediApp.controllers', [])
         var today = new Date();
         var end = new Date();
         //anzahl Monate der Zukunftsprojektion
-        end.setMonth(now.getMonth() + 3);
+        end.setMonth(now.getMonth() + 1);
         var i = 0;
         console.log("Endtime: " + end);
         var notifications = [];
