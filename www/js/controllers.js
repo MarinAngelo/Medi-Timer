@@ -250,21 +250,6 @@ angular.module('mediApp.controllers', [])
             today.setDate(today.getDate() + 1);
         }
 
-        //console.log(notifications);
-
-        //ngCordova methode funktioniert nicht?????????????????
-        // $scope.scheduleSingleNotification = function() {
-        //     $cordovaLocalNotification.schedule(notifications).then(function(result) {
-        //         console.log("The Medi-Timer notification has been set");
-        //     });
-        // };
-
-        //replaces function above, auskommentieren bei ionic serve
-        // var notifi = function() {
-        //     $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
-        // };
-        // notifi();
-
         //attach notifications to the notificatin center
         (function() {
             $cordovaLocalNotification.schedule(notifications, console.log("The Medi-Timer notification has been set"));
@@ -283,28 +268,8 @@ angular.module('mediApp.controllers', [])
                 $scope.allNotifications = allNotifications;
                 // alert("scheduled: " + notification.id + " " + new Date(notification.at * 1000));
             });
-
-
-        //kommt immer 2x je notification, warum blos?
-        // $rootScope.$on('$cordovaLocalNotification:trigger',
-        //     function(event, notification, state) {
-        //         alert("triggered: " + notification.id + " " + new Date(notification.at * 1000));
-        //     });
-
-    });
+   });
     //**********ende local notification generieren****************
-
-    //Wellcome Screen anzeigen, wenn noch keine Medis gespeicheret sind
-    //sonst wird der Benachrichtigungs-Plan angezeigt
-    //teste ob key "medis" im Local Storage vorhanden ist (produktion)
-    // if (localStorage.medis === undefined) {
-    //     $state.go('cover');
-
-    // } else {
-
-    //     $scope.medis = $localstorage.getObject('medis');
-
-    // }
 
 })
 
@@ -422,68 +387,3 @@ angular.module('mediApp.controllers', [])
 
     };
 });
-
-// $scope.$on('$ionicView.beforeEnter',
-//     function() {
-//         // Code here is always executed when entering this state
-//         //reload page each time when routed
-//         // $state.forceReload();
-//     }
-// );
-
-//alle notifications an scope heften um in "Benachrichtigungen" anzuzeigen 
-//- auch alte werden angezeigt??
-// cordova.plugins.notification.local.getAll(function(notifications) {
-
-//     $scope.allNotifications = notifications;
-//     console.log(new Date($scope.allNotifications[0].at * 1000));
-
-//     for (var i = 0; i < $scope.allNotifications.length; i++) {
-//         $scope.allNotifications[i].at = new Date($scope.allNotifications[i].at * 1000);
-
-//     }
-
-// });
-
-//daten aktualisieren
-// , $other, $depencies (zugehörige dependencies)
-// $scope.$on('$ionicView.beforeEnter',
-//     function() {
-//         // Code here is always executed when entering this state
-//         //reload page each time when routed
-//         // $state.forceReload();
-//         // $window.location.reload(true);
-//     }
-// );
-
-
-//local notification test
-//***************************************************
-// $scope.add = function() {
-//     var alarmTime = new Date();
-//     alarmTime.setMinutes(alarmTime.getMinutes() + 1);
-//     $cordovaLocalNotification.add({
-//         id: "1234",
-//         date: alarmTime,
-//         message: "This is a message",
-//         title: "This is a title",
-//         autoCancel: true,
-//         sound: null
-//     }).then(function() {
-//         console.log("The notification has been set");
-//     });
-// };
-
-// $scope.isScheduled = function() {
-//     $cordovaLocalNotification.isScheduled("1234").then(function(isScheduled) {
-//         alert("Notification 1234 Scheduled: " + isScheduled);
-//     });
-// };
-//*********************************************************************
-
-//wenn app in den hintergrund geht
-// document.addEventListener('pause', function unload() {
-
-//     console.log('ich bin in Pause');
-
-// });
