@@ -12,6 +12,13 @@ angular.module('mediApp.controllers', [])
 .controller('AppCtrl', function($scope, $rootScope, $ionicPlatform, $ionicModal, $ionicPopup, $timeout,
     $localstorage, $interval, Timer, $window, $state, $cordovaLocalNotification) {
 
+    // ios permission
+    $ionicPlatform.ready(function() {
+    if(device.platform === "iOS") {
+        window.plugin.notification.local.promptForPermission();
+    }
+});
+
 
     //Local Storage Array "medis" holen, um in gewünschtes Format umzuwandeln
     //************************************************************************
